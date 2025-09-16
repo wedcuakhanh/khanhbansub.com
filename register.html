@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Đăng ký - KHÁNH BÁN SUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-gradient-to-br from-pink-100 via-rose-100 to-sky-100 min-h-screen flex items-center justify-center font-[Poppins]"
+  >
+    <div
+      class="bg-white/90 backdrop-blur-md shadow-2xl rounded-2xl p-8 w-full max-w-md text-center border border-rose-200"
+    >
+      <!-- Logo + tên shop -->
+      <div class="flex flex-col items-center gap-2 mb-6">
+        <img
+          src="DVFB.png"
+          alt="Logo Shop"
+          class="w-16 h-16 rounded-full shadow-lg border-2 border-rose-300"
+        />
+        <h1
+          class="text-2xl font-extrabold bg-gradient-to-r from-rose-500 to-pink-400 bg-clip-text text-transparent"
+        >
+          KHÁNH BÁN SUB
+        </h1>
+        <p class="text-xs text-slate-500">
+          Tăng Follow · Like · Share nhanh chóng
+        </p>
+      </div>
+
+      <h2
+        class="text-lg font-semibold mb-4 text-rose-600 tracking-wide uppercase"
+      >
+        📝 Đăng ký tài khoản
+      </h2>
+
+      <form onsubmit="return registerUser(event)" class="space-y-4 text-left">
+        <div>
+          <label class="text-sm text-slate-600">Tên đăng nhập</label>
+          <input
+            id="regUser"
+            type="text"
+            class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-400 border-rose-200"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="text-sm text-slate-600">Gmail</label>
+          <input
+            id="regEmail"
+            type="email"
+            class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-400 border-rose-200"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="text-sm text-slate-600">Mật khẩu</label>
+          <input
+            id="regPass"
+            type="password"
+            class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-400 border-rose-200"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="text-sm text-slate-600">Nhập lại mật khẩu</label>
+          <input
+            id="regPass2"
+            type="password"
+            class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-pink-400 border-rose-200"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white py-2 rounded-lg shadow-lg transition"
+        >
+          Đăng ký
+        </button>
+      </form>
+
+      <p class="text-sm mt-4 text-slate-600">
+        Đã có tài khoản?
+        <a href="login.html" class="text-rose-500 hover:underline font-semibold"
+          >Đăng nhập</a
+        >
+      </p>
+    </div>
+
+    <script>
+      function registerUser(e) {
+        e.preventDefault();
+        let user = document.getElementById("regUser").value;
+        let email = document.getElementById("regEmail").value;
+        let pass = document.getElementById("regPass").value;
+        let pass2 = document.getElementById("regPass2").value;
+
+        if (pass !== pass2) {
+          alert("Mật khẩu nhập lại không khớp!");
+          return false;
+        }
+
+        // Lưu demo vào localStorage
+        localStorage.setItem("username", user);
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", pass);
+
+        alert("Đăng ký thành công! Hãy đăng nhập.");
+        window.location.href = "login.html";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Quản lý hệ thống</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-pink-50 to-rose-100 p-6">
+    <div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-rose-600">👑 Trang Admin</h1>
+        <a href="index.html" class="px-4 py-2 bg-rose-500 text-white rounded-lg"
+          >⬅ Trang chủ</a
+        >
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-4 mb-6">
+        <button
+          onclick="showTab('orders')"
+          class="px-4 py-2 bg-rose-100 rounded-lg"
+        >
+          📋 Đơn hàng
+        </button>
+        <button
+          onclick="showTab('users')"
+          class="px-4 py-2 bg-rose-100 rounded-lg"
+        >
+          👥 Người dùng
+        </button>
+      </div>
+
+      <!-- Quản lý Đơn hàng -->
+      <div id="tab-orders">
+        <h2 class="text-xl font-semibold mb-3">📋 Quản lý đơn hàng</h2>
+        <table class="w-full border text-sm">
+          <thead class="bg-rose-200 text-rose-700">
+            <tr>
+              <th class="p-2">Người đặt</th>
+              <th class="p-2">Dịch vụ</th>
+              <th class="p-2">Link</th>
+              <th class="p-2">Số lượng</th>
+              <th class="p-2">Tổng</th>
+              <th class="p-2">Trạng thái</th>
+              <th class="p-2">Hành động</th>
+            </tr>
+          </thead>
+          <tbody id="orderList"></tbody>
+        </table>
+      </div>
+
+      <!-- Quản lý Người dùng -->
+      <div id="tab-users" class="hidden">
+        <h2 class="text-xl font-semibold mb-3">👥 Quản lý tài khoản</h2>
+        <table class="w-full border text-sm">
+          <thead class="bg-rose-200 text-rose-700">
+            <tr>
+              <th class="p-2">Tên đăng nhập</th>
+              <th class="p-2">Email</th>
+              <th class="p-2">Vai trò</th>
+              <th class="p-2">Hành động</th>
+            </tr>
+          </thead>
+          <tbody id="userList"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // Check quyền admin
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser || currentUser.role !== "admin") {
+        alert("Bạn không có quyền vào trang này!");
+        window.location.href = "login.html";
+      }
+
+      // Tabs
+      function showTab(tab) {
+        document.getElementById("tab-orders").classList.add("hidden");
+        document.getElementById("tab-users").classList.add("hidden");
+        document.getElementById("tab-" + tab).classList.remove("hidden");
+      }
+
+      // Load Orders
+      function loadOrders() {
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+        let tbody = document.getElementById("orderList");
+        tbody.innerHTML = "";
+        orders.forEach((o, i) => {
+          tbody.innerHTML += `
+          <tr class="border">
+            <td class="p-2">${o.user}</td>
+            <td class="p-2">${o.service}</td>
+            <td class="p-2 text-blue-600"><a href="${
+              o.link
+            }" target="_blank">Link</a></td>
+            <td class="p-2">${o.quantity}</td>
+            <td class="p-2 text-rose-600">${o.total.toLocaleString(
+              "vi-VN"
+            )} VNĐ</td>
+            <td class="p-2">${o.status}</td>
+            <td class="p-2">
+              <button onclick="updateStatus(${i}, 'done')" class="px-2 py-1 bg-green-500 text-white rounded">Duyệt</button>
+              <button onclick="updateStatus(${i}, 'cancel')" class="px-2 py-1 bg-red-500 text-white rounded">Hủy</button>
+            </td>
+          </tr>`;
+        });
+      }
+      function updateStatus(index, status) {
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders[index].status = status;
+        localStorage.setItem("orders", JSON.stringify(orders));
+        loadOrders();
+      }
+
+      // Load Users
+      function loadUsers() {
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let tbody = document.getElementById("userList");
+        tbody.innerHTML = "";
+        users.forEach((u, i) => {
+          tbody.innerHTML += `
+          <tr class="border">
+            <td class="p-2">${u.username}</td>
+            <td class="p-2">${u.email}</td>
+            <td class="p-2">${u.role}</td>
+            <td class="p-2">
+              <button onclick="deleteUser(${i})" class="px-2 py-1 bg-red-500 text-white rounded">Xóa</button>
+            </td>
+          </tr>`;
+        });
+      }
+      function deleteUser(index) {
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        users.splice(index, 1);
+        localStorage.setItem("users", JSON.stringify(users));
+        loadUsers();
+      }
+
+      loadOrders();
+      loadUsers();
+    </script>
+  </body>
+</html>
