@@ -13,7 +13,7 @@
         font-family: "Poppins", sans-serif;
         color: #333;
         min-height: 100vh;
-        overflow: hidden;
+        overflow-x: hidden;
         position: relative;
       }
 
@@ -28,31 +28,7 @@
         position: relative;
         z-index: 10;
         text-align: center;
-        padding: 0 20px;
-      }
-
-      /* Text gradient */
-      .metal-text {
-        background: linear-gradient(90deg, #ff3ca6, #c471ed, #fcb1ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-weight: 900;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
-        letter-spacing: 1px;
-      }
-
-      /* Nút */
-      .glow-button {
-        background: linear-gradient(90deg, #fbb6ce, #fce1ec);
-        border: 2px solid #f9c7d9;
-        color: #333;
-        font-weight: bold;
-        transition: all 0.3s;
-      }
-      .glow-button:hover {
-        background: linear-gradient(90deg, #fce1ec, #fbb6ce);
-        transform: scale(1.08);
-        box-shadow: 0 0 20px #f9c7d9;
+        padding: 0 16px;
       }
 
       /* Logo viền sáng */
@@ -75,28 +51,39 @@
         }
       }
 
-      /* Chữ nổi */
-      .float-up {
-        animation: floatUp 3s ease-in-out infinite;
+      /* Text gradient */
+      .metal-text {
+        background: linear-gradient(90deg, #ff3ca6, #c471ed, #fcb1ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 900;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+        letter-spacing: 1px;
       }
-      @keyframes floatUp {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
+
+      /* Nút */
+      .glow-button {
+        background: linear-gradient(90deg, #fbb6ce, #fce1ec);
+        border: 2px solid #f9c7d9;
+        color: #333;
+        font-weight: bold;
+        transition: all 0.3s;
+        display: inline-block;
+      }
+      .glow-button:hover {
+        background: linear-gradient(90deg, #fce1ec, #fbb6ce);
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #f9c7d9;
       }
 
       /* Cam kết dịch vụ */
       .commit-box {
-        margin-top: 40px;
+        margin-top: 32px;
         background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(12px);
         border-radius: 16px;
-        padding: 25px;
-        max-width: 520px;
+        padding: 20px;
+        max-width: 95%;
         margin-left: auto;
         margin-right: auto;
         border: 3px solid transparent;
@@ -107,7 +94,7 @@
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
       }
       .commit-box h2 {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: 800;
         background: linear-gradient(90deg, #ff0066, #9b4dff);
         -webkit-background-clip: text;
@@ -116,8 +103,23 @@
       }
       .commit-box ul li {
         font-weight: 600;
-        font-size: 1rem;
+        font-size: 0.95rem;
         color: #444;
+      }
+
+      /* Mobile tối ưu */
+      @media (max-width: 640px) {
+        .metal-text {
+          font-size: 2rem !important;
+        }
+        .logo-wrapper img {
+          width: 70px !important;
+          height: 70px !important;
+        }
+        .glow-button {
+          width: 100%;
+          text-align: center;
+        }
       }
     </style>
   </head>
@@ -135,22 +137,23 @@
       </div>
 
       <!-- Tiêu đề -->
-      <h1 class="metal-text text-5xl md:text-6xl mb-4 float-up">
-        KHÁNH BÁN SUB
-      </h1>
+      <h1 class="metal-text text-4xl md:text-6xl mb-4">KHÁNH BÁN SUB</h1>
 
       <!-- Mô tả -->
-      <p class="text-gray-800 text-lg md:text-xl mb-8 font-medium">
+      <p class="text-gray-800 text-base md:text-xl mb-8 font-medium">
         Dịch Vụ Tăng Follow · Like · Share Nhanh Chóng — An Toàn & Uy Tín
       </p>
 
       <!-- Nút -->
-      <a href="dangnhap.html" class="glow-button px-10 py-4 rounded-full text-lg">
+      <a
+        href="dangnhap.html"
+        class="glow-button px-8 py-3 md:px-10 md:py-4 rounded-full text-base md:text-lg"
+      >
         Đăng Nhập
       </a>
 
       <!-- Cam kết -->
-      <div class="commit-box mt-8 text-left">
+      <div class="commit-box mt-6 text-left">
         <h2 class="text-center">Cam Kết Dịch Vụ</h2>
         <ul class="space-y-2">
           <li>✔ Bảo mật tuyệt đối thông tin khách hàng</li>
