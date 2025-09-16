@@ -27,36 +27,23 @@
     </style>
   </head>
   <!-- POPUP ƯU ĐÃI TRUNG THU -->
+<!-- Popup Ưu đãi bằng ảnh -->
 <div
   id="offerPopup"
-  class="fixed inset-0 bg-black/30 hidden items-center justify-center z-50"
+  class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50"
 >
   <div
-    class="rounded-2xl p-6 max-w-sm w-11/12 text-center shadow-2xl relative"
-    style="
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #fff8dc, #ffe4e6);
-    "
+    class="relative rounded-2xl shadow-2xl max-w-sm w-11/12 overflow-hidden"
   >
-    <!-- Icon trang trí -->
-    <div class="absolute -top-6 -left-6 text-yellow-300 text-4xl">🌕</div>
-    <div class="absolute -top-4 right-4 text-pink-400 text-2xl">🏮</div>
-    <div class="absolute -bottom-4 left-6 text-yellow-400 text-2xl">🐇</div>
+    <!-- Ảnh ưu đãi -->
+    <img src="./subsale.png" alt="Ưu đãi Trung Thu" class="w-full rounded-2xl" />
 
-    <h3 class="text-lg font-bold text-amber-700 mb-2">🎑 Ưu Đãi Trung Thu</h3>
-    <p class="text-gray-700 text-sm">
-      🌟 Giảm <span class="font-semibold text-rose-500">10%</span> tất cả dịch vụ
-    </p>
-    <p class="mt-1 text-gray-700 text-sm">
-      🐇 Tặng thêm <span class="font-semibold text-purple-500">200 Like miễn phí</span> cho đơn đầu tiên
-    </p>
-    <p class="mt-2 text-xs text-gray-500 italic">Chỉ trong dịp Trung Thu này!</p>
-
+    <!-- Nút đóng -->
     <button
       onclick="closeOffer()"
-      class="mt-4 px-5 py-2 bg-amber-400 text-white rounded-full hover:bg-amber-500 transition shadow"
+      class="absolute top-2 right-2 bg-white/80 text-gray-700 rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-rose-500 hover:text-white transition"
     >
-      Đóng
+      ✕
     </button>
   </div>
 </div>
@@ -72,12 +59,13 @@
     popup.classList.remove("hidden");
     popup.classList.add("flex");
 
-    // Tự tắt sau 6 giây
+    // Tự tắt sau 8 giây
     setTimeout(() => {
       closeOffer();
-    }, 10000);
+    }, 8000);
   });
 </script>
+
 <!-- CHAT BOX -->
 <div id="chatWidget" class="fixed bottom-5 right-5 z-50 font-sans">
   <!-- Nút mở chat (ảnh thay cho icon) -->
