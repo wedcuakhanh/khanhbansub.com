@@ -1,64 +1,164 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Đăng nhập - KHÁNH BÁN SUB</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gradient-to-br from-pink-50 via-rose-50 to-sky-50 min-h-screen flex items-center justify-center font-[Poppins]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KHÁNH BÁN SUB - Giới thiệu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background: linear-gradient(135deg, #ffe6f0, #f2e9fb),
+          url("./background.jpg") no-repeat center center;
+        background-size: cover;
+        font-family: "Poppins", sans-serif;
+        color: #333;
+        min-height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
 
-  <div class="bg-white/90 backdrop-blur-md shadow-xl rounded-2xl p-8 w-full max-w-md text-center border border-rose-100">
-    
-    <!-- Logo + tên shop -->
-    <div class="flex flex-col items-center gap-2 mb-6">
-      <img src="DVFB.png" alt="Logo Shop" class="w-16 h-16 rounded-full shadow border-2 border-rose-400">
-      <h1 class="text-xl font-bold bg-gradient-to-r from-rose-500 to-pink-400 bg-clip-text text-transparent">
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.4);
+        z-index: 0;
+      }
+
+      .content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      /* Text gradient */
+      .metal-text {
+        background: linear-gradient(90deg, #ff3ca6, #c471ed, #fcb1ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 900;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+        letter-spacing: 1px;
+      }
+
+      /* Nút */
+      .glow-button {
+        background: linear-gradient(90deg, #fbb6ce, #fce1ec);
+        border: 2px solid #f9c7d9;
+        color: #333;
+        font-weight: bold;
+        transition: all 0.3s;
+      }
+      .glow-button:hover {
+        background: linear-gradient(90deg, #fce1ec, #fbb6ce);
+        transform: scale(1.08);
+        box-shadow: 0 0 20px #f9c7d9;
+      }
+
+      /* Logo viền sáng */
+      .logo-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+        border-radius: 9999px;
+        background: linear-gradient(90deg, #ff3ca6, #c471ed, #42d9f4);
+        box-shadow: 0 0 25px rgba(255, 0, 150, 0.6);
+        animation: glowPulse 3s infinite alternate;
+      }
+      @keyframes glowPulse {
+        from {
+          box-shadow: 0 0 15px rgba(255, 60, 166, 0.6);
+        }
+        to {
+          box-shadow: 0 0 35px rgba(196, 113, 237, 0.8);
+        }
+      }
+
+      /* Chữ nổi */
+      .float-up {
+        animation: floatUp 3s ease-in-out infinite;
+      }
+      @keyframes floatUp {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Cam kết dịch vụ */
+      .commit-box {
+        margin-top: 40px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        padding: 25px;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 3px solid transparent;
+        background-clip: padding-box, border-box;
+        background-origin: border-box;
+        background-image: linear-gradient(white, white),
+          linear-gradient(90deg, #ff3ca6, #c471ed, #42d9f4);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+      .commit-box h2 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        background: linear-gradient(90deg, #ff0066, #9b4dff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 15px;
+      }
+      .commit-box ul li {
+        font-weight: 600;
+        font-size: 1rem;
+        color: #444;
+      }
+    </style>
+  </head>
+  <body class="flex flex-col items-center justify-center">
+    <div class="overlay"></div>
+
+    <div class="content">
+      <!-- Logo -->
+      <div class="logo-wrapper mb-4">
+        <img
+          src="./DVFB.png"
+          alt="Logo KHÁNH BÁN SUB"
+          class="w-24 h-24 rounded-full object-cover"
+        />
+      </div>
+
+      <!-- Tiêu đề -->
+      <h1 class="metal-text text-5xl md:text-6xl mb-4 float-up">
         KHÁNH BÁN SUB
       </h1>
-      <p class="text-xs text-slate-500">Tăng Follow · Like · Share nhanh chóng</p>
+
+      <!-- Mô tả -->
+      <p class="text-gray-800 text-lg md:text-xl mb-8 font-medium">
+        Dịch Vụ Tăng Follow · Like · Share Nhanh Chóng — An Toàn & Uy Tín
+      </p>
+
+      <!-- Nút -->
+      <a href="dangnhap.html" class="glow-button px-10 py-4 rounded-full text-lg">
+        Đăng Nhập
+      </a>
+
+      <!-- Cam kết -->
+      <div class="commit-box mt-8 text-left">
+        <h2 class="text-center">Cam Kết Dịch Vụ</h2>
+        <ul class="space-y-2">
+          <li>✔ Bảo mật tuyệt đối thông tin khách hàng</li>
+          <li>✔ Hoàn tiền nếu dịch vụ không đúng cam kết</li>
+          <li>✔ Hỗ trợ nhanh chóng 24/7</li>
+          <li>✔ Giá rẻ nhất - Chất lượng tốt nhất</li>
+        </ul>
+      </div>
     </div>
-
-    <h2 class="text-lg font-semibold mb-4 text-slate-700">🔑 Đăng nhập</h2>
-
-    <form onsubmit="return loginUser(event)" class="space-y-4 text-left">
-      <div>
-        <label class="text-sm text-slate-600">Tên đăng nhập</label>
-        <input id="username" type="text" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-rose-400 focus:border-rose-300" required>
-      </div>
-      <div>
-        <label class="text-sm text-slate-600">Mật khẩu</label>
-        <input id="password" type="password" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-rose-400 focus:border-rose-300" required>
-      </div>
-
-      <button type="submit" class="w-full bg-gradient-to-r from-rose-500 to-pink-400 hover:from-rose-600 hover:to-pink-500 text-white py-2 rounded-lg shadow transition font-semibold">
-        Đăng nhập
-      </button>
-    </form>
-
-    <p class="text-sm mt-4 text-slate-600">
-      Chưa có tài khoản?
-      <a href="register.html" class="text-rose-500 font-semibold hover:underline">Đăng ký ngay</a>
-    </p>
-  </div>
-
-  <script>
-    function loginUser(e) {
-      e.preventDefault();
-      let user = document.getElementById("username").value;
-      let pass = document.getElementById("password").value;
-
-      // Demo: kiểm tra user/pass với localStorage
-      let savedUser = localStorage.getItem("username");
-      let savedPass = localStorage.getItem("password");
-
-      if (user === savedUser && pass === savedPass) {
-        alert("Đăng nhập thành công!");
-        window.location.href = "trangchu.html"; // Chuyển về trang chủ
-      } else {
-        alert("Sai tài khoản hoặc mật khẩu!");
-      }
-    }
-  </script>
-</body>
+  </body>
 </html>
