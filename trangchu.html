@@ -26,59 +26,67 @@
       }
     </style>
   </head>
-  <!-- Thanh thông báo Glassmorphism -->
-<div id="flashSaleBar" 
-  class="fixed top-0 left-0 w-full z-50 flex items-center justify-center p-2 sm:p-3">
+<!-- Flash Sale Bar -->
+<div id="flashSaleBar" class="fixed top-2 left-1/2 transform -translate-x-1/2 
+                            flex items-center gap-2 sm:gap-4 p-2 sm:p-3 rounded-2xl 
+                            bg-white/80 backdrop-blur-md shadow-lg border border-white/30 z-50">
 
-  <div class="flex items-center gap-2 sm:gap-4 px-3 sm:px-6 py-2 rounded-xl 
-              backdrop-blur-md bg-white/40 border border-white/50 shadow-lg 
-              max-w-[95%] sm:max-w-full">
 
-    <!-- Icon 🎊 -->
-    <span class="text-xl sm:text-2xl animate-bounce">🎊</span>
+<!-- Icon 🎊 giữ màu mặc định -->
+<span class="text-2xl sm:text-3xl">
+  🎊
+</span>
 
-    <!-- Nội dung -->
-    <span class="text-gray-900 font-semibold text-xs sm:text-sm md:text-base truncate">
-      <span class="hidden xs:inline">Giảm giá</span> 
-      <span class="text-rose-600"> Giảm Giá 10%</span> 🎉
+
+  <!-- Nội dung chạy -->
+  <div class="overflow-hidden whitespace-nowrap w-[150px] sm:w-[200px]">
+    <span class="animate-marquee inline-block font-bold text-xs sm:text-sm md:text-base text-gray-900">
+      Flash Sale: <span class="text-rose-600">Giảm Giá 10%</span> 🎉
     </span>
+  </div>
 
-    <!-- Đếm ngược -->
-    <div id="countdown"
-      class="ml-2 sm:ml-4 px-2 sm:px-3 py-1 rounded-lg bg-gradient-to-r 
-             from-red-500 to-purple-600 text-white text-xs sm:text-sm font-mono font-bold shadow-md">
-      00:00:00
-    </div>
+  <!-- Đếm ngược -->
+  <div id="countdown" class="ml-2 sm:ml-4 px-2 sm:px-3 py-1 rounded-lg 
+                             bg-gradient-to-r from-red-400 via-pink-500 to-purple-600 
+                             text-white text-xs sm:text-sm font-mono font-bold shadow-md">
+    00:00:00
   </div>
 </div>
 
+<style>
+  /* Chữ chạy marquee đơn giản */
+  @keyframes marquee {
+    0%   { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  .animate-marquee {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 8s linear infinite;
+  }
+</style>
+
 <script>
-// Set thời gian kết thúc Flash Sale (ví dụ sau 3 giờ)
-let countdownEnd = new Date().getTime() + (3 * 60 * 60 * 1000);
+  // Countdown demo
+  function startCountdown(duration = 3600) { // 1 giờ
+    const countdown = document.getElementById("countdown");
+    let timer = duration, hours, minutes, seconds;
 
-function updateCountdown() {
-  let now = new Date().getTime();
-  let distance = countdownEnd - now;
+    setInterval(() => {
+      hours = Math.floor(timer / 3600);
+      minutes = Math.floor((timer % 3600) / 60);
+      seconds = timer % 60;
 
-  if (distance < 0) {
-    document.getElementById("countdown").innerHTML = "Hết hạn";
-    clearInterval(interval);
-    return;
+      countdown.textContent = 
+        `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+      
+      if (timer > 0) timer--;
+    }, 1000);
   }
 
-  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  document.getElementById("countdown").innerHTML =
-    (hours < 10 ? "0" + hours : hours) + ":" +
-    (minutes < 10 ? "0" + minutes : minutes) + ":" +
-    (seconds < 10 ? "0" + seconds : seconds);
-}
-
-let interval = setInterval(updateCountdown, 1000);
-updateCountdown();
+  startCountdown(3600); // bắt đầu đếm ngược 1 giờ
 </script>
+
 
 
 <!-- Popup Ưu đãi bằng ảnh -->
@@ -280,9 +288,53 @@ updateCountdown();
     }
   });
 </script>
-
+  <!-- Góc phải trên cùng -->
+<!-- Góc phải trên cùng -->
+<div id="welcomeUser"
+     class="fixed top-2 right-2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg 
+            text-xs sm:text-sm font-bold z-50 max-w-[75%] flex items-center gap-2 truncate border border-indigo-300">
   
+  <!-- Icon 👋 giữ màu mặc định -->
+  <span class="text-xl sm:text-2xl">
+    👋
+  </span>
+
+  <!-- Chữ chạy gradient -->
+  <span id="welcomeText" class="truncate font-semibold">
+    Xin chào, Khách!
+  </span>
+</div>
+
+<style>
+  /* Hiệu ứng chữ gradient chạy */
+  #welcomeText {
+    background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899, #3b82f6);
+    background-size: 300% 300%;
+    animation: gradientMove 6s infinite linear;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+</style>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const user = localStorage.getItem("currentUser");
+    const welcomeText = document.getElementById("welcomeText");
+
+    if (user) {
+      welcomeText.textContent = `Xin chào, ${user}!`;
+    } else {
+      welcomeText.textContent = "Xin chào, Khách!";
+    }
+  });
 </script>
+
 
   <body class="bg-gradient-to-br from-slate-50 to-sky-50 text-slate-800">
     <!-- NAVBAR -->
@@ -410,6 +462,172 @@ updateCountdown();
 </div>
 
     </section>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Web Khánh</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-slide {
+      animation: fadeSlide 0.8s ease forwards;
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #userList {
+      max-height: 360px;
+      overflow-y: auto;
+    }
+    #userList::-webkit-scrollbar {
+      width: 6px;
+    }
+    #userList::-webkit-scrollbar-thumb {
+      background-color: rgba(79, 70, 229, 0.6);
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-indigo-50 via-white to-indigo-50 min-h-screen flex flex-col items-center p-6 gap-8">
+
+  <!-- Section Thống kê -->
+  <div class="flex flex-col sm:flex-row justify-center items-stretch gap-6 w-full max-w-6xl mx-auto">
+    <!-- Card 1 -->
+    <div class="flex-1 p-6 rounded-2xl bg-gradient-to-tr from-indigo-100 via-indigo-50 to-indigo-200 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+      <div class="flex items-center gap-4">
+        <div class="bg-white/50 p-4 rounded-full flex-shrink-0 shadow-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-indigo-700 font-medium">Người dùng hôm nay</p>
+          <p class="text-2xl font-bold text-indigo-900" id="usersToday">0</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="flex-1 p-6 rounded-2xl bg-gradient-to-tr from-green-100 via-green-50 to-green-200 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+      <div class="flex items-center gap-4">
+        <div class="bg-white/50 p-4 rounded-full flex-shrink-0 shadow-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-green-700 font-medium">Đơn đã hoàn thành</p>
+          <p class="text-2xl font-bold text-green-900" id="ordersCompleted">0</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="flex-1 p-6 rounded-2xl bg-gradient-to-tr from-pink-100 via-pink-50 to-pink-200 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+      <div class="flex items-center gap-4">
+        <div class="bg-white/50 p-4 rounded-full flex-shrink-0 shadow-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 9l-3 3m0 0l-3-3m3 3V4" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-pink-700 font-medium">Tổng like đã cung cấp</p>
+          <p class="text-2xl font-bold text-pink-900" id="totalLikes">0</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Bảng người dùng ảo -->
+  <div class="flex flex-col justify-center items-center gap-4 w-full max-w-2xl mx-auto p-6 bg-white rounded-2xl shadow-lg border-2 border-indigo-200">
+    <h2 class="text-2xl font-bold mb-4 text-center text-indigo-600">Người vừa sử dụng dịch vụ</h2>
+    <ul id="userList" class="w-full space-y-3"></ul>
+  </div>
+
+  <script>
+    function animateCount(id, target, duration = 1000) {
+      const el = document.getElementById(id);
+      let start = 0;
+      const stepTime = Math.max(Math.floor(duration / target), 10);
+      const timer = setInterval(() => {
+        start++;
+        el.textContent = start;
+        if (start >= target) clearInterval(timer);
+      }, stepTime);
+    }
+
+    const usersTodayCount = Math.floor(Math.random() * 10 + 50);
+    const ordersCompletedCount = Math.floor(Math.random() * 30 + 20);
+    const totalLikesCount = Math.floor(Math.random() * 10000 + 500);
+
+    animateCount("usersToday", usersTodayCount);
+    animateCount("ordersCompleted", ordersCompletedCount);
+    animateCount("totalLikes", totalLikesCount);
+
+const userList = document.getElementById("userList");
+
+  // Danh sách tên dài hơn
+  const names = [
+    "Khánh","An","Bảo","Cường","Dũng","Hải","Linh","Minh","Ngọc",
+    "Phúc","Quang","Trang","Vy","Huy","Thu","Lan","Hoàng","Trâm",
+    "Điệp","Tú","Nhật","Kiên","Thanh","Diệu","Vinh"
+  ];
+
+  // Nhiều ảnh avatar hơn
+  const avatars = [
+    "https://i.pravatar.cc/40?img=1",
+    "https://i.pravatar.cc/40?img=2",
+    "https://i.pravatar.cc/40?img=3",
+    "https://i.pravatar.cc/40?img=4",
+    "https://i.pravatar.cc/40?img=5",
+    "https://i.pravatar.cc/40?img=6",
+    "https://i.pravatar.cc/40?img=7",
+    "https://i.pravatar.cc/40?img=8",
+    "https://i.pravatar.cc/40?img=9",
+    "https://i.pravatar.cc/40?img=10",
+    "https://i.pravatar.cc/40?img=11",
+    "https://i.pravatar.cc/40?img=12",
+    "https://i.pravatar.cc/40?img=13",
+    "https://i.pravatar.cc/40?img=14",
+    "https://i.pravatar.cc/40?img=15",
+    "https://i.pravatar.cc/40?img=16",
+    "https://i.pravatar.cc/40?img=17",
+    "https://i.pravatar.cc/40?img=18",
+    "https://i.pravatar.cc/40?img=19",
+    "https://i.pravatar.cc/40?img=20"
+  ];
+
+  function randomName() {
+    return names[Math.floor(Math.random() * names.length)] + Math.floor(Math.random() * 100);
+  }
+  function randomAvatar() {
+    return avatars[Math.floor(Math.random() * avatars.length)];
+  }
+
+  function addUser() {
+    const li = document.createElement("li");
+    li.className = "flex items-center justify-between bg-indigo-50 px-4 py-2 rounded-xl shadow hover:shadow-md transition-all fade-slide border border-indigo-100";
+    li.innerHTML = `
+      <div class="flex items-center gap-3">
+        <img src="${randomAvatar()}" alt="avatar" class="w-10 h-10 rounded-full border-2 border-indigo-300 flex-shrink-0 shadow-md">
+        <span class="font-semibold text-indigo-800">${randomName()}</span>
+      </div>
+      <span class="text-xs text-indigo-600 italic flex-shrink-0">vừa dùng xong</span>
+    `;
+    userList.prepend(li);
+    if(userList.children.length > 6) userList.removeChild(userList.lastChild);
+  }
+
+  // Thêm user mới mỗi 3 giây
+  setInterval(addUser, 7000);
+
+  // Khởi tạo 3 user ban đầu
+  for(let i=0; i<3; i++) addUser();
+</script>
+</body>
+</html>
 
     <!-- SERVICES -->
     <section id="services" class="max-w-6xl mx-auto px-4 py-8">
@@ -627,6 +845,7 @@ updateCountdown();
   object-fit: cover;
 }
 </style>
+
 
 
 <!-- CAM KẾT & THÔNG TIN -->
