@@ -27,9 +27,11 @@
     </style>
   </head>
 <!-- Flash Sale Bar -->
-<div id="flashSaleBar" class="fixed top-2 left-1/2 transform -translate-x-1/2 
-                            flex items-center gap-2 sm:gap-4 p-2 sm:p-3 rounded-2xl 
-                            bg-white/80 backdrop-blur-md shadow-lg border border-white/30 z-50">
+<div id="flashSaleBar" 
+     class="fixed top-12 sm:top-2 left-1/2 transform -translate-x-1/2 
+            flex items-center gap-2 sm:gap-4 p-2 sm:p-3 rounded-2xl 
+            bg-white/80 backdrop-blur-md shadow-lg border border-white/30 z-50">
+
 
 
 <!-- Icon 🎊 giữ màu mặc định -->
@@ -289,21 +291,24 @@
   });
 </script>
   <!-- Góc phải trên cùng -->
-<!-- Góc phải trên cùng -->
-<div id="welcomeUser"
-     class="fixed top-2 right-2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg 
+<div id="welcomeUser" class="fixed top-2 right-2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg 
             text-xs sm:text-sm font-bold z-50 max-w-[75%] flex items-center gap-2 truncate border border-indigo-300">
-  
-  <!-- Icon 👋 giữ màu mặc định -->
-  <span class="text-xl sm:text-2xl">
-    👋
-  </span>
-
-  <!-- Chữ chạy gradient -->
+  <span class="text-xl sm:text-2xl">👋</span>
   <span id="welcomeText" class="truncate font-semibold">
     Xin chào, Khách!
   </span>
 </div>
+
+<script>
+  // Lấy tên từ localStorage
+  const storedUser = localStorage.getItem("currentUser");
+  const welcomeTextEl = document.getElementById("welcomeText");
+
+  if(storedUser && storedUser.trim() !== "") {
+    welcomeTextEl.textContent = `Xin chào, ${storedUser}!`;
+  }
+</script>
+
 
 <style>
   /* Hiệu ứng chữ gradient chạy */
