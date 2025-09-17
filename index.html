@@ -7,11 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       body {
-        background: linear-gradient(135deg, #ffe6f0, #f2e9fb),
-          url("./background.jpg") no-repeat center center;
-        background-size: cover;
+        background: linear-gradient(
+          135deg,
+          #f8fafc,
+          #f0f9ff
+        ); /* nền xanh nhạt */
         font-family: "Poppins", sans-serif;
-        color: #333;
+        color: #1e293b; /* chữ xanh đậm dễ đọc */
         min-height: 100vh;
         overflow-x: hidden;
         position: relative;
@@ -20,7 +22,7 @@
       .overlay {
         position: absolute;
         inset: 0;
-        background: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.6);
         z-index: 0;
       }
 
@@ -31,80 +33,76 @@
         padding: 0 16px;
       }
 
-      /* Logo viền sáng */
+      /* Logo viền sáng xanh - tím */
       .logo-wrapper {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         padding: 6px;
         border-radius: 9999px;
-        background: linear-gradient(90deg, #ff3ca6, #c471ed, #42d9f4);
-        box-shadow: 0 0 25px rgba(255, 0, 150, 0.6);
+        background: linear-gradient(90deg, #6a5acd, #7dd3fc);
+        box-shadow: 0 0 25px rgba(106, 90, 205, 0.5);
         animation: glowPulse 3s infinite alternate;
       }
       @keyframes glowPulse {
         from {
-          box-shadow: 0 0 15px rgba(255, 60, 166, 0.6);
+          box-shadow: 0 0 15px rgba(106, 90, 205, 0.4);
         }
         to {
-          box-shadow: 0 0 35px rgba(196, 113, 237, 0.8);
+          box-shadow: 0 0 35px rgba(125, 211, 252, 0.8);
         }
       }
 
-      /* Text gradient */
+      /* Tiêu đề gradient tím - xanh */
       .metal-text {
-        background: linear-gradient(90deg, #ff3ca6, #c471ed, #fcb1ff);
+        background: linear-gradient(90deg, #6a5acd, #7dd3fc, #a78bfa);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 900;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+        text-shadow: 1px 1px 6px rgba(167, 139, 250, 0.5);
         letter-spacing: 1px;
       }
 
       /* Nút */
       .glow-button {
-        background: linear-gradient(90deg, #fbb6ce, #fce1ec);
-        border: 2px solid #f9c7d9;
-        color: #333;
+        background: #ffffff;
+        border: 2px solid #7dd3fc;
+        color: #1e293b;
         font-weight: bold;
         transition: all 0.3s;
         display: inline-block;
       }
       .glow-button:hover {
-        background: linear-gradient(90deg, #fce1ec, #fbb6ce);
+        background: #e0f2fe;
         transform: scale(1.05);
-        box-shadow: 0 0 20px #f9c7d9;
+        box-shadow: 0 0 15px #a78bfa;
       }
 
       /* Cam kết dịch vụ */
       .commit-box {
         margin-top: 32px;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(12px);
+        background: #ffffff;
         border-radius: 16px;
         padding: 20px;
         max-width: 95%;
         margin-left: auto;
         margin-right: auto;
-        border: 3px solid transparent;
-        background-clip: padding-box, border-box;
-        background-origin: border-box;
-        background-image: linear-gradient(white, white),
-          linear-gradient(90deg, #ff3ca6, #c471ed, #42d9f4);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        border: 2px solid #7dd3fc;
+        box-shadow: 0 6px 20px rgba(106, 90, 205, 0.15);
+        color: #1e293b;
       }
       .commit-box h2 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 800;
-        background: linear-gradient(90deg, #ff0066, #9b4dff);
+        background: linear-gradient(90deg, #6a5acd, #7dd3fc);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 15px;
       }
       .commit-box ul li {
         font-weight: 600;
-        font-size: 0.95rem;
-        color: #444;
+        font-size: 1rem;
+        color: #1e293b;
       }
 
       /* Mobile tối ưu */
@@ -140,7 +138,7 @@
       <h1 class="metal-text text-4xl md:text-6xl mb-4">KHÁNH BÁN SUB</h1>
 
       <!-- Mô tả -->
-      <p class="text-gray-800 text-base md:text-xl mb-8 font-medium">
+      <p class="text-base md:text-xl mb-8 font-medium">
         Dịch Vụ Tăng Follow · Like · Share Nhanh Chóng — An Toàn & Uy Tín
       </p>
 
