@@ -27,19 +27,26 @@
     </style>
   </head>
   <!-- Thanh thông báo Glassmorphism -->
-<div id="flashSaleBar" class="fixed top-0 left-0 w-full z-50 flex items-center justify-center p-3">
-  <div class="flex items-center gap-4 px-6 py-2 rounded-2xl backdrop-blur-md bg-white/30 border border-white/40 shadow-lg">
+<div id="flashSaleBar" 
+  class="fixed top-0 left-0 w-full z-50 flex items-center justify-center p-2 sm:p-3">
+
+  <div class="flex items-center gap-2 sm:gap-4 px-3 sm:px-6 py-2 rounded-xl 
+              backdrop-blur-md bg-white/40 border border-white/50 shadow-lg 
+              max-w-[95%] sm:max-w-full">
+
     <!-- Icon 🎊 -->
-    <span class="text-2xl animate-bounce">🎊</span>
+    <span class="text-xl sm:text-2xl animate-bounce">🎊</span>
 
     <!-- Nội dung -->
-    <span class="text-gray-900 font-semibold text-sm sm:text-base">
-      Giảm giá <span class="text-rose-600">20%</span> cho 100 khách đầu tiên hôm nay!
+    <span class="text-gray-900 font-semibold text-xs sm:text-sm md:text-base truncate">
+      <span class="hidden xs:inline">Giảm giá</span> 
+      <span class="text-rose-600"> Giảm Giá 10%</span> 🎉
     </span>
 
     <!-- Đếm ngược -->
     <div id="countdown"
-      class="ml-4 px-3 py-1 rounded-lg bg-gradient-to-r from-red-500 to-purple-600 text-white font-mono font-bold shadow-md">
+      class="ml-2 sm:ml-4 px-2 sm:px-3 py-1 rounded-lg bg-gradient-to-r 
+             from-red-500 to-purple-600 text-white text-xs sm:text-sm font-mono font-bold shadow-md">
       00:00:00
     </div>
   </div>
@@ -72,6 +79,7 @@ function updateCountdown() {
 let interval = setInterval(updateCountdown, 1000);
 updateCountdown();
 </script>
+
 
 <!-- Popup Ưu đãi bằng ảnh -->
 <div
@@ -620,75 +628,6 @@ updateCountdown();
 }
 </style>
 
-<script>
-const feed = document.getElementById("liveFeed");
-const fakeData = [
-  {name:"Trang", service:"Mua Follow 💙"},
-  {name:"Linh", service:"Share Bài 🔄"},
-  {name:"Minh", service:"Sub Kênh ▶️"},
-  {name:"Phương", service:"Mua Follow 💙"},
-  {name:"Duy", service:"Tăng Like ❤️"},
-  {name:"An", service:"Share Bài 🔄"},
-  {name:"Vy", service:"Sub Kênh ▶️"},
-  {name:"Hương", service:"Mua Follow 💙"},
-  {name:"Tuấn", service:"Tăng Like ❤️"},
-  {name:"Mai", service:"Share Bài 🔄"},
-  {name:"Quang", service:"Sub Kênh ▶️"},
-  {name:"Hải", service:"Mua Follow 💙"},
-  {name:"Diệu", service:"Tăng Like ❤️"},
-  {name:"Nam", service:"Share Bài 🔄"},
-  {name:"Yến", service:"Sub Kênh ▶️"},
-  {name:"Long", service:"Mua Follow 💙"},
-  {name:"Thảo", service:"Tăng Like ❤️"},
-  {name:"Sơn", service:"Share Bài 🔄"},
-  {name:"Lan", service:"Sub Kênh ▶️"},
-  {name:"Tùng", service:"Mua Follow 💙"},
-  {name:"Ngọc", service:"Tăng Like ❤️"},
-  {name:"Kiên", service:"Share Bài 🔄"},
-  {name:"Hạnh", service:"Sub Kênh ▶️"},
-  {name:"Phong", service:"Mua Follow 💙"},
-  {name:"My", service:"Tăng Like ❤️"},
-  {name:"Thịnh", service:"Share Bài 🔄"},
-  {name:"Thu", service:"Sub Kênh ▶️"},
-  {name:"Hoàng", service:"Mua Follow 💙"},
-  {name:"Quỳnh", service:"Tăng Like ❤️"},
-  {name:"Hùng", service:"Share Bài 🔄"},
-  {name:"Giang", service:"Sub Kênh ▶️"},
-  {name:"Bảo", service:"Mua Follow 💙"},
-  {name:"Trâm", service:"Tăng Like ❤️"},
-  {name:"Vũ", service:"Share Bài 🔄"},
-  {name:"Tiên", service:"Sub Kênh ▶️"},
-  {name:"Alex", service:"Mua Follow 💙"},
-  {name:"Hana", service:"Tăng Like ❤️"},
-];
-
-
-// Avatar thật từ randomuser API
-function getRealAvatar() {
-  const id = Math.floor(Math.random() * 90) + 1;
-  return `https://randomuser.me/api/portraits/women/${id}.jpg`;
-}
-
-let i = 0;
-setInterval(() => {
-  let item = fakeData[i % fakeData.length];
-  let div = document.createElement("div");
-  div.className = "live-bubble";
-  div.innerHTML = `
-    <img src="${getRealAvatar()}" />
-    <div><b>${item.name}</b><br/><span>${item.service}</span></div>
-  `;
-  feed.appendChild(div);
-
-  // Sau 6s thì fade-out rồi remove
-  setTimeout(() => {
-    div.classList.add("fade-out");
-    setTimeout(() => div.remove(), 1000);
-  }, 6000);
-
-  i++;
-}, 4000);
-</script>
 
 <!-- CAM KẾT & THÔNG TIN -->
 <section class="bg-white py-16 mt-12 relative">
