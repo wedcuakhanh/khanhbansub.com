@@ -305,8 +305,9 @@
   });
 </script>
   <!-- Góc phải trên cùng -->
-<div id="welcomeUser" class="fixed top-2 right-2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg 
-            text-xs sm:text-sm font-bold z-50 max-w-[75%] flex items-center gap-2 truncate border border-indigo-300">
+<div id="welcomeUser" 
+  class="fixed top-2 right-2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg 
+         text-xs sm:text-sm font-bold z-50 max-w-[75%] flex items-center gap-2 truncate border border-indigo-300">
   <span class="text-xl sm:text-2xl">👋</span>
   <span id="welcomeText" class="truncate font-semibold">
     Xin chào, Khách!
@@ -321,6 +322,15 @@
   if(storedUser && storedUser.trim() !== "") {
     welcomeTextEl.textContent = `Xin chào, ${storedUser}!`;
   }
+  // Cho hiện trong 6 giây rồi ẩn
+  setTimeout(() => {
+    const welcomeBox = document.getElementById("welcomeUser");
+    if (welcomeBox) {
+      welcomeBox.style.transition = "opacity 0.5s ease";
+      welcomeBox.style.opacity = "0";
+      setTimeout(() => welcomeBox.remove(), 500); // Xóa hẳn sau khi ẩn mờ
+    }
+  }, 6000); // 6000ms = 6 giây
 </script>
 
 
