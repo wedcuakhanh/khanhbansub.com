@@ -304,34 +304,146 @@
     }
   });
 </script>
-  <!-- Góc phải trên cùng -->
-<div id="welcomeUser" 
-  class="fixed top-2 right-2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg 
-         text-xs sm:text-sm font-bold z-50 max-w-[75%] flex items-center gap-2 truncate border border-indigo-300">
-  <span class="text-xl sm:text-2xl">👋</span>
-  <span id="welcomeText" class="truncate font-semibold">
-    Xin chào, Khách!
-  </span>
+<!-- Nút menu góc phải -->
+<div id="menuButton" 
+  class="fixed top-3 right-3 z-50 bg-indigo-600 text-white p-2 rounded-lg shadow-lg cursor-pointer">
+  ☰
 </div>
 
+<!-- Thanh menu trượt từ phải -->
+<div id="sideMenu" 
+  class="fixed top-0 right-0 h-full w-64 
+         bg-gradient-to-b from-white/90 via-purple-100/80 to-indigo-100/90 
+         backdrop-blur-md text-gray-800 shadow-2xl transform translate-x-full 
+         transition-transform duration-300 z-40 rounded-l-2xl border-l border-indigo-200 flex flex-col justify-between">
+
+  <div>
+    <!-- Logo + Tên shop -->
+    <div class="p-4 border-b border-indigo-200 font-bold text-lg flex items-center justify-center gap-2 text-indigo-600 relative">
+      <img src="./DVFB.png" alt="Logo" class="w-8 h-8 rounded-full shadow-md">
+      <span>KHÁNH SHOP</span>
+    </div>
+
+    <!-- Quản lý -->
+    <div class="p-4 text-sm font-semibold text-indigo-500 uppercase">
+      QUẢN LÝ
+    </div>
+    <ul class="px-4 space-y-3 font-medium mb-4">
+      <li>
+        <a href="trangchu.html" class="flex items-center gap-2 p-2 rounded-md hover:bg-indigo-500 hover:text-white transition">
+          🏠 <span>Quản lý chung</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="px-4 space-y-3 font-medium mb-4">
+      <li>
+        <a href="thongtintaikhoan.html" class="flex items-center gap-2 p-2 rounded-md hover:bg-indigo-500 hover:text-white transition">
+          👤 <span>Thông Tin Tài Khoản</span>
+        </a>
+      </li>
+    </ul>
+
+  <!-- Danh sách dịch vụ -->
+<div class="p-4 text-sm font-semibold text-indigo-500 uppercase border-t border-indigo-200">
+  DANH SÁCH DỊCH VỤ
+</div>
+<ul class="px-4 space-y-3 font-medium">
+  <li>
+    <a href="dvfb.html" class="flex items-center gap-3 p-2 rounded-md hover:bg-indigo-500 hover:text-white transition">
+      <img src="./fb.png" alt="Facebook" class="w-6 h-6">
+      <span>Facebook</span>
+    </a>
+  </li>
+  <li>
+    <a href="dvtk.html" class="flex items-center gap-3 p-2 rounded-md hover:bg-indigo-500 hover:text-white transition">
+      <img src="./tk.png" alt="TikTok" class="w-6 h-6">
+      <span>TikTok</span>
+    </a>
+  </li>
+  <li>
+    <a href="dangcapnhat.html" class="flex items-center gap-3 p-2 rounded-md hover:bg-indigo-500 hover:text-white transition">
+      <img src="./itg.jpg" alt="Instagram" class="w-6 h-6">
+      <span>Instagram</span>
+    </a>
+  </li>
+  <li>
+    <a href="dangcapnhat.html" class="flex items-center gap-3 p-2 rounded-md hover:bg-indigo-500 hover:text-white transition">
+      <img src="./ytb.png" alt="Youtube" class="w-6 h-6">
+      <span>Youtube</span>
+    </a>
+  </li>
+  <li>
+    <a href="dangcapnhat.html" class="flex items-center gap-3 p-2 rounded-md hover:bg-indigo-500 hover:text-white transition">
+      <img src="./tlg.png" alt="Telegram" class="w-6 h-6">
+      <span>Telegram</span>
+    </a>
+  </li>
+  <li>
+    <a href="dangcapnhat.html" class="flex items-center gap-3 p-2 rounded-md hover:bg-indigo-500 hover:text-white transition">
+      <img src="./hk.jpg" alt="Đam Nick Facebook" class="w-6 h-6">
+      <span>Đam Nick Facebook</span>
+    </a>
+  </li>
+</ul>
+
+    <!-- Xin chào -->
+    <div class="p-4 mt-6 border-t border-indigo-200 text-sm font-bold text-indigo-600">
+      👋 <span id="welcomeText">Xin chào, Khách!</span>
+    </div>
+  </div>
+
+  <!-- Đăng xuất -->
+  <div class="p-4 border-t border-indigo-200">
+    <a href="index.html" class="flex items-center gap-2 p-2 rounded-md bg-red-500 hover:bg-red-600 text-white transition">
+      ⛔ <span>Đăng xuất</span>
+    </a>
+  </div>
+</div>
+
+<!-- Nút đóng (>) nằm bên trái menu -->
+<div id="closeMenuBtn" 
+  class="hidden fixed top-3 right-[268px] z-50 bg-indigo-600 text-white p-2 rounded-lg shadow-lg cursor-pointer">
+  &gt;
+</div>
+
+<!-- Nền mờ -->
+<div id="overlay" class="fixed inset-0 bg-black/40 hidden z-30"></div>
+
 <script>
-  // Lấy tên từ localStorage
-  const storedUser = localStorage.getItem("currentUser");
+  const menuButton = document.getElementById("menuButton");
+  const closeMenuBtn = document.getElementById("closeMenuBtn");
+  const sideMenu = document.getElementById("sideMenu");
+  const overlay = document.getElementById("overlay");
   const welcomeTextEl = document.getElementById("welcomeText");
 
+  // Lấy tên từ localStorage
+  const storedUser = localStorage.getItem("currentUser");
   if(storedUser && storedUser.trim() !== "") {
     welcomeTextEl.textContent = `Xin chào, ${storedUser}!`;
   }
-  // Cho hiện trong 6 giây rồi ẩn
-  setTimeout(() => {
-    const welcomeBox = document.getElementById("welcomeUser");
-    if (welcomeBox) {
-      welcomeBox.style.transition = "opacity 0.5s ease";
-      welcomeBox.style.opacity = "0";
-      setTimeout(() => welcomeBox.remove(), 500); // Xóa hẳn sau khi ẩn mờ
-    }
-  }, 6000); // 6000ms = 6 giây
+
+  // Mở menu
+  menuButton.addEventListener("click", () => {
+    sideMenu.classList.remove("translate-x-full");
+    overlay.classList.remove("hidden");
+    menuButton.classList.add("hidden");
+    closeMenuBtn.classList.remove("hidden");
+  });
+
+  // Đóng menu
+  function closeMenu() {
+    sideMenu.classList.add("translate-x-full");
+    overlay.classList.add("hidden");
+    menuButton.classList.remove("hidden");
+    closeMenuBtn.classList.add("hidden");
+  }
+
+  closeMenuBtn.addEventListener("click", closeMenu);
+  overlay.addEventListener("click", closeMenu);
 </script>
+
+
+
 
 
 <style>
@@ -402,7 +514,7 @@
   <!-- Hình ảnh minh họa -->
   <div class="mb-8">
     <img 
-      src="./0376447206.png" 
+      src="./0376447206.png" 6
       alt="Dịch vụ tăng tương tác" 
       class="mx-auto rounded-2xl shadow-xl object-cover w-full max-w-5xl h-auto"
     />
@@ -639,138 +751,7 @@ const userList = document.getElementById("userList");
 </body>
 </html>
 
-    <!-- SERVICES -->
-    <section id="services" class="max-w-6xl mx-auto px-4 py-8">
-  <h2 class="text-2xl font-bold mb-4 text-indigo-600">Dịch vụ phổ biến</h2>
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    
-    <!-- Follow Facebook -->
-    <article class="bg-white rounded-xl p-6 shadow hover:scale-[1.02] transition border border-indigo-100">
-      <div class="flex items-center gap-3">
-        <img src="./fb.jpg" alt="Follow Facebook" class="w-12 h-12 rounded-lg object-cover shadow border border-indigo-200">
-        <div>
-          <h3 class="font-semibold text-slate-700">Follow Facebook</h3>
-          <p class="text-xs text-slate-500">
-            Tăng follow page - Trang Cá Nhân , Quốc gia VN.
-          </p>
-        </div>
-      </div>
-      <div class="mt-4 flex items-end justify-between">
-        <div>
-          <div class="text-sm text-slate-600">Tối thiểu 100.000 Follow</div>
-          <div class="text-lg font-bold text-indigo-600">29đ/follow</div>
-        </div>
-        <button
-          class="px-3 py-2 bg-gradient-to-r from-sky-400 to-indigo-500 text-white rounded-lg shadow hover:opacity-90 transition"
-          onclick="openOrder('Follow Facebook')"
-        >
-        
-          Mua
-        </button>
-      </div>
-    </article>
 
-    <!-- Follow TikTok -->
-    <article class="bg-white rounded-xl p-6 shadow hover:scale-[1.02] transition border border-indigo-100">
-      <div class="flex items-center gap-3">
-        <img src="./tik tok.jpg" alt="Follow TikTok" class="w-12 h-12 rounded-lg object-cover shadow border border-indigo-200">
-        <div>
-          <h3 class="font-semibold text-slate-700">Follow TikTok</h3>
-          <p class="text-xs text-slate-500">
-            Tăng Follow Doanh Nghiệp & Trang Cá Nhân.
-          </p>
-        </div>
-      </div>
-      <div class="mt-4 flex items-end justify-between">
-        <div>
-          <div class="text-sm text-slate-600">Tối thiểu 100.000 Follow</div>
-          <div class="text-lg font-bold text-indigo-600">29đ/follow</div>
-        </div>
-        <button
-          class="px-3 py-2 bg-gradient-to-r from-sky-400 to-indigo-500 text-white rounded-lg shadow hover:opacity-90 transition"
-          onclick="openOrder('Follow TikTok')"
-        >
-          Mua
-        </button>
-      </div>
-    </article>
-
-    <!-- Like TikTok & Facebook -->
-    <article class="bg-white rounded-xl p-6 shadow hover:scale-[1.02] transition border border-indigo-100">
-      <div class="flex items-center gap-3">
-        <img src="./like.jpg" alt="Like TikTok & Facebook" class="w-12 h-12 rounded-lg object-cover shadow border border-indigo-200">
-        <div>
-          <h3 class="font-semibold text-slate-700">Like TikTok & Facebook</h3>
-          <p class="text-xs text-slate-500">
-            Tăng Tương Tác - Nhanh Chóng - Hiệu Quả.
-          </p>
-        </div>
-      </div>
-      <div class="mt-4 flex items-end justify-between">
-        <div>
-          <div class="text-sm text-slate-600">Tối thiểu 100.000 Like</div>
-          <div class="text-lg font-bold text-indigo-600">29đ/like</div>
-        </div>
-        <button
-          class="px-3 py-2 bg-gradient-to-r from-sky-400 to-indigo-500 text-white rounded-lg shadow hover:opacity-90 transition"
-          onclick="openOrder('Like Facebook & TikTok')"
-        >
-          Mua
-        </button>
-      </div>
-    </article>
-  </div>
-</section>
-
-
- <section id="pricing" class="max-w-6xl mx-auto px-4 py-8">
-  <h2 class="text-2xl font-bold mb-4">Bảng giá tham khảo</h2>
-  <div class="grid md:grid-cols-3 gap-6">
-    
-<!-- Gói cơ bản -->
-<div class="bg-white p-6 rounded-2xl shadow">
-  <div class="text-sm text-slate-500">Gói cơ bản</div>
-  <div class="text-3xl font-bold mt-2">50K</div>
-  <ul class="mt-4 text-sm space-y-2 text-slate-600">
-    <li>Follow/ngày: 2K</li>
-    <li>Hỗ trợ 24/7</li>
-  </ul>
-  <button onclick="openModal()" class="mt-6 w-full py-2 bg-sky-400 text-white rounded-lg hover:bg-sky-500 transition">
-    Chọn gói
-  </button>
-</div>
-
-<!-- Gói phổ biến - Best Seller -->
-<div class="bg-white p-6 rounded-2xl shadow-lg border-2 border-indigo-300 transform scale-105 relative">
-  <!-- Nhãn Best Seller -->
-  <div class="absolute -top-3 right-4 bg-gradient-to-r from-sky-400 to-indigo-400 text-white text-xs px-3 py-1 rounded-full shadow">
-    🔥 Best Seller
-  </div>
-
-  <div class="text-sm text-slate-500">Gói phổ biến</div>
-  <div class="text-3xl font-bold mt-2 text-indigo-500">₫199K</div>
-  <ul class="mt-4 text-sm space-y-2 text-slate-600">
-    <li>Follow/ngày: 10K 🚀</li>
-    <li>Báo cáo chi tiết 📊</li>
-  </ul>
-  <button onclick="openModal()" class="mt-6 w-full py-2 bg-gradient-to-r from-sky-400 to-indigo-400 text-white rounded-lg shadow-lg hover:scale-105 transition">
-    Dùng ngay
-  </button>
-</div>
-
-<!-- Gói Pro -->
-<div class="bg-white p-6 rounded-2xl shadow">
-  <div class="text-sm text-slate-500">Gói Pro</div>
-  <div class="text-3xl font-bold mt-2">499K</div>
-  <ul class="mt-4 text-sm space-y-2 text-slate-600">
-    <li>Follow/ngày: 60K</li>
-    <li>Ưu tiên xử lý</li>
-  </ul>
-  <button onclick="openModal()" class="mt-6 w-full py-2 bg-indigo-400 text-white rounded-lg hover:bg-indigo-500 transition">
-    Chọn gói
-  </button>
-</div>
-</div>
 </section>
 
 <!-- Modal Liên hệ Admin -->
@@ -1122,194 +1103,4 @@ const userList = document.getElementById("userList");
     </div>
   </div>
 </footer>
-
-
-    <!-- ORDER MODAL -->
-    <!-- ORDER MODAL -->
-    <!-- ORDER MODAL -->
-    <div
-  id="orderModal"
-  class="fixed inset-0 bg-black/50 hidden items-center justify-center z-40"
->
-  <div class="bg-white rounded-2xl p-6 w-11/12 max-w-md">
-    <div class="flex justify-between items-center">
-      <h3 class="text-lg font-semibold">Tạo đơn</h3>
-      <button type="button" onclick="closeOrder()">✕</button>
-    </div>
-
-    <!-- Form gửi về Formspree -->
-    <form
-      id="orderForm"
-      class="mt-4 space-y-3"
-      onsubmit="return submitOrder(event)"
-    >
-      <!-- Dịch vụ -->
-      <input
-        type="text"
-        id="serviceName"
-        name="service"
-        readonly
-        class="w-full p-3 bg-slate-50 rounded"
-      />
-
-      <!-- Link -->
-      <input
-        type="text"
-        id="targetLink"
-        name="link"
-        placeholder="Link Cần Tương Tác"
-        class="w-full p-3 rounded border"
-        required
-      />
-
-      <!-- Số lượng -->
-      <input
-        type="number"
-        id="quantity"
-        name="quantity"
-        placeholder="Số lượng"
-        class="w-full p-3 rounded border"
-        min="1"
-        required
-        oninput="tinhTien()"
-      />
-
-      <!-- Tổng tiền -->
-      <div id="totalPrice" class="text-right font-semibold text-rose-500">
-        Tổng tiền: 0 VNĐ
-      </div>
-      <!-- ⚡ Thông tin thanh toán -->
-<div class="mt-4 border rounded-lg p-3 bg-gray-50 text-sm text-gray-700">
-  <h4 class="font-semibold mb-2">Thông tin thanh toán</h4>
-  <div class="flex items-center gap-2 mb-3">
-    <!-- Logo ngân hàng -->
-    <img src="./mb.jpg" 
-         alt="MB Bank" class="h-8" />
-    <span class="font-medium">MB Bank</span>
-  </div>
-  <ul class="space-y-1">
-    <li>
-      <span class="font-medium">Số tài khoản:</span>
-      <span
-        id="stk"
-        class="text-rose-600 font-semibold cursor-pointer"
-        onclick="copyText('stk')"
-      >0376447206</span>
-    </li>
-    <li><span class="font-medium">Chủ tài khoản:</span> TRAN QUOC KHANH</li>
-    <li>
-      <span class="font-medium">Nội dung CK:Tên Tài Khoản Cần Tăng  </span>
-      <span
-        id="ndck"
-        class="text-blue-600 font-semibold cursor-pointer"
-        onclick="copyText('ndck')"
-      ></span>
-    </li>
-  </ul>
-
-  <!-- QR code chuyển khoản -->
-  <div class="mt-3 text-center">
-    <p class="text-sm mb-1">Quét mã QR để thanh toán nhanh</p>
-    <img src="./nganhang.jpg" 
-         alt="QR Thanh toán" class="w-40 mx-auto border rounded-lg" />
-  </div>
-
-  <p class="text-xs text-gray-500 mt-2 text-center">
-    👉 Bấm vào <span class="text-rose-600">Số tài khoản</span> hoặc
-    <span class="text-blue-600">Nội dung CK</span> để copy nhanh.
-  </p>
-</div>
-<!-- ⚡ end -->
-
-<!-- Ẩn input để gửi tổng tiền -->
-<input type="hidden" id="hiddenTotal" name="total" />
-
-<div class="flex justify-center gap-4 mt-3 w-full max-w-md mx-auto">
-  <button
-    type="submit"
-    class="flex-[2] px-5 py-3 bg-gradient-to-r from-sky-400 to-indigo-400 text-white rounded-lg shadow hover:scale-[1.02] transition"
-  >
-    Đặt hàng
-  </button>
-  <button
-    type="button"
-    class="flex-1 px-5 py-3 bg-gradient-to-r from-sky-400 to-indigo-400 text-white rounded-lg shadow hover:scale-[1.02] transition"
-    onclick="closeOrder()"
-  >
-    Huỷ
-  </button>
-</div>
-
-
-
-
-
-<!-- SIMPLE SCRIPTS -->
-<script>
-  const orderModal   = document.getElementById("orderModal");
-  const serviceName  = document.getElementById("serviceName");
-  const totalPrice   = document.getElementById("totalPrice");
-  const hiddenTotal  = document.getElementById("hiddenTotal");
-  const flashSaleBar = document.getElementById("flashSaleBar"); // lấy thanh Flash Sale
-
-  function openOrder(name = "") {
-    serviceName.value = name;
-    orderModal.classList.remove("hidden");
-    orderModal.classList.add("flex");
-
-    // ẩn flash sale bar
-    if (flashSaleBar) {
-      flashSaleBar.classList.add("flash-hidden");
-    }
-  }
-
-  function closeOrder() {
-    orderModal.classList.remove("flex");
-    orderModal.classList.add("hidden");
-
-    // hiện lại flash sale bar
-    if (flashSaleBar) {
-      flashSaleBar.classList.remove("flash-hidden");
-    }
-  }
-
-  // Tính tiền
-  function tinhTien() {
-    const qty = document.getElementById("quantity").value;
-    const pricePerUnit = 29;
-    const total = qty * pricePerUnit;
-    totalPrice.textContent = "Tổng tiền: " + total.toLocaleString() + " VNĐ";
-    hiddenTotal.value = total;
-  }
-
-  // Submit Form
-  async function submitOrder(e) {
-    e.preventDefault();
-    const form = document.getElementById("orderForm");
-    const response = await fetch("https://formspree.io/f/xrbavvjq", {
-      method: "POST",
-      body: new FormData(form),
-      headers: { Accept: "application/json" },
-    });
-
-    if (response.ok) {
-      alert("Vui Lòng Thanh Toán Để Admin Duyệt Đơn Trong 24h");
-      window.location.href = "thanhtoan.html";
-    } else {
-      alert("Có lỗi xảy ra, vui lòng thử lại.");
-    }
-  }
-</script>
-
-<style>
-  /* class hiệu ứng cho flash sale bar */
-  .flash-hidden {
-    opacity: 0;
-    transform: translate(-50%, -20px);
-    transition: all 0.4s ease;
-    pointer-events: none;
-  }
-  #flashSaleBar {
-    transition: all 0.4s ease;
-  }
-</style>
+</html>

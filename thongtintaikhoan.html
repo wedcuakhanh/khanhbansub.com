@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thông tin tài khoản - KHÁNH BÁN SUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-gradient-to-br from-indigo-50 via-blue-50 to-violet-50 min-h-screen flex items-center justify-center font-[Poppins]"
+  >
+    <div
+      class="bg-white/90 backdrop-blur-md shadow-xl rounded-2xl p-8 w-full max-w-md border border-indigo-100"
+    >
+      <!-- Logo + tên shop -->
+      <div class="flex flex-col items-center gap-2 mb-6">
+        <img
+          src="DVFB.png"
+          alt="Logo Shop"
+          class="w-16 h-16 rounded-full shadow border-2 border-indigo-400"
+        />
+        <h1
+          class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-sky-400 bg-clip-text text-transparent"
+        >
+          KHÁNH BÁN SUB
+        </h1>
+        <p class="text-xs text-slate-500">Thông tin tài khoản</p>
+      </div>
+
+      <!-- Ảnh đại diện + tên -->
+      <div class="flex flex-col items-center mb-6">
+        <img
+          id="avatarDisplay"
+          src="nguoidung.png"
+          alt="Avatar"
+          class="w-20 h-20 rounded-full border-2 border-indigo-300 shadow-md mb-2 object-cover"
+        />
+        <p id="usernameDisplay" class="text-lg font-bold text-indigo-600">
+          ...
+        </p>
+      </div>
+
+      <!-- Thông tin user -->
+      <div class="space-y-4 text-left">
+        <div>
+          <p class="text-sm text-slate-500">📧 Email:</p>
+          <p id="emailDisplay" class="font-semibold text-indigo-600">...</p>
+        </div>
+
+        <div>
+          <p class="text-sm text-slate-500">💰 Số dư:</p>
+          <p id="balanceDisplay" class="font-semibold text-green-600">...</p>
+        </div>
+
+        <div>
+          <p class="text-sm text-slate-500">⏰ Ngày tham gia:</p>
+          <p id="joinDate" class="font-semibold text-slate-700">...</p>
+        </div>
+      </div>
+
+      <!-- Nút -->
+      <div class="mt-6 space-y-3">
+        <button
+          onclick="goHome()"
+          class="w-full bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 text-white py-2 rounded-lg shadow transition font-semibold"
+        >
+          🏠 Về trang chủ
+        </button>
+
+        <button
+          onclick="logout()"
+          class="w-full bg-gradient-to-r from-indigo-600 to-sky-400 hover:from-indigo-700 hover:to-sky-500 text-white py-2 rounded-lg shadow transition font-semibold"
+        >
+          🚪 Đăng xuất
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Lấy thông tin từ localStorage
+      const currentUser = localStorage.getItem("currentUser");
+      const savedEmail = localStorage.getItem("email") || "Chưa cập nhật";
+      const savedBalance = localStorage.getItem("balance") || "0";
+      const savedJoinDate = localStorage.getItem("joinDate") || "01/01/2025";
+      const savedAvatar = localStorage.getItem("avatar") || "nguoidung.png";
+
+      if (currentUser) {
+        document.getElementById("usernameDisplay").textContent = currentUser;
+        document.getElementById("emailDisplay").textContent = savedEmail;
+        document.getElementById("balanceDisplay").textContent =
+          savedBalance + " VNĐ";
+        document.getElementById("joinDate").textContent = savedJoinDate;
+        document.getElementById("avatarDisplay").src = savedAvatar;
+      } else {
+        alert("Bạn chưa đăng nhập!");
+        window.location.href = "login.html";
+      }
+
+      // Về trang chủ
+      function goHome() {
+        window.location.href = "trangchu.html";
+      }
+
+      // Đăng xuất
+      function logout() {
+        localStorage.removeItem("currentUser");
+        alert("Bạn đã đăng xuất!");
+        window.location.href = "dangnhap.html";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dịch vụ Facebook - KHÁNH BÁN SUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-gradient-to-br from-indigo-50 via-blue-50 to-violet-50 min-h-screen flex items-center justify-center font-[Poppins]"
+  >
+    <!-- Modal nhắc thanh toán -->
+    <div
+      id="paymentNotice"
+      class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+      <div
+        class="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-md text-center animate-bounce-in"
+      >
+        <div class="flex items-center justify-center gap-3 mb-3">
+          <img
+            src="./DVFB.png"
+            alt="Logo Shop"
+            class="w-14 h-14 rounded-full border border-indigo-300 shadow"
+          />
+          <span class="text-lg font-bold text-indigo-600">KHÁNH BÁN SUB</span>
+        </div>
+        <h2 class="text-xl font-bold text-indigo-600 mb-2">
+          ⚠️ Nhắc nhở thanh toán
+        </h2>
+        <p class="text-gray-700 mb-4">
+          Vui lòng
+          <span class="font-semibold text-rose-500">chuyển khoản trước</span> để
+          đơn hàng được duyệt nhanh chóng. Hãy đảm bảo nhập đúng
+          <span class="text-blue-500">nội dung chuyển khoản</span>.
+        </p>
+        <button
+          onclick="closeNotice()"
+          class="px-5 py-2 bg-gradient-to-r from-sky-400 to-indigo-400 text-white rounded-lg shadow hover:scale-[1.05] transition"
+        >
+          Tôi đã hiểu
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md border border-indigo-100 relative"
+    >
+      <!-- Logo + Tên shop -->
+      <div class="flex justify-center items-center gap-3 mb-4">
+        <img
+          src="./DVFB.png"
+          alt="Logo Shop"
+          class="w-16 h-16 rounded-full border border-indigo-300 shadow"
+        />
+        <span class="text-xl font-bold text-indigo-600">KHÁNH BÁN SUB</span>
+      </div>
+
+      <!-- Tiêu đề -->
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold text-indigo-600">
+          🛒 Đặt dịch vụ Facebook
+        </h3>
+        <button onclick="goBack()" class="text-gray-500 hover:text-red-500">
+          ✕
+        </button>
+      </div>
+
+      <!-- Form -->
+      <form
+        id="orderForm"
+        class="space-y-3"
+        onsubmit="return submitOrder(event)"
+      >
+        <!-- Chọn loại dịch vụ -->
+        <label class="block text-sm font-medium text-gray-700"
+          >Chọn dịch vụ</label
+        >
+        <select
+          id="serviceName"
+          name="service"
+          class="w-full p-3 rounded border bg-slate-50"
+          onchange="toggleEmotion(); tinhTien();"
+        >
+          <option value="like">👍 Like (Cảm xúc)</option>
+          <option value="follow">👤 Follow Facebook</option>
+          <option value="view">👀 View Video</option>
+          <option value="share">🔄 Share Video</option>
+          <option value="review">⭐ Review Fanpage</option>
+        </select>
+
+        <!-- Chọn cảm xúc (chỉ Like) -->
+        <div id="emotionGroup" class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700"
+            >Chọn cảm xúc</label
+          >
+          <select id="emotion" class="w-full p-3 rounded border bg-slate-50">
+            <option value="like">👍 Thích</option>
+            <option value="love">❤️ Yêu thích</option>
+            <option value="haha">😆 Haha</option>
+            <option value="wow">😮 Wow</option>
+            <option value="sad">😢 Buồn</option>
+          </select>
+        </div>
+
+        <!-- Hidden input để gửi cảm xúc -->
+        <input type="hidden" id="hiddenEmotion" name="emotion" />
+
+        <!-- Link -->
+        <input
+          type="text"
+          id="targetLink"
+          name="link"
+          placeholder="Link post/video/fanpage"
+          class="w-full p-3 rounded border"
+          required
+        />
+
+        <!-- Số lượng -->
+        <input
+          type="number"
+          id="quantity"
+          name="quantity"
+          placeholder="Số lượng"
+          class="w-full p-3 rounded border"
+          min="1"
+          required
+          oninput="tinhTien()"
+        />
+
+        <!-- Tổng tiền -->
+        <div id="totalPrice" class="text-right font-semibold text-rose-500">
+          Tổng tiền: 0 VNĐ
+        </div>
+
+        <!-- Chi tiết dịch vụ -->
+        <div
+          class="mt-4 border rounded-xl p-4 bg-gradient-to-br from-indigo-50 to-white shadow-sm text-sm text-gray-700"
+        >
+          <h4 class="font-semibold text-indigo-600 mb-2">
+            ℹ️ Chi tiết dịch vụ
+          </h4>
+          <ul class="space-y-1">
+            <li>
+              ✅ <span class="font-medium">Link ví dụ:</span> Link
+              post/video/fanpage Facebook
+            </li>
+            <li>
+              🕓 <span class="font-medium">Thời gian bắt đầu:</span> 0 - 30 Phút
+            </li>
+            <li>🚀 <span class="font-medium">Tốc độ:</span> 3K - 10K/Ngày</li>
+            <li>
+              ⚖️ <span class="font-medium">Tối thiểu/Tối đa:</span> 1K / 100K
+            </li>
+            <li>
+              ♻️ <span class="font-medium">Bảo hành:</span> Không bảo hành
+            </li>
+            <li>🌎 <span class="font-medium">Quốc gia:</span> Toàn cầu</li>
+          </ul>
+
+          <div class="mt-4 border-t pt-3">
+            <h4 class="font-semibold text-rose-600 mb-2">⚠️ Lưu ý</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-600">
+              <li>
+                📌 Tài khoản phải <span class="font-medium">công khai</span>,
+                không được riêng tư.
+              </li>
+              <li>
+                📌 Liên kết sai
+                <span class="font-medium">không được hoàn lại tiền</span>, kiểm
+                tra kỹ trước khi đặt.
+              </li>
+              <li>
+                📌 Nghiêm cấm buff ID vi phạm pháp luật, chính trị, đồi trụy...
+              </li>
+              <li>📌 Khi dịch vụ bận, tốc độ bắt đầu có thể thay đổi.</li>
+              <li>
+                📌 Không đặt đơn thứ hai trên cùng liên kết trước khi đơn đầu
+                hoàn tất.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Thông tin thanh toán -->
+        <div
+          class="mt-4 border rounded-lg p-3 bg-gray-50 text-sm text-gray-700"
+        >
+          <h4 class="font-semibold mb-2">Thông tin thanh toán</h4>
+          <div class="flex items-center gap-2 mb-3">
+            <img src="./mb.jpg" alt="MB Bank" class="h-8" />
+            <span class="font-medium">MB Bank</span>
+          </div>
+          <ul class="space-y-1">
+            <li>
+              <span class="font-medium">Số tài khoản:</span>
+              <span
+                id="stk"
+                class="text-rose-600 font-semibold cursor-pointer"
+                onclick="copyText('stk')"
+                >0376447206</span
+              >
+            </li>
+            <li>
+              <span class="font-medium">Chủ tài khoản:</span> TRAN QUOC KHANH
+            </li>
+            <li>
+              <span class="font-medium">Nội dung CK:</span>
+              <span
+                id="ndck"
+                class="text-blue-600 font-semibold cursor-pointer"
+                onclick="copyText('ndck')"
+                >Tên Tài Khoản Cần Tăng</span
+              >
+            </li>
+          </ul>
+          <div class="mt-3 text-center">
+            <p class="text-sm mb-1">Quét mã QR để thanh toán nhanh</p>
+            <img
+              src="./nganhang.jpg"
+              alt="QR Thanh toán"
+              class="w-40 mx-auto border rounded-lg"
+            />
+          </div>
+          <p class="text-xs text-gray-500 mt-2 text-center">
+            👉 Bấm vào <span class="text-rose-600">Số tài khoản</span> hoặc
+            <span class="text-blue-600">Nội dung CK</span> để copy nhanh.
+          </p>
+        </div>
+
+        <!-- Ẩn input gửi tổng tiền -->
+        <input type="hidden" id="hiddenTotal" name="total" />
+
+        <!-- Nút -->
+        <div class="flex justify-center gap-4 mt-3">
+          <button
+            type="submit"
+            class="flex-[2] px-5 py-3 bg-gradient-to-r from-sky-400 to-indigo-400 text-white rounded-lg shadow hover:scale-[1.02] transition"
+          >
+            Xác nhận đặt hàng
+          </button>
+          <button
+            type="button"
+            class="flex-1 px-5 py-3 bg-gray-300 text-gray-700 rounded-lg shadow hover:scale-[1.02] transition"
+            onclick="goBack()"
+          >
+            Huỷ
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function closeNotice() {
+        document.getElementById("paymentNotice").style.display = "none";
+      }
+
+      function toggleEmotion() {
+        const service = document.getElementById("serviceName").value;
+        document.getElementById("emotionGroup").style.display =
+          service === "like" ? "block" : "none";
+      }
+
+      function tinhTien() {
+        const qty = parseInt(document.getElementById("quantity").value) || 0;
+        const service = document.getElementById("serviceName").value;
+        let pricePerUnit = 0;
+
+        switch (service) {
+          case "like":
+            pricePerUnit = 29;
+            break;
+          case "follow":
+            pricePerUnit = 15;
+            break;
+          case "view":
+            pricePerUnit = 10;
+            break;
+          case "share":
+            pricePerUnit = 12;
+            break;
+          case "review":
+            pricePerUnit = 20;
+            break;
+        }
+
+        const total = qty * pricePerUnit;
+        document.getElementById("totalPrice").textContent =
+          "Tổng tiền: " + total.toLocaleString() + " VNĐ";
+        document.getElementById("hiddenTotal").value = total;
+      }
+
+      function copyText(id) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text);
+        alert("Đã copy: " + text);
+      }
+
+      async function submitOrder(e) {
+        e.preventDefault();
+        const service = document.getElementById("serviceName").value;
+        const emotion =
+          service === "like" ? document.getElementById("emotion").value : "";
+        document.getElementById("hiddenEmotion").value = emotion;
+
+        const form = document.getElementById("orderForm");
+        const response = await fetch("https://formspree.io/f/xrbavvjq", {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (response.ok) {
+          alert("✅ Vui lòng thanh toán, admin sẽ duyệt đơn trong 24h.");
+          window.location.href = "thanhtoan.html";
+        } else {
+          alert("❌ Có lỗi xảy ra, vui lòng thử lại.");
+        }
+      }
+
+      function goBack() {
+        window.location.href = "trangchu.html";
+      }
+
+      toggleEmotion();
+      tinhTien();
+    </script>
+  </body>
+</html>
+6
