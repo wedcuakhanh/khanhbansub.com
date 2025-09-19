@@ -233,7 +233,7 @@
             type="submit"
             class="flex-[2] px-5 py-3 bg-gradient-to-r from-pink-400 to-indigo-400 text-white rounded-lg shadow hover:scale-[1.02] transition"
           >
-            ✅ Xác nhận đặt hàng
+            Xác nhận đặt hàng
           </button>
           <button
             type="button"
@@ -256,16 +256,16 @@
         let pricePerUnit = 0;
         switch (service) {
           case "follow":
-            pricePerUnit = 25;
+            pricePerUnit = 29;
             break;
           case "tym":
-            pricePerUnit = 20;
+            pricePerUnit = 25;
             break;
           case "view":
-            pricePerUnit = 5;
+            pricePerUnit = 1;
             break;
           case "share":
-            pricePerUnit = 15;
+            pricePerUnit = 5;
             break;
           default:
             pricePerUnit = 0;
@@ -296,7 +296,7 @@
 
         if (response.ok) {
           alert("✅ Vui lòng thanh toán, admin sẽ duyệt đơn trong 24h.");
-          window.location.href = "trangchu.html";
+          window.location.href = "thanhtoan.html";
         } else {
           alert("❌ Có lỗi xảy ra, vui lòng thử lại.");
         }
