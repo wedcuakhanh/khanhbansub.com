@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Khánh Shop - Bán Nick TikTok</title>
+    <title>Khánh Shop - Bán Tài Khoản CapCut Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body
     class="bg-gradient-to-br from-indigo-50 via-blue-50 to-violet-50 min-h-screen flex flex-col items-center font-[Poppins] py-10"
   >
     <!-- Header -->
-    <div class="text-center mb-8">
+    <div class="text-center mb-6">
       <img
         src="./DVFB.png"
         alt="Logo Shop"
@@ -19,34 +19,33 @@
       <h1
         class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-sky-400 bg-clip-text text-transparent mt-2"
       >
-        KHÁNH SHOP NICK TIKTOK
+        KHÁNH SHOP CAPCUT PRO
       </h1>
       <p class="text-slate-500 mt-1">
-        Chọn nick bạn thích, xem chi tiết và mua ngay
+        Chọn tài khoản bạn thích, xem chi tiết và mua ngay
       </p>
     </div>
 
-    <!-- Bảng cảnh báo nổi bật ngay dưới header -->
-    <div id="infoBox" class="w-full max-w-6xl px-4 mb-6">
+    <!-- Bảng cảnh báo -->
+    <div class="w-full max-w-6xl px-4 mb-6">
       <div
         class="bg-red-50 border-l-4 border-red-600 p-5 rounded-xl shadow-lg text-sm text-red-700 font-semibold"
       >
         ⚠️ <span class="font-bold">Lưu ý quan trọng:</span>
-        Không mua Clone sử dụng vào việc xấu như: Lừa đảo, mạo danh, nói xấu,
-        xuyên tạc tổ chức, cá nhân... Nếu bị phát hiện, bên chúng tôi sẽ khóa
-        tài khoản quý khách. Và không chịu trách nhiệm trước pháp luật. Check
-        Live Auto 100% trước khi xuất, bên mình sẽ không bảo hành Login hoặc
-        dùng bị Checkpoint. Khách mua Clone về Check Live, Pass và Xem Chuẩn Acc
-        không để được bảo hành ngay. Không hỗ trợ Die do ngâm. Cảm ơn khách hàng
-        đã ủng hộ TRUMCLONE.VN!
+        Không mua tài khoản sử dụng vào việc xấu như: Lừa đảo, mạo danh, nói
+        xấu, xuyên tạc tổ chức, cá nhân... Nếu bị phát hiện, bên chúng tôi sẽ
+        khóa tài khoản quý khách. Và không chịu trách nhiệm trước pháp luật.
+        Check Live Auto 100% trước khi xuất, bên mình sẽ không bảo hành Login
+        hoặc dùng bị Checkpoint. Cảm ơn khách hàng đã ủng hộ KHÁNH SHOP!
         <br />- Đơn Hàng Của Bạn Sẽ Xóa Sau 1 Ngày - Tránh Bị Scan Nick! <br />-
         Bảo Hành Acc Bị Back 7 Ngày.
       </div>
     </div>
+
     <!-- Danh sách sản phẩm -->
     <div
       id="productGrid"
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 w-full max-w-6xl px-4"
+      class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 w-full max-w-6xl px-4"
     ></div>
 
     <!-- Modal Chi tiết -->
@@ -70,60 +69,22 @@
       </div>
     </div>
 
-    <!-- Modal Nhắc nhở -->
-    <div
-      id="paymentNotice"
-      class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden"
-    >
-      <div
-        class="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-md text-center"
-      >
-        <h2 class="text-xl font-bold text-indigo-600 mb-2">⚠️ Nhắc nhở</h2>
-        <p class="text-gray-700 mb-4">
-          Bạn cần thanh toán để nhận được tài khoản TikTok.
-        </p>
-        <button
-          onclick="showPaymentInfo()"
-          class="px-5 py-2 bg-gradient-to-r from-sky-400 to-indigo-400 text-white rounded-lg shadow"
-        >
-          Tôi đã hiểu
-        </button>
-        <button
-          onclick="cancelPaymentNotice()"
-          class="px-5 py-2 bg-gray-300 text-gray-700 rounded-lg shadow mt-2"
-        >
-          Huỷ
-        </button>
-      </div>
-    </div>
-
-    <!-- Modal Thanh toán nâng cấp -->
+    <!-- Modal thanh toán -->
     <div
       id="paymentInfo"
       class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden"
     >
       <div
-        class="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-md text-center animate-bounce-in"
+        class="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-md text-center"
       >
-        <!-- Logo + tên shop -->
-        <div class="flex items-center justify-center gap-3 mb-3">
-          <img
-            src="./DVFB.png"
-            alt="Logo Shop"
-            class="w-14 h-14 rounded-full border border-indigo-300 shadow"
-          />
-          <span class="text-lg font-bold text-indigo-600">KHÁNH SHOP NICK</span>
-        </div>
         <h2 class="text-xl font-bold text-indigo-600 mb-2">
           💳 Thông tin thanh toán
         </h2>
         <p class="text-gray-700 mb-4">
-          Vui lòng chuyển khoản để nhận tài khoản TikTok đã chọn. Nhập đúng
+          Vui lòng chuyển khoản để nhận tài khoản CapCut Pro đã chọn. Nhập đúng
           <span class="text-blue-500 font-semibold">nội dung chuyển khoản</span
           >.
         </p>
-
-        <!-- Thông tin ngân hàng -->
         <div
           class="border rounded-lg p-3 bg-gray-50 text-sm text-gray-700 text-left"
         >
@@ -143,12 +104,10 @@
               id="ndck"
               class="text-blue-600 font-semibold cursor-pointer"
               onclick="copyText('ndck')"
-              >Tên Nick Đang Chọn</span
+              >Tên Tài Khoản Đang Chọn</span
             >
           </p>
         </div>
-
-        <!-- QR thanh toán -->
         <div class="mt-3 text-center">
           <p class="text-sm mb-1">Quét mã QR để thanh toán nhanh</p>
           <img
@@ -157,12 +116,6 @@
             class="w-40 mx-auto border rounded-lg"
           />
         </div>
-        <p class="text-xs text-gray-500 mt-2 text-center">
-          👉 Bấm vào <span class="text-rose-600">Số tài khoản</span> hoặc
-          <span class="text-blue-600">Nội dung CK</span> để copy nhanh.
-        </p>
-
-        <!-- Nút xác nhận & hủy -->
         <div class="flex justify-center gap-4 mt-4">
           <button
             onclick="showCodeInput()"
@@ -210,7 +163,7 @@
       </div>
     </div>
 
-    <!-- Modal Hiển thị nick -->
+    <!-- Modal hiển thị tài khoản -->
     <div
       id="accountInfo"
       class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden"
@@ -219,7 +172,7 @@
         class="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-md text-center"
       >
         <h2 class="text-xl font-bold text-indigo-600 mb-4">
-          🎉 Thông tin Nick TikTok
+          🎉 Thông tin CapCut Pro
         </h2>
         <p class="mb-2">
           <span class="font-semibold">Tài khoản:</span>
@@ -242,73 +195,40 @@
       let selectedNick = "";
       let selectedPass = "";
 
-      const nicks = [
+      const accounts = [
         {
-          title: "TikTok VIP 1 Tháng",
-          stock: "3.639",
-          price: "2.000đ",
-          desc: "Nick TikTok VIP 1 tháng, mail live đầy đủ.",
-          nick: "vip01",
+          title: "CapCut Pro 1 Tháng",
+          stock: "500",
+          price: "89.000đ",
+          desc: "ĐỂ LOGIN TRÊN MÁY TÍNH ANH EM CẦN THAO TÁC LOGIN TRÊN ĐIỆN THOẠI SAU ĐÓ QUÉT MÃ QR ĐỂ ĐĂNG NHẬP PC",
+          nick: "cap01",
           pass: "123456",
-        },
-        {
-          title: "TikTok VIP 2 Tháng",
-          stock: "2.845",
-          price: "3.500đ",
-          desc: "Nick TikTok VIP 2 tháng, mail live đầy đủ.",
-          nick: "vip02",
-          pass: "654321",
-        },
-        {
-          title: "TikTok Hot Trend 1 Tháng",
-          stock: "1.500",
-          price: "2.500đ",
-          desc: "Nick TikTok hot trend 1 tháng, mail live đầy đủ.",
-          nick: "hot01",
-          pass: "112233",
-        },
-        {
-          title: "TikTok Hot Trend 2 Tháng",
-          stock: "900",
-          price: "4.000đ",
-          desc: "Nick TikTok hot trend 2 tháng, mail live đầy đủ.",
-          nick: "hot02",
-          pass: "445566",
-        },
-        {
-          title: "TikTok VIP 3 Tháng",
-          stock: "1.980",
-          price: "5.000đ",
-          desc: "Nick TikTok VIP 3 tháng, mail live đầy đủ.",
-          nick: "vip03",
-          pass: "778899",
         },
       ];
 
       const grid = document.getElementById("productGrid");
 
-      nicks.forEach((nick) => {
+      accounts.forEach((acc) => {
         const card = document.createElement("div");
         card.className =
           "bg-white rounded-xl shadow-md border border-indigo-200 overflow-hidden flex flex-col hover:scale-105 transition-transform duration-300";
         card.innerHTML = `
           <div class="px-4 py-3">
-            <h2 class="font-semibold text-indigo-700 text-lg">${nick.title}</h2>
-            <p class="text-sm text-pink-600 font-semibold mt-2">Kho hàng: ${nick.stock}</p>
-            <p class="text-2xl font-bold text-sky-600 mt-2">${nick.price}</p>
-            <p class="text-xs text-slate-500 mt-1">${nick.desc}</p>
+            <h2 class="font-semibold text-indigo-700 text-lg">${acc.title}</h2>
+            <p class="text-sm text-pink-600 font-semibold mt-2">Kho hàng: ${acc.stock}</p>
+            <p class="text-2xl font-bold text-sky-600 mt-2">${acc.price}</p>
+            <p class="text-xs text-slate-500 mt-1">${acc.desc}</p>
           </div>
           <div class="mt-auto flex">
             <button class="detailBtn w-1/2 py-2 text-sm bg-slate-100 hover:bg-slate-200" 
-              data-title="${nick.title}" data-stock="${nick.stock}" data-price="${nick.price}" data-desc="${nick.desc}">Chi tiết</button>
+              data-title="${acc.title}" data-stock="${acc.stock}" data-price="${acc.price}" data-desc="${acc.desc}">Chi tiết</button>
             <button class="buyBtn w-1/2 py-2 bg-gradient-to-r from-indigo-600 to-sky-400 text-white font-semibold"
-              data-nick="${nick.nick}" data-pass="${nick.pass}">MUA NGAY</button>
+              data-nick="${acc.nick}" data-pass="${acc.pass}">MUA NGAY</button>
           </div>
         `;
         grid.appendChild(card);
       });
 
-      // Chi tiết modal
       document.querySelectorAll(".detailBtn").forEach((btn) => {
         btn.addEventListener("click", () => {
           document.getElementById("detailTitle").innerText = btn.dataset.title;
@@ -324,36 +244,45 @@
         document.getElementById("detailModal").classList.add("hidden");
       }
 
-      // Mua ngay
       document.querySelectorAll(".buyBtn").forEach((btn) => {
         btn.addEventListener("click", () => {
           selectedNick = btn.dataset.nick;
           selectedPass = btn.dataset.pass;
           document.getElementById("ndck").innerText = selectedNick;
-          document.getElementById("paymentNotice").classList.remove("hidden");
+          document.getElementById("paymentInfo").classList.remove("hidden");
         });
       });
-
-      function showPaymentInfo() {
-        document.getElementById("paymentNotice").classList.add("hidden");
-        document.getElementById("paymentInfo").classList.remove("hidden");
-      }
-
-      function cancelPaymentNotice() {
-        document.getElementById("paymentNotice").classList.add("hidden");
-      }
 
       function closePayment() {
         document.getElementById("paymentInfo").classList.add("hidden");
       }
-
       function showCodeInput() {
-        document.getElementById("paymentInfo").classList.add("hidden");
-        document.getElementById("codeModal").classList.remove("hidden");
-      }
+    document.getElementById("paymentInfo").classList.add("hidden");
+    
+    // Tạo thông báo liên hệ admin
+    const noticeDiv = document.createElement("div");
+    noticeDiv.id = "adminNotice";
+    noticeDiv.className = "fixed inset-0 bg-black/40 flex items-center justify-center z-50";
+    noticeDiv.innerHTML = `
+      <div class="bg-white rounded-2xl shadow-2xl p-6 w-11/12 max-w-md text-center">
+        <h2 class="text-xl font-bold text-indigo-600 mb-4">⚠️ Hoàn tất thanh toán</h2>
+        <p class="text-gray-700 mb-4">
+          Vui lòng liên hệ <span class="text-blue-600 font-bold">Admin</span> để nhận <span class="text-red-600 font-bold">mã 6 số</span>.
+        </p>
+        <button id="okBtn" class="px-6 py-2 bg-gradient-to-r from-indigo-600 to-sky-400 text-white rounded-lg shadow">Đã hiểu</button>
+      </div>
+    `;
+    document.body.appendChild(noticeDiv);
+
+    // Khi bấm "Đã hiểu", mở modal nhập mã
+    document.getElementById("okBtn").addEventListener("click", () => {
+      document.getElementById("adminNotice").remove();
+      document.getElementById("codeModal").classList.remove("hidden");
+    });
+  }
+      
 
       const ADMIN_CODE = "062807";
-
       function checkCode() {
         const code = document.getElementById("codeInput").value;
         if (code === ADMIN_CODE) {
@@ -370,11 +299,9 @@
       function closeAccountInfo() {
         document.getElementById("accountInfo").classList.add("hidden");
       }
-
       function copyText(id) {
-        const text = document.getElementById(id).innerText;
-        navigator.clipboard.writeText(text);
-        alert("Đã copy: " + text);
+        navigator.clipboard.writeText(document.getElementById(id).innerText);
+        alert("Đã copy: " + document.getElementById(id).innerText);
       }
     </script>
   </body>
