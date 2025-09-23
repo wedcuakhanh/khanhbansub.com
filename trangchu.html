@@ -100,19 +100,11 @@
 <!-- Popup Ưu đãi bằng video -->
 <div
   id="offerPopup"
-  class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50"
+  class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50"
 >
   <div
-    class="relative rounded-2xl shadow-2xl w-full max-w-[1200px] mx-auto overflow-hidden"
+    class="relative rounded-2xl shadow-2xl w-[90%] sm:w-[80%] md:w-[65%] lg:w-[55%] max-w-[800px] mx-auto overflow-hidden"
   >
-    <!-- Nút đóng -->
-    <button
-      onclick="closeOffer()"
-      class="absolute top-2 right-2 bg-white/80 text-gray-700 rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-rose-500 hover:text-white transition"
-    >
-      ✕
-    </button>
-
     <!-- Video ưu đãi -->
     <video src="./KHÁNH BÁN SUB.mp4" 
            class="w-full h-auto rounded-2xl" 
@@ -121,9 +113,16 @@
            loop 
            playsinline>
     </video>
+
+    <!-- Nút đóng -->
+    <button
+      onclick="closeOffer()"
+      class="absolute top-2 right-2 bg-white/80 text-gray-700 rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-rose-500 hover:text-white transition"
+    >
+      ✕
+    </button>
   </div>
 </div>
-
 
 <script>
   function closeOffer() {
@@ -142,6 +141,7 @@
     }, 8000);
   });
 </script>
+
    <!-- chat box-->
 <div id="chatWidget" class="fixed bottom-5 right-5 z-50 font-sans">
   <!-- Nút mở chat -->
