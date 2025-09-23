@@ -97,24 +97,14 @@
 
 
 
-<!-- Popup Ưu đãi bằng ảnh -->
+<!-- Popup Ưu đãi bằng video -->
 <div
   id="offerPopup"
   class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50"
 >
   <div
-    class="relative rounded-2xl shadow-2xl max-w-sm w-11/12 overflow-hidden"
+    class="relative rounded-2xl shadow-2xl w-full max-w-[1200px] mx-auto overflow-hidden"
   >
-   <!-- Video ưu đãi -->
-<video src="./KHÁNH BÁN SUB.mp4" 
-       class="w-full max-w-[1200px] rounded-2xl mx-auto" 
-       autoplay 
-       muted 
-       loop 
-       playsinline>
-</video>
-
-
     <!-- Nút đóng -->
     <button
       onclick="closeOffer()"
@@ -122,8 +112,18 @@
     >
       ✕
     </button>
+
+    <!-- Video ưu đãi -->
+    <video src="./KHÁNH BÁN SUB.mp4" 
+           class="w-full h-auto rounded-2xl" 
+           autoplay 
+           muted 
+           loop 
+           playsinline>
+    </video>
   </div>
 </div>
+
 
 <script>
   function closeOffer() {
