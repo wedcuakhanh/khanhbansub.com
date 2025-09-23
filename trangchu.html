@@ -27,57 +27,48 @@
     </style>
   </head>
   
-<!-- Flash Sale Bar -->
+<!-- Flash Sale Bar Modern -->
 <div id="flashSaleBar" 
      class="fixed top-20 sm:top-16 left-1/2 transform -translate-x-1/2 
-            flex items-center gap-2 sm:gap-4 p-2 sm:p-3 rounded-2xl 
-            bg-white/80 backdrop-blur-md shadow-lg border border-white/30 z-50 
-            transition-all duration-500 opacity-100 translate-y-0">
+            flex items-center gap-3 sm:gap-6 px-4 py-2 sm:px-6 sm:py-3 
+            rounded-2xl bg-gradient-to-r from-rose-500 via-red-500 to-orange-400
+            text-white shadow-xl z-50 transition-all duration-500 opacity-100 translate-y-0">
 
-  <!-- Icon 🎊 -->
-  <span class="text-2xl sm:text-3xl">
-    🎊
-  </span>
+ <!-- Icon bằng ảnh -->
+<div class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-white/20">
+  <img src="./adminanh.jpg" alt="Sale" class="w-full h-full object-cover">
+</div>
 
-  <!-- Nội dung chạy -->
-  <div class="overflow-hidden whitespace-nowrap w-[150px] sm:w-[200px]">
-    <span class="animate-marquee inline-block font-bold text-xs sm:text-sm md:text-base text-gray-900">
-      Flash Sale: <span class="text-rose-600">Giảm Giá 10%</span> 🎉
-    </span>
+
+  <!-- Nội dung -->
+  <div class="flex flex-col">
+    <span class="font-extrabold text-sm sm:text-lg tracking-wide">FLASH SALE</span>
+    <span class="text-xs sm:text-sm font-medium">Giảm ngay <b>30%</b> tất cả dịch vụ</span>
   </div>
 
   <!-- Đếm ngược -->
   <div id="countdown" 
-       class="ml-2 sm:ml-4 px-2 sm:px-3 py-1 rounded-lg 
-              bg-gradient-to-r from-red-400 via-pink-500 to-purple-600 
-              text-white text-xs sm:text-sm font-mono font-bold shadow-md">
+       class="ml-2 sm:ml-4 px-3 py-1 rounded-lg bg-black/40 font-mono text-sm sm:text-base font-bold">
     00:00:00
   </div>
+
+  <!-- Nút tắt -->
+  <button onclick="hideFlashSale()" 
+          class="ml-2 sm:ml-4 text-white/70 hover:text-white text-lg">&times;</button>
 </div>
 
 <style>
-  /* Chữ chạy marquee đơn giản */
-  @keyframes marquee {
-    0%   { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-  }
-  .animate-marquee {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marquee 8s linear infinite;
-  }
-
   /* class ẩn có hiệu ứng */
   .flash-hidden {
     opacity: 0 !important;
-    transform: translate(-50%, -20px) !important; /* trượt lên một chút */
+    transform: translate(-50%, -20px) !important;
     pointer-events: none;
   }
 </style>
 
 <script>
-  // Countdown demo
-  function startCountdown(duration = 3600) { // 1 giờ
+  // Countdown
+  function startCountdown(duration = 3600) {
     const countdown = document.getElementById("countdown");
     let timer = duration, hours, minutes, seconds;
 
@@ -92,10 +83,9 @@
       if (timer > 0) timer--;
     }, 1000);
   }
+  startCountdown(604800);
 
-  startCountdown(3600); // bắt đầu đếm ngược 1 giờ
-
-  // Hàm ẩn / hiện
+  // Ẩn hiện
   function hideFlashSale() {
     document.getElementById("flashSaleBar").classList.add("flash-hidden");
   }
@@ -103,6 +93,7 @@
     document.getElementById("flashSaleBar").classList.remove("flash-hidden");
   }
 </script>
+
 
 
 
@@ -323,7 +314,7 @@
     <!-- Logo + Tên shop -->
     <div class="p-4 border-b border-indigo-200 font-bold text-lg flex items-center justify-center gap-2 text-indigo-600 relative">
       <img src="./DVFB.png" alt="Logo" class="w-8 h-8 rounded-full shadow-md">
-      <span>KHÁNH SHOP</span>
+      <span>KHÁNH BÁN SUB </span>
     </div>
 
     <!-- Quản lý -->
@@ -571,73 +562,81 @@
     </div>
   </div>
 
-  <!-- Cột phải: Bảng giá -->
-  <div id="pricing" class="bg-white rounded-2xl shadow-lg p-6">
-    <h2 class="text-2xl font-bold text-indigo-600 mb-4 text-center">💰 Bảng giá dịch vụ</h2>
+ <!-- Cột phải: Bảng giá -->
+<div id="pricing" class="bg-white rounded-2xl shadow-lg p-6">
+  <h2 class="text-2xl font-bold text-indigo-600 mb-4 text-center">
+    Bảng giá dịch vụ 
+    <span class="bg-red-500 text-white px-2 py-1 rounded-lg text-sm ml-2">SALE 30%</span>
+  </h2>
 
-    <!-- Bảng giá TikTok -->
-    <h3 class="text-xl font-semibold text-pink-500 mb-2 mt-4">TikTok</h3>
-    <table class="w-full text-left border-collapse mb-4">
-      <thead>
-        <tr class="bg-pink-100">
-          <th class="px-4 py-2 border">Dịch vụ</th>
-          <th class="px-4 py-2 border">Giá / 1 đơn vị (VNĐ)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="hover:bg-pink-50">
-          <td class="px-4 py-2 border">Follow</td>
-          <td class="px-4 py-2 border">29</td>
-        </tr>
-        <tr class="hover:bg-pink-50">
-          <td class="px-4 py-2 border">Tym (Like Video)</td>
-          <td class="px-4 py-2 border">25</td>
-        </tr>
-        <tr class="hover:bg-pink-50">
-          <td class="px-4 py-2 border">View Video</td>
-          <td class="px-4 py-2 border">1</td>
-        </tr>
-        <tr class="hover:bg-pink-50">
-          <td class="px-4 py-2 border">Share Video</td>
-          <td class="px-4 py-2 border">5</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- Bảng giá Facebook -->
-    <h3 class="text-xl font-semibold text-blue-500 mb-2 mt-4">Facebook</h3>
-    <table class="w-full text-left border-collapse">
-      <thead>
-        <tr class="bg-blue-100">
-          <th class="px-4 py-2 border">Dịch vụ</th>
-          <th class="px-4 py-2 border">Giá / 1 đơn vị (VNĐ)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="hover:bg-blue-50">
-          <td class="px-4 py-2 border">Like (Cảm xúc)</td>
-          <td class="px-4 py-2 border">22</td>
-        </tr>
-        <tr class="hover:bg-blue-50">
-          <td class="px-4 py-2 border">Follow Facebook</td>
-          <td class="px-4 py-2 border">35</td>
-        </tr>
-        <tr class="hover:bg-blue-50">
-          <td class="px-4 py-2 border">View Video</td>
-          <td class="px-4 py-2 border">11</td>
-        </tr>
-        <tr class="hover:bg-blue-50">
-          <td class="px-4 py-2 border">Share Video</td>
-          <td class="px-4 py-2 border">29</td>
-        </tr>
-        <tr class="hover:bg-blue-50">
-          <td class="px-4 py-2 border">Review / Fanpage</td>
-          <td class="px-4 py-2 border">90</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Bảng giá TikTok -->
+  <div class="flex items-center gap-2 mt-6 mb-2">
+    <img src="./tk.png" alt="TikTok" class="w-10 h-10 rounded-full border p-1 bg-pink-50">
+    <h3 class="text-xl font-semibold text-pink-500">TikTok</h3>
   </div>
-</section>
+  <table class="w-full text-left border-collapse mb-4">
+    <thead>
+      <tr class="bg-pink-100">
+        <th class="px-4 py-2 border">Dịch vụ</th>
+        <th class="px-4 py-2 border">Giá / 1 đơn vị (VNĐ)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-pink-50">
+        <td class="px-4 py-2 border">Follow</td>
+        <td class="px-4 py-2 border font-bold text-pink-600">29</td>
+      </tr>
+      <tr class="hover:bg-pink-50">
+        <td class="px-4 py-2 border">Tym (Like Video)</td>
+        <td class="px-4 py-2 border font-bold text-pink-600">25</td>
+      </tr>
+      <tr class="hover:bg-pink-50">
+        <td class="px-4 py-2 border">View Video</td>
+        <td class="px-4 py-2 border font-bold text-pink-600">1</td>
+      </tr>
+      <tr class="hover:bg-pink-50">
+        <td class="px-4 py-2 border">Share Video</td>
+        <td class="px-4 py-2 border font-bold text-pink-600">5</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Bảng giá Facebook -->
+  <div class="flex items-center gap-2 mt-6 mb-2">
+    <img src="fb.png" alt="Facebook" class="w-10 h-10 rounded-full border p-1 bg-blue-50">
+    <h3 class="text-xl font-semibold text-blue-500">Facebook</h3>
+  </div>
+  <table class="w-full text-left border-collapse">
+    <thead>
+      <tr class="bg-blue-100">
+        <th class="px-4 py-2 border">Dịch vụ</th>
+        <th class="px-4 py-2 border">Giá / 1 đơn vị (VNĐ)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-blue-50">
+        <td class="px-4 py-2 border">Like (Cảm xúc)</td>
+        <td class="px-4 py-2 border font-bold text-blue-600">22</td>
+      </tr>
+      <tr class="hover:bg-blue-50">
+        <td class="px-4 py-2 border">Follow Facebook</td>
+        <td class="px-4 py-2 border font-bold text-blue-600">35</td>
+      </tr>
+      <tr class="hover:bg-blue-50">
+        <td class="px-4 py-2 border">View Video</td>
+        <td class="px-4 py-2 border font-bold text-blue-600">11</td>
+      </tr>
+      <tr class="hover:bg-blue-50">
+        <td class="px-4 py-2 border">Share Video</td>
+        <td class="px-4 py-2 border font-bold text-blue-600">29</td>
+      </tr>
+      <tr class="hover:bg-blue-50">
+        <td class="px-4 py-2 border">Review / Fanpage</td>
+        <td class="px-4 py-2 border font-bold text-blue-600">90</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 
 
