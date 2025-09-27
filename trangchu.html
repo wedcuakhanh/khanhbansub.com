@@ -96,28 +96,72 @@
 
 
 
-
-<!-- Popup Ưu đãi bằng video -->
+<!-- Popup Thông báo -->
 <div
   id="offerPopup"
-  class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50"
+  class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50"
 >
   <div
-    class="relative rounded-2xl shadow-2xl w-[90%] sm:w-[80%] md:w-[65%] lg:w-[55%] max-w-[800px] mx-auto overflow-hidden"
+    class="relative rounded-2xl shadow-2xl w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] max-w-[850px] mx-auto bg-white/95 backdrop-blur-md overflow-hidden border-2 border-indigo-400"
   >
-    <!-- Video ưu đãi -->
-    <video src="./KHÁNH BÁN SUB.mp4" 
-           class="w-full h-auto rounded-2xl" 
-           autoplay 
-           muted 
-           loop 
-           playsinline>
-    </video>
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 text-white text-center py-3 font-bold text-xl tracking-wide shadow-md">
+      📢 THÔNG BÁO QUAN TRỌNG 
+    </div>
+
+    <!-- Nội dung -->
+    <div class="p-6 text-gray-800 space-y-4 text-[15px] leading-relaxed">
+      <p class="font-semibold text-lg text-center text-indigo-600">
+        Cảm ơn quý khách đã truy cập 
+        <span class="text-purple-600 font-bold">KHÁNH BÁN SUB</span>  
+        - Nền tảng mạng xã hội hàng đầu thị trường!
+      </p>
+
+      <!-- Bảng thông tin -->
+      <div class="overflow-x-auto">
+        <table class="w-full border border-indigo-300 rounded-lg text-left shadow-sm">
+          <tbody>
+            <tr class="border-b hover:bg-indigo-50 transition">
+              <td class="px-4 py-3 font-bold text-sky-500 w-12">⚠️</td>
+              <td class="px-4 py-3">
+                Đối tác đấu API, CTV lấy nguồn từ <b>KHÁNH BÁN SUB</b> sẽ được chiết khấu.  
+                Chúng tôi cam kết <span class="text-purple-600 font-semibold">đầu nguồn & giá rẻ nhất thị trường</span>!
+              </td>
+            </tr>
+            <tr class="border-b hover:bg-purple-50 transition">
+              <td class="px-4 py-3 font-bold text-purple-500">⚠️</td>
+              <td class="px-4 py-3">
+                Hãy đảm bảo <span class="font-semibold">tài khoản & mật khẩu</span> của bạn 
+                <span class="text-red-500 font-bold">không trùng</span> với website khác 
+                để tránh rủi ro bị đánh cắp.
+              </td>
+            </tr>
+            <tr class="hover:bg-sky-50 transition">
+              <td class="px-4 py-3 font-bold text-indigo-500">⚠️</td>
+              <td class="px-4 py-3">
+                Hệ thống cung cấp tài nguyên <span class="font-semibold">không nhằm mục đích vi phạm pháp luật</span>.  
+                <span class="text-gray-600">Chúng tôi miễn trừ trách nhiệm.</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Thông tin thêm -->
+      <div class="bg-gradient-to-r from-sky-50 via-indigo-50 to-purple-50 p-4 rounded-lg text-sm text-gray-700 mt-4 shadow-inner">
+        📌 <b>Liên hệ hỗ trợ:</b> Zalo / Facebook / Telegram chính thức của 
+        <span class="text-purple-600 font-semibold">KHÁNH BÁN SUB</span>  
+        <br>
+        ⏰ Hỗ trợ khách hàng: <span class="font-medium text-indigo-600">24/7</span>  
+        <br>
+        🔒 <span class="text-sky-600 font-medium">Bảo mật tuyệt đối</span> thông tin khách hàng
+      </div>
+    </div>
 
     <!-- Nút đóng -->
     <button
       onclick="closeOffer()"
-      class="absolute top-2 right-2 bg-white/80 text-gray-700 rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-rose-500 hover:text-white transition"
+      class="absolute top-3 right-3 bg-white/80 text-gray-700 rounded-full w-9 h-9 flex items-center justify-center shadow hover:bg-indigo-500 hover:text-white transition"
     >
       ✕
     </button>
@@ -135,12 +179,13 @@
     popup.classList.remove("hidden");
     popup.classList.add("flex");
 
-    // Tự tắt sau 8 giây
+    // Tự tắt sau 12 giây
     setTimeout(() => {
       closeOffer();
-    }, 8000);
+    }, 12000);
   });
 </script>
+
 
    <!-- chat box-->
 <div id="chatWidget" class="fixed bottom-5 right-5 z-50 font-sans">
