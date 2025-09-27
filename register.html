@@ -94,27 +94,29 @@
       </p>
     </div>
 
-    <script>
-      function registerUser(e) {
-        e.preventDefault();
-        let user = document.getElementById("regUser").value;
-        let email = document.getElementById("regEmail").value;
-        let pass = document.getElementById("regPass").value;
-        let pass2 = document.getElementById("regPass2").value;
+<script>
+  function registerUser(e) {
+    e.preventDefault();
+    let user = document.getElementById("regUser").value;
+    let email = document.getElementById("regEmail").value;
+    let pass = document.getElementById("regPass").value;
+    let pass2 = document.getElementById("regPass2").value;
 
-        if (pass !== pass2) {
-          alert("Mật khẩu nhập lại không khớp!");
-          return false;
-        }
+    if (pass !== pass2) {
+      alert("Mật khẩu nhập lại không khớp!");
+      return false;
+    }
 
-        // Lưu demo vào localStorage
-        localStorage.setItem("username", user);
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", pass);
+    // Lưu thông tin vào localStorage
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    users.push({ username: user, email: email, password: pass });
+    localStorage.setItem("users", JSON.stringify(users));
 
-        alert("Đăng ký thành công! Hãy đăng nhập.");
-        window.location.href = "dangnhap.html";
-      }
-    </script>
+    alert("Đăng ký thành công!");
+    window.location.href = "dangnhap.html";
+  }
+</script>
+
+
   </body>
 </html>
