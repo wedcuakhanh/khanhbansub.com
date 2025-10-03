@@ -67,23 +67,43 @@
 </style>
 
 <script>
-  // Countdown
-  function startCountdown(duration = 3600) {
+  // Tổng thời gian Flash Sale (7 ngày)
+  const DURATION = 604800; // giây
+
+  function startCountdown() {
     const countdown = document.getElementById("countdown");
-    let timer = duration, hours, minutes, seconds;
 
-    setInterval(() => {
-      hours = Math.floor(timer / 3600);
-      minutes = Math.floor((timer % 3600) / 60);
-      seconds = timer % 60;
+    // Lấy endTime từ localStorage nếu có
+    let endTime = localStorage.getItem("flashSaleEndTime");
+    if (!endTime) {
+      // Nếu chưa có, set mới
+      endTime = Date.now() + DURATION * 1000;
+      localStorage.setItem("flashSaleEndTime", endTime);
+    } else {
+      endTime = parseInt(endTime);
+    }
 
-      countdown.textContent = 
-        `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
-      
-      if (timer > 0) timer--;
-    }, 1000);
+    function updateCountdown() {
+      const now = Date.now();
+      let remaining = Math.floor((endTime - now) / 1000);
+
+      if (remaining <= 0) remaining = 0;
+
+      const hours = Math.floor(remaining / 3600);
+      const minutes = Math.floor((remaining % 3600) / 60);
+      const seconds = remaining % 60;
+
+      countdown.textContent =
+        `${hours.toString().padStart(2,'0')}:` +
+        `${minutes.toString().padStart(2,'0')}:` +
+        `${seconds.toString().padStart(2,'0')}`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   }
-  startCountdown(604800);
+
+  startCountdown();
 
   // Ẩn hiện
   function hideFlashSale() {
