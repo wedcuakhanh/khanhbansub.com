@@ -5,94 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Đăng nhập - KHÁNH BÁN SUB</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* CSS cho Hiệu ứng Viền Phát Sáng/Nổi bật */
+      .glow-on-hover:hover {
+        /* Màu chủ đạo: Indigo */
+        box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.4);
+        transform: translateY(-2px);
+      }
+      .input-glow:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+      }
+    </style>
   </head>
   <body
-    class="bg-gradient-to-br from-indigo-50 via-blue-50 to-violet-50 min-h-screen flex items-center justify-center font-[Poppins]"
+    class="bg-gray-50 min-h-screen flex items-center justify-center font-sans"
   >
     <div
-      class="bg-white/90 backdrop-blur-md shadow-xl rounded-2xl p-8 w-full max-w-md text-center border border-indigo-100"
+      class="bg-white rounded-3xl p-10 w-full max-w-sm text-center border-t-4 border-indigo-600 shadow-2xl transition transform hover:scale-[1.01]"
     >
-      <!-- Logo + tên shop -->
-      <div class="flex flex-col items-center gap-2 mb-6">
+      <div class="flex flex-col items-center gap-3 mb-8">
         <img
           src="DVFB.png"
           alt="Logo Shop"
-          class="w-16 h-16 rounded-full shadow border-2 border-indigo-400"
+          class="w-16 h-16 rounded-full shadow-lg border-4 border-indigo-500 p-0.5"
         />
-        <h1
-          class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-sky-400 bg-clip-text text-transparent"
-        >
-          KHÁNH BÁN SUB
-        </h1>
-        <p class="text-xs text-slate-500">
-          Tăng Follow · Like · Share nhanh chóng
+        <h1 class="text-3xl font-extrabold text-gray-900">KHÁNH BÁN SUB</h1>
+        <p class="text-sm text-gray-500">
+          Nền tảng Tăng tương tác | An toàn & Tự động
         </p>
       </div>
 
-      <h2 class="text-lg font-semibold mb-4 text-slate-700">🔑 Đăng nhập</h2>
+      <h2 class="text-xl font-bold mb-6 text-gray-800">
+        🔑 Đăng nhập Hệ thống
+      </h2>
 
-      <form onsubmit="return loginUser(event)" class="space-y-4 text-left">
+      <form onsubmit="return loginUser(event)" class="space-y-6 text-left">
         <div>
-          <label class="text-sm text-slate-600">Tên đăng nhập</label>
+          <label class="text-sm font-medium text-gray-700">Tên đăng nhập</label>
           <input
             id="username"
             type="text"
-            class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-300"
+            placeholder="Tên hoặc Email"
+            class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-xl input-glow transition duration-200 focus:ring-0"
             required
           />
         </div>
         <div>
-          <label class="text-sm text-slate-600">Mật khẩu</label>
+          <label class="text-sm font-medium text-gray-700">Mật khẩu</label>
           <input
             id="password"
             type="password"
-            class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-300"
+            placeholder="Mật khẩu của bạn"
+            class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-xl input-glow transition duration-200 focus:ring-0"
             required
           />
         </div>
 
         <button
           type="submit"
-          class="w-full bg-gradient-to-r from-indigo-600 to-sky-400 hover:from-indigo-700 hover:to-sky-500 text-white py-2 rounded-lg shadow transition font-semibold"
+          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl shadow-lg hover:shadow-indigo-500/50 transition font-semibold text-lg glow-on-hover"
         >
-          Đăng nhập
+          Đăng nhập Ngay
         </button>
       </form>
 
-      <p class="text-sm mt-4 text-slate-600">
+      <p class="text-sm mt-6 text-gray-600">
         Chưa có tài khoản?
         <a
           href="register.html"
-          class="text-indigo-600 font-semibold hover:underline"
+          class="text-indigo-600 font-bold hover:underline"
           >Đăng ký ngay</a
         >
       </p>
     </div>
 
- <script>
-  function loginUser(e) {
-    e.preventDefault();
-    let user = document.getElementById("username").value.trim();
-    let pass = document.getElementById("password").value.trim();
+    <script>
+      function loginUser(e) {
+        e.preventDefault();
+        let user = document.getElementById("username").value.trim();
+        let pass = document.getElementById("password").value.trim();
 
-    // Lấy danh sách users từ localStorage
-    let users = JSON.parse(localStorage.getItem("users")) || [];
+        // Lấy danh sách users từ localStorage
+        let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Kiểm tra có user nào trùng không
-    let foundUser = users.find(
-      (u) => u.username === user && u.password === pass
-    );
+        // Kiểm tra có user nào trùng không
+        let foundUser = users.find(
+          (u) => u.username === user && u.password === pass
+        );
 
-    if (foundUser) {
-      alert("✅ Đăng nhập thành công!");
-      localStorage.setItem("currentUser", foundUser.username);
-      window.location.href = "trangchu.html";
-    } else {
-      alert("❌ Sai tên đăng nhập hoặc mật khẩu!");
-    }
-  }
-</script>
-
+        if (foundUser) {
+          alert("✅ Đăng nhập thành công!");
+          localStorage.setItem("currentUser", foundUser.username);
+          window.location.href = "trangchu.html";
+        } else {
+          alert("❌ Sai tên đăng nhập hoặc mật khẩu!");
+        }
+      }
     </script>
   </body>
 </html>

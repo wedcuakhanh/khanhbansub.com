@@ -26,96 +26,6 @@
       }
     </style>
   </head>
-  
-<!-- Flash Sale Bar Modern -->
-<div id="flashSaleBar" 
-     class="fixed top-20 sm:top-16 left-1/2 transform -translate-x-1/2 
-            flex items-center gap-3 sm:gap-6 px-4 py-2 sm:px-6 sm:py-3 
-            rounded-2xl bg-gradient-to-r from-rose-500 via-red-500 to-orange-400
-            text-white shadow-xl z-50 transition-all duration-500 opacity-100 translate-y-0">
-
- <!-- Icon bằng ảnh -->
-<div class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-white/20">
-  <img src="./adminanh.jpg" alt="Sale" class="w-full h-full object-cover">
-</div>
-
-
-  <!-- Nội dung -->
-  <div class="flex flex-col">
-    <span class="font-extrabold text-sm sm:text-lg tracking-wide">FLASH SALE</span>
-    <span class="text-xs sm:text-sm font-medium">Giảm ngay <b>30%</b> tất cả dịch vụ</span>
-  </div>
-
-  <!-- Đếm ngược -->
-  <div id="countdown" 
-       class="ml-2 sm:ml-4 px-3 py-1 rounded-lg bg-black/40 font-mono text-sm sm:text-base font-bold">
-    00:00:00
-  </div>
-
-  <!-- Nút tắt -->
-  <button onclick="hideFlashSale()" 
-          class="ml-2 sm:ml-4 text-white/70 hover:text-white text-lg">&times;</button>
-</div>
-
-<style>
-  /* class ẩn có hiệu ứng */
-  .flash-hidden {
-    opacity: 0 !important;
-    transform: translate(-50%, -20px) !important;
-    pointer-events: none;
-  }
-</style>
-
-<script>
-  // Tổng thời gian Flash Sale (7 ngày)
-  const DURATION = 604800; // giây
-
-  function startCountdown() {
-    const countdown = document.getElementById("countdown");
-
-    // Lấy endTime từ localStorage nếu có
-    let endTime = localStorage.getItem("flashSaleEndTime");
-    if (!endTime) {
-      // Nếu chưa có, set mới
-      endTime = Date.now() + DURATION * 1000;
-      localStorage.setItem("flashSaleEndTime", endTime);
-    } else {
-      endTime = parseInt(endTime);
-    }
-
-    function updateCountdown() {
-      const now = Date.now();
-      let remaining = Math.floor((endTime - now) / 1000);
-
-      if (remaining <= 0) remaining = 0;
-
-      const hours = Math.floor(remaining / 3600);
-      const minutes = Math.floor((remaining % 3600) / 60);
-      const seconds = remaining % 60;
-
-      countdown.textContent =
-        `${hours.toString().padStart(2,'0')}:` +
-        `${minutes.toString().padStart(2,'0')}:` +
-        `${seconds.toString().padStart(2,'0')}`;
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  }
-
-  startCountdown();
-
-  // Ẩn hiện
-  function hideFlashSale() {
-    document.getElementById("flashSaleBar").classList.add("flash-hidden");
-  }
-  function showFlashSale() {
-    document.getElementById("flashSaleBar").classList.remove("flash-hidden");
-  }
-</script>
-
-
-
 <!-- Popup Thông báo -->
 <div
   id="offerPopup"
@@ -616,100 +526,83 @@
     Bạn có thể chọn các gói like, follow, share phù hợp với nhu cầu.
   </p>
 </section>
-<!-- HERO + Bảng giá -->
-<section class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-8 items-start">
-  <!-- Cột trái: Text + Nút -->
-  <div class="space-y-6">
-    <h1 class="text-4xl md:text-5xl font-extrabold text-indigo-600">
-      Tăng tương tác — An toàn & Nhanh
-    </h1>
-    <p class="text-slate-600">
-      Dịch vụ tăng follow, like, share cho Facebook, TikTok, Instagram. Giao hàng tự động, báo cáo đầy đủ, hỗ trợ 24/7.
-    </p>
+<style>
+    /* Thẻ nền trắng với bóng đổ mềm */
+    .premium-light-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb; /* Gray-200 */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Bóng đổ mềm */
+        transition: all 0.3s ease;
+    }
+    .premium-light-card:hover {
+        border-color: #6366f1; /* Indigo-500 */
+        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15); /* Bóng đổ màu Indigo khi hover */
+        transform: translateY(-5px);
+    }
+</style>
 
-    <div class="flex gap-3 flex-wrap">
-      <a href="#services" class="px-5 py-3 bg-gradient-to-r from-sky-400 to-indigo-400 text-white rounded-lg shadow hover:scale-[1.02] transition">Xem dịch vụ</a>
-      <a href="#pricing" class="px-5 py-3 border border-indigo-300 text-indigo-500 rounded-lg hover:bg-indigo-50 transition">Xem bảng giá</a>
+<section class="max-w-6xl mx-auto px-4 py-20 bg-white grid md:grid-cols-2 gap-12 items-start rounded-2xl shadow-xl border border-gray-100">
+    
+    <div class="space-y-6 pt-8 text-gray-900">
+        <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">
+            Tăng <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Tương Tác</span> — An Toàn & Nhanh
+        </h1>
+        <p class="text-gray-600 text-lg">
+            Dịch vụ tăng follow, like, share cho **Facebook, TikTok, Instagram**. Hệ thống tự động xử lý, bảo mật tuyệt đối, hỗ trợ 24/7.
+        </p>
+
+        <div class="flex gap-4 flex-wrap pt-4">
+            <a href="#services" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full text-lg font-semibold shadow-lg hover:shadow-indigo-400/50 transition transform hover:scale-[1.05]">
+                Bắt đầu ngay
+            </a>
+            <a href="#pricing" class="px-6 py-3 border-2 border-indigo-400 text-indigo-600 rounded-full text-lg font-semibold hover:bg-indigo-50 transition transform hover:scale-[1.05]">
+                Xem bảng giá chi tiết
+            </a>
+        </div>
     </div>
-  </div>
 
- <!-- Cột phải: Bảng giá -->
-<div id="pricing" class="bg-white rounded-2xl shadow-lg p-6">
-  <h2 class="text-2xl font-bold text-indigo-600 mb-4 text-center">
-    Bảng giá dịch vụ 
-    <span class="bg-red-500 text-white px-2 py-1 rounded-lg text-sm ml-2">SALE 30%</span>
-  </h2>
+    <div id="pricing" class="rounded-3xl shadow-2xl p-6 bg-white border border-gray-200">
+        <h2 class="text-2xl font-extrabold text-indigo-600 mb-6 text-center">
+            Bảng Giá Dịch Vụ <span class="bg-red-600 text-white px-3 py-1 rounded-full text-sm ml-2 font-bold">SALE 30%</span>
+        </h2>
 
-  <!-- Bảng giá TikTok -->
-  <div class="flex items-center gap-2 mt-6 mb-2">
-    <img src="./tk.png" alt="TikTok" class="w-10 h-10 rounded-full border p-1 bg-pink-50">
-    <h3 class="text-xl font-semibold text-pink-500">TikTok</h3>
-  </div>
-  <table class="w-full text-left border-collapse mb-4">
-    <thead>
-      <tr class="bg-pink-100">
-        <th class="px-4 py-2 border">Dịch vụ</th>
-        <th class="px-4 py-2 border">Giá / 1 đơn vị (VNĐ)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="hover:bg-pink-50">
-        <td class="px-4 py-2 border">Follow</td>
-        <td class="px-4 py-2 border font-bold text-pink-600">29</td>
-      </tr>
-      <tr class="hover:bg-pink-50">
-        <td class="px-4 py-2 border">Tym (Like Video)</td>
-        <td class="px-4 py-2 border font-bold text-pink-600">25</td>
-      </tr>
-      <tr class="hover:bg-pink-50">
-        <td class="px-4 py-2 border">View Video</td>
-        <td class="px-4 py-2 border font-bold text-pink-600">1</td>
-      </tr>
-      <tr class="hover:bg-pink-50">
-        <td class="px-4 py-2 border">Share Video</td>
-        <td class="px-4 py-2 border font-bold text-pink-600">5</td>
-      </tr>
-    </tbody>
-  </table>
+        <div class="space-y-4">
+            
+            <div class="premium-light-card p-4 rounded-xl">
+                <div class="flex items-center gap-3 mb-2 border-b border-gray-200 pb-2">
+                    <img src="./tk.png" alt="TikTok" class="w-8 h-8 rounded-full">
+                    <h3 class="text-lg font-bold text-pink-600">TikTok Services</h3>
+                </div>
+                <ul class="space-y-1 text-sm text-gray-700">
+                    <li class="flex justify-between border-b border-gray-100 pb-1"><span>Follow</span> <span class="font-extrabold text-pink-600">29 VNĐ</span></li>
+                    <li class="flex justify-between border-b border-gray-100 pb-1"><span>Tym (Like Video)</span> <span class="font-extrabold text-pink-600">25 VNĐ</span></li>
+                    <li class="flex justify-between border-b border-gray-100 pb-1"><span>View Video</span> <span class="font-extrabold text-pink-600">1 VNĐ</span></li>
+                    <li class="flex justify-between"><span>Share Video</span> <span class="font-extrabold text-pink-600">5 VNĐ</span></li>
+                </ul>
+            </div>
 
-  <!-- Bảng giá Facebook -->
-  <div class="flex items-center gap-2 mt-6 mb-2">
-    <img src="fb.png" alt="Facebook" class="w-10 h-10 rounded-full border p-1 bg-blue-50">
-    <h3 class="text-xl font-semibold text-blue-500">Facebook</h3>
-  </div>
-  <table class="w-full text-left border-collapse">
-    <thead>
-      <tr class="bg-blue-100">
-        <th class="px-4 py-2 border">Dịch vụ</th>
-        <th class="px-4 py-2 border">Giá / 1 đơn vị (VNĐ)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="hover:bg-blue-50">
-        <td class="px-4 py-2 border">Like (Cảm xúc)</td>
-        <td class="px-4 py-2 border font-bold text-blue-600">22</td>
-      </tr>
-      <tr class="hover:bg-blue-50">
-        <td class="px-4 py-2 border">Follow Facebook</td>
-        <td class="px-4 py-2 border font-bold text-blue-600">35</td>
-      </tr>
-      <tr class="hover:bg-blue-50">
-        <td class="px-4 py-2 border">View Video</td>
-        <td class="px-4 py-2 border font-bold text-blue-600">11</td>
-      </tr>
-      <tr class="hover:bg-blue-50">
-        <td class="px-4 py-2 border">Share Video</td>
-        <td class="px-4 py-2 border font-bold text-blue-600">29</td>
-      </tr>
-      <tr class="hover:bg-blue-50">
-        <td class="px-4 py-2 border">Review / Fanpage</td>
-        <td class="px-4 py-2 border font-bold text-blue-600">90</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
+            <div class="premium-light-card p-4 rounded-xl">
+                <div class="flex items-center gap-3 mb-2 border-b border-gray-200 pb-2">
+                    <img src="./fb.png" alt="Facebook" class="w-8 h-8 rounded-full">
+                    <h3 class="text-lg font-bold text-blue-600">Facebook Services</h3>
+                </div>
+                <ul class="space-y-1 text-sm text-gray-700">
+                    <li class="flex justify-between border-b border-gray-100 pb-1"><span>Like (Cảm xúc)</span> <span class="font-extrabold text-blue-600">22 VNĐ</span></li>
+                    <li class="flex justify-between border-b border-gray-100 pb-1"><span>Follow Facebook</span> <span class="font-extrabold text-blue-600">35 VNĐ</span></li>
+                    <li class="flex justify-between border-b border-gray-100 pb-1"><span>View Video</span> <span class="font-extrabold text-blue-600">11 VNĐ</span></li>
+                    <li class="flex justify-between border-b border-gray-100 pb-1"><span>Share Video</span> <span class="font-extrabold text-blue-600">29 VNĐ</span></li>
+                    <li class="flex justify-between"><span>Review / Fanpage</span> <span class="font-extrabold text-blue-600">90 VNĐ</span></li>
+                </ul>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <a href="#order" class="text-base font-semibold text-indigo-600 hover:underline">
+                    👉 Đặt đơn nhanh chóng chỉ trong 30 giây
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
     </section>
 <!DOCTYPE html>
@@ -742,128 +635,173 @@
 </head>
 <body class="bg-gradient-to-b from-indigo-50 via-white to-indigo-50 min-h-screen flex flex-col items-center p-6 gap-8">
 
-  <!-- Section Thống kê -->
   <div class="flex flex-col sm:flex-row justify-center items-stretch gap-6 w-full max-w-6xl mx-auto">
-    <!-- Card 1 -->
-    <div class="flex-1 p-6 rounded-2xl bg-gradient-to-tr from-indigo-100 via-indigo-50 to-indigo-200 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-      <div class="flex items-center gap-4">
-        <div class="bg-white/50 p-4 rounded-full flex-shrink-0 shadow-inner">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
+    
+    <div class="flex-1 p-6 rounded-xl bg-white shadow-xl border border-gray-100/50 
+                hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.03]">
+        <div class="flex items-center gap-4">
+            <div class="bg-indigo-100 p-4 rounded-lg flex-shrink-0 shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+            </div>
+            <div>
+                <p class="text-gray-500 font-medium uppercase text-sm">Người dùng hôm nay</p>
+                <p class="text-3xl font-extrabold text-gray-900 mt-1" id="usersToday">450</p>
+            </div>
         </div>
-        <div>
-          <p class="text-indigo-700 font-medium">Người dùng hôm nay</p>
-          <p class="text-2xl font-bold text-indigo-900" id="usersToday">0</p>
-        </div>
-      </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="flex-1 p-6 rounded-2xl bg-gradient-to-tr from-green-100 via-green-50 to-green-200 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-      <div class="flex items-center gap-4">
-        <div class="bg-white/50 p-4 rounded-full flex-shrink-0 shadow-inner">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" />
-          </svg>
+    <div class="flex-1 p-6 rounded-xl bg-white shadow-xl border border-gray-100/50 
+                hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="flex items-center gap-4">
+            <div class="bg-green-100 p-4 rounded-lg flex-shrink-0 shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" />
+                </svg>
+            </div>
+            <div>
+                <p class="text-gray-500 font-medium uppercase text-sm">Đơn đã hoàn thành</p>
+                <p class="text-3xl font-extrabold text-gray-900 mt-1" id="ordersCompleted">1,562</p>
+            </div>
         </div>
-        <div>
-          <p class="text-green-700 font-medium">Đơn đã hoàn thành</p>
-          <p class="text-2xl font-bold text-green-900" id="ordersCompleted">0</p>
-        </div>
-      </div>
     </div>
 
-    <!-- Card 3 -->
-    <div class="flex-1 p-6 rounded-2xl bg-gradient-to-tr from-pink-100 via-pink-50 to-pink-200 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-      <div class="flex items-center gap-4">
-        <div class="bg-white/50 p-4 rounded-full flex-shrink-0 shadow-inner">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 9l-3 3m0 0l-3-3m3 3V4" />
-          </svg>
+    <div class="flex-1 p-6 rounded-xl bg-white shadow-xl border border-gray-100/50 
+                hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.03]">
+        <div class="flex items-center gap-4">
+            <div class="bg-pink-100 p-4 rounded-lg flex-shrink-0 shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
+            </div>
+            <div>
+                <p class="text-gray-500 font-medium uppercase text-sm">Tổng tương tác</p>
+                <p class="text-3xl font-extrabold text-gray-900 mt-1" id="totalLikes">8,765,432</p>
+            </div>
         </div>
-        <div>
-          <p class="text-pink-700 font-medium">Tổng like đã cung cấp</p>
-          <p class="text-2xl font-bold text-pink-900" id="totalLikes">0</p>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <!-- Section Bảng người dùng ảo -->
-  <div class="flex flex-col justify-center items-center gap-4 w-full max-w-2xl mx-auto p-6 bg-white rounded-2xl shadow-lg border-2 border-indigo-200">
-    <h2 class="text-2xl font-bold mb-4 text-center text-indigo-600">Người vừa sử dụng dịch vụ</h2>
-    <ul id="userList" class="w-full space-y-3"></ul>
-  </div>
+  <style>
+  /* Hiệu ứng trượt và mờ dần khi tải trang */
+  @keyframes slideFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-slide-fade {
+    animation: slideFadeIn 1s ease-out forwards;
+  }
+  
+  /* Hiệu ứng Neumorphism cho mục danh sách */
+  .neumorphism-item {
+    background-color: #ecf0f3; /* Nền sáng nhẹ */
+    box-shadow: 4px 4px 8px #cbcfd4, -4px -4px 8px #ffffff; /* Bóng đổ 3D nhẹ */
+  }
+  .neumorphism-item:hover {
+    box-shadow: inset 2px 2px 5px #cbcfd4, inset -2px -2px 5px #ffffff; /* Hiệu ứng nhấn xuống khi hover */
+  }
+  
+  /* Màu nền của khối chính phải khớp với nền body để Neumorphism hoạt động tốt */
+  #liveFeedContainer {
+      background-color: #ecf0f3; /* Nền trùng với nền Neumorphism */
+  }
 
-  <script>
-    function animateCount(id, target, duration = 1000) {
-      const el = document.getElementById(id);
-      let start = 0;
-      const stepTime = Math.max(Math.floor(duration / target), 10);
-      const timer = setInterval(() => {
-        start++;
-        el.textContent = start;
-        if (start >= target) clearInterval(timer);
-      }, stepTime);
+  /* Thêm giới hạn chiều cao và cuộn (scroll) cho danh sách */
+  #userListPro {
+      max-height: 320px; /* Giới hạn chiều cao để danh sách ngắn lại */
+      overflow-y: hidden; /* Ẩn thanh cuộn, để chỉ thấy hiệu ứng trượt */
+  }
+</style>
+
+<div 
+    id="liveFeedContainer" 
+    class="flex flex-col justify-center items-center gap-4 w-full max-w-lg mx-auto p-6 rounded-2xl shadow-inner border border-gray-100 animate-slide-fade"
+>
+    <h2 class="text-xl md:text-2xl font-bold mb-2 text-center text-gray-700">
+        ⚡ LIVE: Hoạt Động Giao Dịch
+    </h2>
+    
+    <div class="flex items-center justify-center gap-2 mb-4 text-sm font-medium text-green-600 border border-green-300 bg-green-50 p-2 rounded-full shadow-sm">
+        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+        <span>Tốc độ xử lý: Bình thường (17 giao dịch/phút)</span>
+    </div>
+    
+    <ul id="userListPro" class="w-full space-y-3">
+        </ul>
+</div>
+
+<script>
+    const userListPro = document.getElementById("userListPro");
+    const MAX_ITEMS = 5; // Giới hạn chỉ hiển thị 5 mục
+    const UPDATE_INTERVAL = 3500; // Cập nhật chậm lại: 3.5 giây/người
+
+    const namesPro = [
+        "Huy_VIP_SG", "Luna99_HN", "Admin_Test", "Mr.Khánh", "Trader_VN", 
+        "QuangK7", "LinhNhat", "AnBao", "Phuoc_123", "MinhIT"
+    ];
+    // Giữ nguyên avatars
+    const avatarsPro = ["./nguoidung.png"]; 
+
+    const servicesPro = [
+        { name: "1K Follow TikTok", color: "text-red-600", icon: "❤️" },
+        { name: "5K View Video YT", color: "text-blue-600", icon: "▶️" },
+        { name: "2K Like Ảnh FB", color: "text-indigo-600", icon: "👍" },
+        { name: "10K View Story IG", color: "text-orange-600", icon: "📸" }
+    ];
+
+    function randomNamePro() {
+        return namesPro[Math.floor(Math.random() * namesPro.length)];
+    }
+    function randomServicePro() {
+        return servicesPro[Math.floor(Math.random() * servicesPro.length)];
+    }
+    function randomTimeAgoPro() {
+        const seconds = Math.floor(Math.random() * 60) + 15; // Tăng thời gian ngẫu nhiên lên 15 đến 75 giây
+        return `${seconds} giây trước`;
     }
 
-    const usersTodayCount = Math.floor(Math.random() * 10 + 50);
-    const ordersCompletedCount = Math.floor(Math.random() * 30 + 20);
-    const totalLikesCount = Math.floor(Math.random() * 10000 + 500);
+    function addUserPro() {
+        const user = randomNamePro();
+        const service = randomServicePro();
+        const timeAgo = randomTimeAgoPro();
 
-    animateCount("usersToday", usersTodayCount);
-    animateCount("ordersCompleted", ordersCompletedCount);
-    animateCount("totalLikes", totalLikesCount);
+        const li = document.createElement("li");
+        // Giữ nguyên class của Neumorphism
+        li.className = "flex items-center justify-between p-3 rounded-lg neumorphism-item animate-slide-fade";
+        li.innerHTML = `
+            <div class="flex items-center gap-3 truncate">
+                <img src="${avatarsPro[0]}" alt="avatar" class="w-10 h-10 rounded-full border-2 border-gray-300 flex-shrink-0 shadow">
+                <div class="flex flex-col items-start truncate">
+                    <span class="font-bold text-gray-900 truncate">${user}</span>
+                    <span class="text-xs ${service.color} font-medium mt-0.5 flex items-center gap-1">
+                        ${service.icon} ${service.name}
+                    </span>
+                </div>
+            </div>
+            <span class="text-xs text-gray-500 italic font-semibold flex-shrink-0 ml-2">${timeAgo}</span>
+        `;
+        
+        // Điều chỉnh giới hạn hiển thị
+        if (userListPro.children.length >= MAX_ITEMS) { 
+            userListPro.removeChild(userListPro.lastChild);
+        }
+        
+        userListPro.prepend(li);
+    }
 
-const userList = document.getElementById("userList");
+    // Cập nhật chậm lại: 3.5 giây/người
+    setInterval(addUserPro, UPDATE_INTERVAL);
 
-  // Danh sách tên dài hơn
-  const names = [
-    "Khánh","An","Bảo","Cường","Dũng","Hải","Linh","Minh","Ngọc",
-    "Phúc","Quang","Trang","Vy","Huy","Thu","Lan","Hoàng","Trâm",
-    "Điệp","Tú","Nhật","Kiên","Thanh","Diệu","Vinh"
-  ];
-
-  // Nhiều ảnh avatar hơn
-  const avatars = [
-    "./nguoidung.png",
-    
-  ];
-
-  function randomName() {
-    return names[Math.floor(Math.random() * names.length)] + Math.floor(Math.random() * 100);
-  }
-  function randomAvatar() {
-    return avatars[Math.floor(Math.random() * avatars.length)];
-  }
-
-  function addUser() {
-    const li = document.createElement("li");
-    li.className = "flex items-center justify-between bg-indigo-50 px-4 py-2 rounded-xl shadow hover:shadow-md transition-all fade-slide border border-indigo-100";
-    li.innerHTML = `
-      <div class="flex items-center gap-3">
-        <img src="${randomAvatar()}" alt="avatar" class="w-10 h-10 rounded-full border-2 border-indigo-300 flex-shrink-0 shadow-md">
-        <span class="font-semibold text-indigo-800">${randomName()}</span>
-      </div>
-      <span class="text-xs text-indigo-600 italic flex-shrink-0">vừa dùng xong</span>
-    `;
-    userList.prepend(li);
-    if(userList.children.length > 6) userList.removeChild(userList.lastChild);
-  }
-
-  // Thêm user mới mỗi 3 giây
-  setInterval(addUser, 7000);
-
-  // Khởi tạo 3 user ban đầu
-  for(let i=0; i<3; i++) addUser();
+    // Khởi tạo 5 user ban đầu
+    for (let i = 0; i < MAX_ITEMS; i++) addUserPro();
 </script>
-</body>
-</html>
-
-
-</section>
-
 <!-- Modal Liên hệ Admin -->
 <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
   <div class="bg-white p-6 rounded-2xl shadow-xl max-w-md w-full relative">
@@ -891,316 +829,406 @@ const userList = document.getElementById("userList");
   }
 </script>
 
-</script>
+<section id="how" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-3xl font-extrabold text-gray-800 text-center mb-10">
+        🚀 Quy Trình 3 Bước Đơn Giản
+    </h2>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+        
+        <div class="p-8 rounded-2xl shadow-xl border-t-4 border-cyan-500 text-center bg-white 
+                    hover:shadow-cyan-300/50 transition-all duration-300 transform hover:scale-[1.02]">
+            <div class="text-4xl font-extrabold mb-3 text-cyan-600">
+                <span class="bg-cyan-100 p-3 rounded-full inline-block">1️⃣</span>
+            </div>
+            <p class="text-xl font-bold text-gray-800 mt-4">Chọn Dịch Vụ & Gói</p>
+            <p class="mt-2 text-sm text-gray-500">Tìm gói phù hợp nhất với mục tiêu của bạn.</p>
+        </div>
+        
+        <div class="p-8 rounded-2xl shadow-xl border-t-4 border-indigo-500 text-center bg-white 
+                    hover:shadow-indigo-300/50 transition-all duration-300 transform hover:scale-[1.02]">
+            <div class="text-4xl font-extrabold mb-3 text-indigo-600">
+                <span class="bg-indigo-100 p-3 rounded-full inline-block">2️⃣</span>
+            </div>
+            <p class="text-xl font-bold text-gray-800 mt-4">Nhập Link & Số Lượng</p>
+            <p class="mt-2 text-sm text-gray-500">Đảm bảo tài khoản công khai và link chính xác.</p>
+        </div>
+        
+        <div class="p-8 rounded-2xl shadow-xl border-t-4 border-green-500 text-center bg-white 
+                    hover:shadow-green-300/50 transition-all duration-300 transform hover:scale-[1.02]">
+            <div class="text-4xl font-extrabold mb-3 text-green-600">
+                <span class="bg-green-100 p-3 rounded-full inline-block">3️⃣</span>
+            </div>
+            <p class="text-xl font-bold text-gray-800 mt-4">Xử lý & Hoàn thành</p>
+            <p class="mt-2 text-sm text-gray-500">Hệ thống tự động thực hiện và gửi báo cáo.</p>
+        </div>
+        
+    </div>
+</section>
 
-
-    <!-- HOW IT WORKS -->
-    <section id="how" class="max-w-6xl mx-auto px-4 py-8">
-      <h2 class="text-2xl font-bold mb-4">Cách hoạt động</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-xl shadow text-center">
-          <div class="text-3xl font-bold">1</div>
-          <p class="mt-2 text-sm text-slate-600">Chọn dịch vụ & gói</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow text-center">
-          <div class="text-3xl font-bold">2</div>
-          <p class="mt-2 text-sm text-slate-600">Điền link & số lượng</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow text-center">
-          <div class="text-3xl font-bold">3</div>
-          <p class="mt-2 text-sm text-slate-600">Thanh toán & nhận báo cáo</p>
-        </div>
-      </div>
-    </section>
-    <!-- Container hiển thị bong bóng -->
-<div id="liveFeed" class="fixed bottom-20 left-4 space-y-2 z-50"></div>
 
 <style>
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(30px) scale(0.9); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; transform: translateY(-10px) scale(0.95); }
-}
-.live-bubble {
-  background: linear-gradient(135deg, #6a5acd, #7aa2ff); /* tím pastel → xanh lam */
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 18px;
-  font-size: 14px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  animation: slideIn 0.5s ease-out;
-}
-.live-bubble.fade-out {
-  animation: fadeOut 1s ease forwards;
-}
-.live-bubble img {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  object-fit: cover;
-}
+    /* CSS cho hiệu ứng Glassmorphism */
+    .glass-card-dark {
+        background: rgba(255, 255, 255, 0.05); /* Nền cực kỳ trong suốt */
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Bóng đổ mạnh hơn */
+        backdrop-filter: blur(8px); /* Hiệu ứng kính mờ */
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1); /* Viền mờ */
+    }
 </style>
 
+<style>
+    .glow-border-card {
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Bóng đổ nhẹ */
+    }
+    /* Hiệu ứng viền phát sáng khi hover */
+    .glow-border-card:hover {
+        border-color: #6366f1; /* Màu Indigo mặc định khi hover */
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+    }
+    .glow-border-card.cyan:hover {
+        border-color: #06b6d4; 
+        box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.2);
+    }
+    .glow-border-card.purple:hover {
+        border-color: #8b5cf6; 
+        box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+    }
+    .glow-border-card.green:hover {
+        border-color: #10b981; 
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+    }
+    .glow-border-card.red:hover {
+        border-color: #ef4444; 
+        box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+    }
+</style>
 
+<section class="bg-white py-16 mt-12 relative border-t border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-12">
+            Vì Sao Bạn Nên Chọn <span class="text-indigo-600">KHÁNH BÁN SUB</span>?
+        </h2>
 
-<!-- CAM KẾT & THÔNG TIN -->
-<section class="bg-white py-16 mt-12 relative">
-  <div class="max-w-6xl mx-auto px-6 relative z-10">
-    <h2 class="text-3xl font-bold text-center text-indigo-600 mb-12">
-      💎 Vì Sao Bạn Nên Chọn  
-      <span class="text-purple-500">KHÁNH BÁN SUB </span>?
-    </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            
+            <div class="glow-border-card cyan bg-white border border-gray-200 rounded-xl p-6 transition transform hover:-translate-y-1">
+                <div class="text-4xl mb-3 text-cyan-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900">Cam kết chất lượng</h3>
+                <p class="text-sm text-gray-600 mt-2">
+                    Dịch vụ ổn định, Lâu Tụt. Không tụt bất thường, an toàn tuyệt đối.
+                </p>
+            </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      <!-- Cam kết chất lượng -->
-      <div class="bg-white border border-purple-100 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition transform">
-        <div class="text-4xl mb-3 text-purple-500">✅</div>
-        <h3 class="font-bold text-lg text-indigo-600">Cam kết chất lượng</h3>
-        <p class="text-sm text-slate-600 mt-2">
-          Dịch vụ ổn định, Lâu Tụt . Không tụt bất thường, an toàn tuyệt đối.
-        </p>
-      </div>
+            <div class="glow-border-card purple bg-white border border-gray-200 rounded-xl p-6 transition transform hover:-translate-y-1">
+                <div class="text-4xl mb-3 text-purple-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V19.5M3.75 8.25V19.5a2.25 2.25 0 002.25 2.25h13.5a2.25 2.25 0 002.25-2.25V8.25M6 4.5v3.75m6-3.75v3.75m6-3.75v3.75M18 9v.75m-6-.75v.75m-6-.75v.75M16.5 10.5V19.5m-9-9V19.5" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900">Bảo mật tuyệt đối</h3>
+                <p class="text-sm text-gray-600 mt-2">
+                    Không lưu mật khẩu. Thông tin khách hàng luôn được mã hóa và bảo vệ.
+                </p>
+            </div>
 
-      <!-- Bảo mật -->
-      <div class="bg-white border border-purple-100 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition transform">
-        <div class="text-4xl mb-3 text-purple-500">🔒</div>
-        <h3 class="font-bold text-lg text-indigo-600">Bảo mật tuyệt đối</h3>
-        <p class="text-sm text-slate-600 mt-2">
-          Không lưu mật khẩu. Thông tin khách hàng luôn được mã hóa và bảo vệ.
-        </p>
-      </div>
+            <div class="glow-border-card yellow bg-white border border-gray-200 rounded-xl p-6 transition transform hover:-translate-y-1">
+                <div class="text-4xl mb-3 text-yellow-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.25v2.25H6.75M17.25 15.75H3.75V13.5M21.75 12a9.75 9.75 0 00-9-7.5l-2.25 2.25-2.25-2.25-2.25 2.25-2.25-2.25-2.25 2.25-2.25-2.25V8.25a2.25 2.25 0 012.25-2.25h13.5a2.25 2.25 0 012.25 2.25z" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900">Hỗ trợ tận tâm</h3>
+                <p class="text-sm text-gray-600 mt-2">
+                    Đội ngũ trực 24/7 sẵn sàng giải đáp và xử lý yêu cầu nhanh chóng.
+                </p>
+            </div>
 
-      <!-- Hỗ trợ -->
-      <div class="bg-white border border-purple-100 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition transform">
-        <div class="text-4xl mb-3 text-purple-500">🤝</div>
-        <h3 class="font-bold text-lg text-indigo-600">Hỗ trợ tận tâm</h3>
-        <p class="text-sm text-slate-600 mt-2">
-          Đội ngũ trực 24/7 sẵn sàng giải đáp và xử lý yêu cầu nhanh chóng.
-        </p>
-      </div>
+            <div class="glow-border-card green bg-white border border-gray-200 rounded-xl p-6 transition transform hover:-translate-y-1">
+                <div class="text-4xl mb-3 text-green-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-2.25-2.25L12 18m2.25-2.25L12 18m0-12L9.75 7.5m2.25-1.5L14.25 7.5M12 6a7.5 7.5 0 100 15 7.5 7.5 0 000-15z" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900">Giá cả hợp lý</h3>
+                <p class="text-sm text-gray-600 mt-2">
+                    Cạnh tranh nhất thị trường, nhiều ưu đãi định kỳ và giảm giá hấp dẫn.
+                </p>
+            </div>
 
-      <!-- Giá tốt -->
-      <div class="bg-white border border-purple-100 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition transform">
-        <div class="text-4xl mb-3 text-purple-500">💰</div>
-        <h3 class="font-bold text-lg text-indigo-600">Giá cả hợp lý</h3>
-        <p class="text-sm text-slate-600 mt-2">
-          Cạnh tranh nhất thị trường, nhiều ưu đãi định kỳ và giảm giá hấp dẫn.
-        </p>
-      </div>
+            <div class="glow-border-card red bg-white border border-gray-200 rounded-xl p-6 transition transform hover:-translate-y-1">
+                <div class="text-4xl mb-3 text-red-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M21.75 12a.75.75 0 01-.75.75h-15a.75.75 0 01-.75-.75V8.25m0 0a2.25 2.25 0 012.25-2.25h13.5a2.25 2.25 0 012.25 2.25V8.25m-15 0h15" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900">Thanh toán nhanh chóng</h3>
+                <p class="text-sm text-gray-600 mt-2">
+                    Hỗ trợ nhiều phương thức: Momo, ZaloPay, Vietcombank, Visa…
+                </p>
+            </div>
 
-      <!-- Thanh toán nhanh -->
-      <div class="bg-white border border-purple-100 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition transform">
-        <div class="text-4xl mb-3 text-purple-500">⚡</div>
-        <h3 class="font-bold text-lg text-indigo-600">Thanh toán nhanh chóng</h3>
-        <p class="text-sm text-slate-600 mt-2">
-          Hỗ trợ nhiều phương thức: Momo, ZaloPay, Vietcombank, Visa…
-        </p>
-      </div>
-
-      <!-- Uy tín lâu dài -->
-      <div class="bg-white border border-purple-100 rounded-2xl p-6 shadow hover:shadow-xl hover:-translate-y-1 transition transform">
-        <div class="text-4xl mb-3 text-purple-500">🏆</div>
-        <h3 class="font-bold text-lg text-indigo-600">Uy tín hàng đầu</h3>
-        <p class="text-sm text-slate-600 mt-2">
-          Được hàng ngàn khách hàng tin tưởng sử dụng và đánh giá 5⭐.
-        </p>
-      </div>
+            <div class="glow-border-card bg-white border border-gray-200 rounded-xl p-6 transition transform hover:-translate-y-1">
+                <div class="text-4xl mb-3 text-indigo-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 00-9-9 9 9 0 009-9 9 9 0 009 9 9 9 0 00-9 9zM12 9l.01.01M12 12a3 3 0 100-6 3 3 0 000 6z" />
+                    </svg>
+                </div>
+                <h3 class="font-bold text-xl text-gray-900">Uy tín hàng đầu</h3>
+                <p class="text-sm text-gray-600 mt-2">
+                    Được hàng ngàn khách hàng tin tưởng sử dụng và đánh giá 5⭐.
+                </p>
+            </div>
+        </div>
     </div>
-<!-- PHẦN ĐÁNH GIÁ KHÁCH HÀNG -->
-<section class="py-12 bg-gradient-to-br from-white via-gray-50 to-gray-100">
-  <div class="max-w-6xl mx-auto px-4 text-center">
-    <h2 class="text-2xl md:text-3xl font-bold mb-8 text-gray-800">
-      Khách hàng nói gì về chúng tôi 💬
-    </h2>
+</section>
+<section class="py-20 bg-white border-t border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-12 text-gray-900">
+            💬 Những Đánh Giá <span class="text-indigo-600">5 Sao</span> Từ Khách Hàng
+        </h2>
 
-    <div class="grid gap-6 md:grid-cols-3">
-      <!-- Feedback 1 -->
-      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
-        <img src="./nguoidung.png" alt="avatar" class="w-16 h-16 mx-auto rounded-full mb-3 border-2 border-pink-400" />
-        <h3 class="font-semibold text-lg">Lưu Hoài Phong</h3>
-        <p class="text-yellow-400 my-2">⭐⭐⭐⭐⭐</p>
-        <p class="text-gray-600 text-sm">
-          Dịch vụ nhanh chóng, uy tín, mình đặt 500 follow và đã nhận đủ trong 1h. Sẽ ủng hộ dài lâu!
-        </p>
-      </div>
+        <div class="grid gap-6 md:grid-cols-5 items-stretch">
+            
+            <div class="md:col-span-1 bg-gray-50 p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between 
+                        opacity-80 transition hover:opacity-100">
+                <div>
+                    <img src="./nguoidung.png" alt="avatar" class="w-12 h-12 mx-auto rounded-full mb-3 border-2 border-pink-400" />
+                    <p class="text-yellow-500 text-lg mb-2">⭐⭐⭐⭐⭐</p>
+                    <h3 class="font-semibold text-base text-gray-800">Lưu Hoài Phong</h3>
+                </div>
+                <p class="text-gray-500 text-xs mt-3 line-clamp-4">
+                    "Dịch vụ nhanh chóng, uy tín, mình đặt 500 follow và đã nhận đủ trong 1h. Sẽ ủng hộ dài lâu!"
+                </p>
+            </div>
 
-      <!-- Feedback 2 -->
-      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
-        <img src="./nguoidung.png" alt="avatar" class="w-16 h-16 mx-auto rounded-full mb-3 border-2 border-blue-400" />
-        <h3 class="font-semibold text-lg">Trần Thị Thúy Quỳnh</h3>
-        <p class="text-yellow-400 my-2">⭐⭐⭐⭐⭐</p>
-        <p class="text-gray-600 text-sm">
-          Like tăng tự nhiên, không tụt. Hỗ trợ rất nhiệt tình. Rất hài lòng ❤️
-        </p>
-      </div>
+            <div class="md:col-span-3 bg-white p-10 rounded-3xl shadow-2xl border-4 border-indigo-500 relative 
+                        hover:shadow-indigo-400/50 transition transform duration-500">
+                
+                <p class="text-6xl text-indigo-200 absolute top-2 left-4 font-serif">“</p>
+                
+                <img src="./nguoidung.png" alt="avatar" class="w-20 h-20 mx-auto rounded-full mb-4 border-4 border-indigo-600 shadow-xl" />
+                <p class="text-yellow-500 text-3xl mb-4">⭐⭐⭐⭐⭐</p>
+                
+                <p class="text-gray-700 text-xl font-medium italic mb-6">
+                    "Like tăng tự nhiên, không tụt. Hỗ trợ rất nhiệt tình. Rất hài lòng. Tôi sẽ tiếp tục ủng hộ dịch vụ của KHÁNH BÁN SUB lâu dài!"
+                </p>
 
-      <!-- Feedback 3 -->
-      <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
-        <img src="./nguoidung.png" alt="avatar" class="w-16 h-16 mx-auto rounded-full mb-3 border-2 border-green-400" />
-        <h3 class="font-semibold text-lg">Phạm Văn Thống</h3>
-        <p class="text-yellow-400 my-2">⭐⭐⭐⭐⭐</p>
-        <p class="text-gray-600 text-sm">
-          Giá rẻ hơn nhiều nơi, chất lượng ổn định. Sẽ giới thiệu cho bạn bè.
-        </p>
-      </div>
+                <h3 class="font-bold text-2xl text-indigo-700 border-t pt-4 mt-4">Trần Thị Thúy Quỳnh</h3>
+                <p class="text-base text-gray-500">Khách hàng - TikTok Growth Partner</p>
+            </div>
+
+            <div class="md:col-span-1 bg-gray-50 p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between 
+                        opacity-80 transition hover:opacity-100">
+                <div>
+                    <img src="./nguoidung.png" alt="avatar" class="w-12 h-12 mx-auto rounded-full mb-3 border-2 border-green-400" />
+                    <p class="text-yellow-500 text-lg mb-2">⭐⭐⭐⭐⭐</p>
+                    <h3 class="font-semibold text-base text-gray-800">Phạm Văn Thống</h3>
+                </div>
+                <p class="text-gray-500 text-xs mt-3 line-clamp-4">
+                    "Giá rẻ hơn nhiều nơi, chất lượng ổn định. Sẽ giới thiệu cho bạn bè."
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 
-<!-- BẢNG XẾP HẠNG TIÊU BIỂU -->
-<section class="py-12 bg-white">
-  <div class="max-w-4xl mx-auto px-4">
-    <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center text-gray-800">
-      🏆 Bảng Xếp Hạng Khách Hàng Tiêu Biểu
-    </h2>
+<style>
+    /* Hiệu ứng bóng đổ và border nhẹ nhàng */
+    .light-rank-card {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e5e7eb; /* Gray-200 */
+        transition: all 0.2s ease-in-out;
+    }
+    .light-rank-card:hover {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
 
-    <div class="overflow-x-auto">
-      <table class="w-full border-collapse rounded-2xl overflow-hidden shadow-lg">
-        <thead class="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
-          <tr>
-            <th class="py-3 px-4 text-left">Hạng</th>
-            <th class="py-3 px-4 text-left">Khách hàng</th>
-            <th class="py-3 px-4 text-center">Đơn hàng</th>
-            <th class="py-3 px-4 text-center">Đánh giá</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y">
-          <!-- TOP 1 -->
-          <tr class="bg-yellow-50 hover:bg-yellow-100 transition">
-            <td class="py-3 px-4 font-bold text-yellow-600">🥇 TOP 1</td>
-            <td class="py-3 px-4 flex items-center gap-3">
-              <img src="./adminanh.jpg" class="w-10 h-10 rounded-full border-2 border-yellow-400" />
-              <span>Trần Quốc Khánh</span>
-            </td>
-            <td class="py-3 px-4 text-center font-semibold text-gray-700">120</td>
-            <td class="py-3 px-4 text-center text-yellow-400">⭐⭐⭐⭐⭐</td>
-          </tr>
+    /* Hiệu ứng nổi bật cho TOP 1 */
+    .top-rank-gold {
+        background: linear-gradient(135deg, #fffbeb, #fefce8); /* Subtle yellow gradient */
+        border-color: #fcd34d; /* Amber-300 */
+        box-shadow: 0 5px 20px rgba(252, 211, 77, 0.3); /* Amber Glow */
+    }
+</style>
 
-          <!-- TOP 2 -->
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 font-bold text-gray-700">🥈 TOP 2</td>
-            <td class="py-3 px-4 flex items-center gap-3">
-              <img src="./nguoidung.png" class="w-10 h-10 rounded-full border-2 border-gray-400" />
-              <span>Đang Cập Nhật...</span>
-            </td>
-            <td class="py-3 px-4 text-center font-semibold text-gray-700">...</td>
-            <td class="py-3 px-4 text-center text-yellow-400">⭐⭐⭐⭐⭐</td>
-          </tr>
+<section class="py-16 bg-white border-t border-gray-100">
+    <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-extrabold mb-10 text-center text-gray-900">
+            🏆 <span class="text-indigo-600">Khách Hàng Tiêu Biểu</span> Của Chúng Tôi
+        </h2>
 
-          <!-- TOP 3 -->
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 font-bold text-orange-500">🥉 TOP 3</td>
-            <td class="py-3 px-4 flex items-center gap-3">
-              <img src="./nguoidung.png" class="w-10 h-10 rounded-full border-2 border-orange-400" />
-              <span>Đang Cập Nhật...</span>
-            </td>
-            <td class="py-3 px-4 text-center font-semibold text-gray-700">...</td>
-            <td class="py-3 px-4 text-center text-yellow-400">⭐⭐⭐⭐</td>
-          </tr>
+        <div class="space-y-3">
+            
+            <div class="flex items-center p-4 sm:p-5 rounded-xl light-rank-card top-rank-gold">
+                <div class="w-10 h-10 text-xl font-extrabold text-white flex items-center justify-center flex-shrink-0 relative">
+                    <span class="absolute inset-0 bg-yellow-500 rounded-full shadow-md"></span>
+                    <span class="relative z-10">1</span>
+                </div>
+                
+                <div class="flex-grow mx-4">
+                    <p class="text-lg font-bold text-gray-800">Trần Quốc Khánh (Admin)</p>
+                    <p class="text-sm text-gray-500">Lượt đặt: <span class="font-bold text-indigo-600">120 Đơn</span></p>
+                </div>
+                
+                <div class="text-right flex flex-col items-end">
+                    <span class="text-base font-semibold text-gray-700">VIP PLATINUM</span>
+                    <span class="text-sm text-yellow-400 mt-0.5">⭐⭐⭐⭐⭐</span>
+                </div>
+            </div>
 
-          <!-- TOP 4 -->
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 font-bold text-gray-600">TOP 4</td>
-            <td class="py-3 px-4 flex items-center gap-3">
-              <img src="./nguoidung.png" class="w-10 h-10 rounded-full border-2 border-blue-400" />
-              <span>Đang Cập Nhật...</span>
-            </td>
-            <td class="py-3 px-4 text-center font-semibold text-gray-700">...</td>
-            <td class="py-3 px-4 text-center text-yellow-400">⭐⭐⭐⭐</td>
-          </tr>
+            <div class="flex items-center p-4 sm:p-5 rounded-xl light-rank-card bg-white hover:bg-gray-50">
+                <div class="w-10 h-10 text-xl font-extrabold text-white flex items-center justify-center flex-shrink-0 relative">
+                    <span class="absolute inset-0 bg-gray-400 rounded-full shadow-md"></span>
+                    <span class="relative z-10">2</span>
+                </div>
+                <div class="flex-grow mx-4">
+                    <p class="text-lg font-bold text-gray-800">Nguyễn Ngọc Lan</p>
+                    <p class="text-sm text-gray-500">Lượt đặt: <span class="font-bold text-indigo-600">95 Đơn</span></p>
+                </div>
+                <div class="text-right flex flex-col items-end">
+                    <span class="text-base font-semibold text-gray-700">VIP GOLD</span>
+                    <span class="text-sm text-yellow-400 mt-0.5">⭐⭐⭐⭐⭐</span>
+                </div>
+            </div>
 
-          <!-- TOP 5 -->
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 font-bold text-gray-600">TOP 5</td>
-            <td class="py-3 px-4 flex items-center gap-3">
-              <img src="nguoidung.png" class="w-10 h-10 rounded-full border-2 border-green-400" />
-              <span>Đang Cập Nhật...</span>
-            </td>
-            <td class="py-3 px-4 text-center font-semibold text-gray-700">...</td>
-            <td class="py-3 px-4 text-center text-yellow-400">⭐⭐⭐</td>
-          </tr>
-        </tbody>
-      </table>
+            <div class="flex items-center p-4 sm:p-5 rounded-xl light-rank-card bg-white hover:bg-gray-50">
+                <div class="w-10 h-10 text-xl font-extrabold text-white flex items-center justify-center flex-shrink-0 relative">
+                    <span class="absolute inset-0 bg-orange-500 rounded-full shadow-md"></span>
+                    <span class="relative z-10">3</span>
+                </div>
+                <div class="flex-grow mx-4">
+                    <p class="text-lg font-bold text-gray-800">Lê Minh Nhật</p>
+                    <p class="text-sm text-gray-500">Lượt đặt: <span class="font-bold text-indigo-600">85 Đơn</span></p>
+                </div>
+                <div class="text-right flex flex-col items-end">
+                    <span class="text-base font-semibold text-gray-700">VIP SILVER</span>
+                    <span class="text-sm text-yellow-400 mt-0.5">⭐⭐⭐⭐</span>
+                </div>
+            </div>
+
+            <div class="flex items-center p-3 rounded-lg light-rank-card bg-white hover:bg-gray-50">
+                <div class="w-10 text-xl font-semibold text-gray-600 flex-shrink-0">4</div>
+                <div class="flex-grow mx-4 text-gray-700 font-medium">Phạm Thanh Tú</div>
+                <div class="text-right flex flex-col items-end">
+                    <span class="text-sm font-bold text-indigo-600">70 Đơn</span>
+                    <span class="text-sm text-yellow-400">⭐⭐⭐⭐</span>
+                </div>
+            </div>
+
+            <div class="flex items-center p-3 rounded-lg light-rank-card bg-white hover:bg-gray-50">
+                <div class="w-10 text-xl font-semibold text-gray-600 flex-shrink-0">5</div>
+                <div class="flex-grow mx-4 text-gray-700 font-medium">Võ Hoài An</div>
+                <div class="text-right flex flex-col items-end">
+                    <span class="text-sm font-bold text-indigo-600">60 Đơn</span>
+                    <span class="text-sm text-yellow-400">⭐⭐⭐</span>
+                </div>
+            </div>
+            
+        </div>
     </div>
-  </div>
 </section>
 
-<!-- Trust Section -->
-<section class="mt-16 px-6 max-w-6xl mx-auto text-center relative">
-  <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-    Niềm Tin Khách Hàng
-  </h2>
-  <p class="text-gray-600 mt-2 text-sm md:text-base">
-    Sự lựa chọn hàng đầu của hàng nghìn khách hàng và đối tác uy tín.
-  </p>
+<style>
+    /* Reset CSS cho phong cách nền trắng */
+    .light-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb; /* Gray-200 */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Bóng đổ nhẹ */
+        transition: all 0.3s ease;
+    }
+    .light-card:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Bóng đổ tăng cường khi hover */
+        transform: translateY(-5px); /* Hiệu ứng nổi */
+    }
 
-  <!-- Counter Cards -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
-    <div class="backdrop-blur-md bg-white/40 p-6 rounded-2xl shadow-lg border border-white/20">
-      <h3 class="text-4xl font-extrabold text-blue-500 counter" data-target="23">0</h3>
-      <p class="text-gray-700 text-sm mt-2">Khách hàng</p>
-    </div>
-    <div class="backdrop-blur-md bg-white/40 p-6 rounded-2xl shadow-lg border border-white/20">
-      <h3 class="text-4xl font-extrabold text-purple-500 counter" data-target="41">0</h3>
-      <p class="text-gray-700 text-sm mt-2">Đơn hàng</p>
-    </div>
-    <div class="backdrop-blur-md bg-white/40 p-6 rounded-2xl shadow-lg border border-white/20">
-      <h3 class="text-4xl font-extrabold text-pink-500 counter" data-target="60">0</h3>
-      <p class="text-gray-700 text-sm mt-2">Phút trung bình</p>
-    </div>
-    <div class="backdrop-blur-md bg-white/40 p-6 rounded-2xl shadow-lg border border-white/20">
-      <h3 class="text-4xl font-extrabold text-indigo-500 counter" data-target="24">0</h3>
-      <p class="text-gray-700 text-sm mt-2">Hỗ trợ 24/7</p>
-    </div>
-  </div>
+    /* Hiệu ứng gradient cho viền dưới của thẻ */
+    .border-gradient-bottom {
+        border-bottom: 5px solid transparent;
+        border-image: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899) 1;
+    }
 
+    /* Đảm bảo chữ số màu đen */
+    .counter {
+        color: #1f2937; /* Gray-900 */
+    }
+</style>
 
+<section class="mt-16 px-6 py-12 bg-white max-w-6xl mx-auto text-center relative rounded-xl shadow-inner border-t-4 border-b-4 border-gray-100">
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-2 text-gray-900">
+        NIỀM TIN CHẮC CHẮN
+    </h2>
+    <p class="text-gray-600 mt-2 text-sm md:text-base font-light">
+        Sự lựa chọn của hàng nghìn khách hàng uy tín.
+    </p>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+        
+        <div class="light-card p-6 rounded-xl border-gradient-bottom">
+            <h3 class="text-4xl font-extrabold text-blue-500 counter" data-target="23">0</h3>
+            <p class="text-gray-500 text-sm mt-2">KHÁCH HÀNG THÂN THIẾT</p>
+        </div>
+        
+        <div class="light-card p-6 rounded-xl border-gradient-bottom">
+            <h3 class="text-4xl font-extrabold text-fuchsia-500 counter" data-target="41">0</h3>
+            <p class="text-gray-500 text-sm mt-2">GIAO DỊCH HÔM NAY</p>
+        </div>
+        
+        <div class="light-card p-6 rounded-xl border-gradient-bottom">
+            <h3 class="text-4xl font-extrabold text-pink-500 counter" data-target="60">0</h3>
+            <p class="text-gray-500 text-sm mt-2">TỐC ĐỘ XỬ LÝ (PHÚT)</p>
+        </div>
+        
+        <div class="light-card p-6 rounded-xl border-gradient-bottom">
+            <h3 class="text-4xl font-extrabold text-indigo-500 counter" data-target="24">0</h3>
+            <p class="text-gray-500 text-sm mt-2">HỖ TRỢ TRỰC TUYẾN (GIỜ)</p>
+        </div>
+        
+    </div>
+
+    <div class="text-center mt-14 p-6 bg-gray-50 rounded-xl border border-gray-200">
+        <h4 class="text-lg font-bold text-gray-800 mb-2">📞 KÊNH HỖ TRỢ</h4>
+        <p class="text-sm text-gray-600 mt-1">
+            Hotline: <span class="font-bold text-indigo-600">0376447206</span>
+            <span class="mx-2 text-gray-400">|</span> 
+            Email: <span class="font-bold text-indigo-600">tranquockhanh280706@gmail.com</span>
+        </p>
+    </div>
+</section>
 
 <script>
-  // Counter animation (kích hoạt khi scroll xuống)
-  function animateCounters() {
-    const counters = document.querySelectorAll('.counter');
-    counters.forEach(counter => {
-      if (counter.getBoundingClientRect().top < window.innerHeight && !counter.classList.contains("done")) {
-        counter.classList.add("done");
-        counter.innerText = '0';
-        const target = +counter.getAttribute('data-target');
-        const increment = target / 200;
-        const updateCounter = () => {
-          const c = +counter.innerText;
-          if (c < target) {
-            counter.innerText = Math.ceil(c + increment);
-            setTimeout(updateCounter, 15);
-          } else {
-            counter.innerText = target.toLocaleString();
-          }
-        };
-        updateCounter();
-      }
-    });
-  }
-  window.addEventListener('scroll', animateCounters);
+  // Counter animation (kích hoạt khi scroll xuống)
+  function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+      if (counter.getBoundingClientRect().top < window.innerHeight && !counter.classList.contains("done")) {
+        counter.classList.add("done");
+        counter.innerText = '0';
+        const target = +counter.getAttribute('data-target');
+        const increment = target / 200;
+        const updateCounter = () => {
+          const c = +counter.innerText;
+          if (c < target) {
+            counter.innerText = Math.ceil(c + increment);
+            setTimeout(updateCounter, 15);
+          } else {
+            counter.innerText = target.toLocaleString();
+          }
+        };
+        updateCounter();
+      }
+    });
+  }
+  window.addEventListener('scroll', animateCounters);
 </script>
-
-    <!-- Hotline / Email -->
-    <div class="text-center mt-14">
-      <h4 class="text-lg font-semibold text-slate-700">📞 Liên hệ ngay</h4>
-      <p class="text-sm text-slate-600 mt-1">
-        Hotline: <span class="font-bold text-purple-500">0376447206</span> — 
-        Email: <span class="font-bold text-purple-500">tranquockhanh280706@gmail.com</span>
-      </p>
-    </div>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <footer class="mt-12 border-t bg-white/60 py-8">
   <div

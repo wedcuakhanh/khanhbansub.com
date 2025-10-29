@@ -3,163 +3,94 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dịch vụ đang cập nhật</title>
+    <title>Dịch Vụ Đang Cập Nhật - Sắp Hoàn Thiện</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* Floating icon */
-      @keyframes float {
-        0%,
-        100% {
+      /* Hiệu ứng trượt và mờ dần khi tải trang */
+      @keyframes slideFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
           transform: translateY(0);
         }
-        50% {
-          transform: translateY(-15px);
-        }
       }
-      .floating {
-        animation: float 4s ease-in-out infinite;
+      .animate-slide-fade {
+        animation: slideFadeIn 1s ease-out forwards;
       }
-
-      /* Glitch text */
-      .glitch {
-        position: relative;
-        color: #fff;
-        font-weight: 800;
-        letter-spacing: 2px;
+      /* Hiệu ứng quay nhẹ cho icon */
+      @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
       }
-      .glitch::before,
-      .glitch::after {
-        content: attr(data-text);
-        position: absolute;
-        left: 0;
-        width: 100%;
-        overflow: hidden;
-        clip: rect(0, 900px, 0, 0);
-      }
-      .glitch::before {
-        animation: glitchTop 2s infinite linear alternate-reverse;
-        color: #0ff;
-      }
-      .glitch::after {
-        animation: glitchBottom 2s infinite linear alternate-reverse;
-        color: #f0f;
-      }
-      @keyframes glitchTop {
-        0% {
-          clip: rect(0, 9999px, 0, 0);
-        }
-        10% {
-          clip: rect(10px, 9999px, 40px, 0);
-          transform: translate(-3px, -3px);
-        }
-        50% {
-          clip: rect(80px, 9999px, 100px, 0);
-          transform: translate(3px, 3px);
-        }
-        100% {
-          clip: rect(0, 9999px, 0, 0);
-        }
-      }
-      @keyframes glitchBottom {
-        0% {
-          clip: rect(0, 9999px, 0, 0);
-        }
-        10% {
-          clip: rect(50px, 9999px, 90px, 0);
-          transform: translate(3px, 3px);
-        }
-        50% {
-          clip: rect(20px, 9999px, 60px, 0);
-          transform: translate(-3px, -3px);
-        }
-        100% {
-          clip: rect(0, 9999px, 0, 0);
-        }
-      }
-
-      /* Sao lấp lánh */
-      .star {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: white;
-        border-radius: 50%;
-        animation: twinkle 3s infinite ease-in-out;
-      }
-      @keyframes twinkle {
-        0%,
-        100% {
-          opacity: 0.2;
-        }
-        50% {
-          opacity: 1;
-        }
-      }
-
-      /* Sao băng */
-      .shooting-star {
-        position: absolute;
-        width: 150px;
-        height: 2px;
-        background: linear-gradient(90deg, white, transparent);
-        top: 20%;
-        left: -200px;
-        transform: rotate(20deg);
-        animation: shooting 5s linear infinite;
-      }
-      @keyframes shooting {
-        0% {
-          left: -200px;
-          top: 20%;
-          opacity: 1;
-        }
-        100% {
-          left: 120%;
-          top: 80%;
-          opacity: 0;
-        }
+      .animate-spin-slow {
+        animation: spin-slow 8s linear infinite;
       }
     </style>
   </head>
   <body
-    class="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-950 via-purple-900 to-black overflow-hidden font-[Poppins] text-center"
+    class="bg-gray-100 min-h-screen flex items-center justify-center font-sans"
   >
-    <!-- Sao lấp lánh -->
-    <div class="star" style="top: 10%; left: 20%"></div>
-    <div class="star" style="top: 30%; left: 70%"></div>
-    <div class="star" style="top: 60%; left: 40%"></div>
-    <div class="star" style="top: 80%; left: 80%"></div>
-
-    <!-- Sao băng -->
-    <div class="shooting-star"></div>
-
-    <!-- Icon chính -->
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/4712/4712139.png"
-      alt="Cập nhật"
-      class="w-40 h-40 floating mb-6 drop-shadow-2xl"
-    />
-
-    <!-- Tiêu đề glitch -->
-    <h1
-      class="glitch text-4xl sm:text-5xl mb-4"
-      data-text="⚠️ Dịch vụ đang cập nhật"
+    <div
+      class="text-center p-8 md:p-16 max-w-xl bg-white rounded-2xl shadow-2xl border-l-8 border-blue-500 animate-slide-fade"
     >
-      ⚠️ Dịch vụ đang cập nhật
-    </h1>
+      <div
+        class="mb-6 mx-auto inline-block text-blue-600 p-4 rounded-full bg-blue-100 animate-spin-slow"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-12 h-12"
+          style="color: #3b82f6;" /* Đảm bảo màu xanh */
+        >
+          <path
+            fill-rule="evenodd"
+            d="M16.467 1.885a.75.75 0 0 0-1.042-.158l-1.998 1.488A7.2 7.2 0 0 0 9 3.75v5.158l-.66-.492-.002.001A6.738 6.738 0 0 0 7.532 8.25H6.223a.75.75 0 0 0-.584 1.258l3.18 4.673c.27.397.731.597 1.202.597.472 0 .933-.2 1.203-.597l3.18-4.673a.75.75 0 0 0-.584-1.258h-1.309c-.198-.124-.383-.263-.55-.418V3.75c0-.447.168-.874.472-1.22l.216-.255ZM13.88 17.77l.205-.224h.01c.217.185.454.346.7.474l1.998 1.487a.75.75 0 0 0 1.04-.16l.217-.254a7.221 7.221 0 0 0 1.583-4.697v-5.158l.66.492.002-.001a6.738 6.738 0 0 0 1.467 1.5H19.5a.75.75 0 0 0 .584-1.258l-3.18-4.673c-.27-.397-.731-.597-1.202-.597-.472 0-.933.2-1.203.597l-3.18 4.673a.75.75 0 0 0 .584 1.258h1.309c.198.124.383.263.55.418v4.295c0 .447-.168.874-.472 1.22l-.216.255Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
 
-    <!-- Mô tả -->
-    <p class="text-slate-300 text-lg sm:text-xl mb-8 max-w-xl leading-relaxed">
-      Chúng tôi đang nâng cấp hệ thống để mang đến trải nghiệm tốt hơn.<br />
-      Vui lòng quay lại sau nhé 🚀
-    </p>
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+        DỊCH VỤ ĐANG ĐƯỢC CẬP NHẬT
+      </h1>
 
-    <!-- Nút -->
-    <button
-      onclick="window.location.href='trangchu.html'"
-      class="px-8 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-white font-bold rounded-xl shadow-lg hover:scale-110 hover:shadow-2xl transition transform"
-    >
-      🔙 Quay về trang chủ
-    </button>
+      <p class="text-lg text-gray-600 mb-8 max-w-sm mx-auto font-medium">
+        Chúng tôi đang hoàn thiện các nâng cấp quan trọng để đảm bảo dịch vụ **ổn định** và **mạnh mẽ hơn**.
+      </p>
+
+      <div class="w-full bg-gray-200 rounded-full h-3.5 mb-8 overflow-hidden">
+        <div
+          class="bg-blue-500 h-3.5 rounded-full relative"
+          style="width: 85%; transition: width 0.5s;"
+        >
+            <div 
+                class="absolute inset-0 bg-white/20 transform -skew-x-12 animate-pulse" 
+                style="animation-duration: 1.5s; width: 30%;">
+            </div>
+        </div>
+      </div>
+
+      <div class="mb-10 p-3 bg-blue-50 rounded-lg inline-block">
+        <p class="text-md font-semibold text-blue-700">
+          **Thời gian hoàn tất dự kiến:**
+          <span class="text-lg text-blue-900 ml-1">Khoảng 1-2 Giờ</span>
+        </p>
+      </div>
+
+      <a
+        href="trangchu.html"
+        class="block w-full px-8 py-3 bg-blue-600 text-white text-lg font-bold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-[1.02]"
+      >
+        Trở Lại Trang Chủ 🏠
+      </a>
+
+      <p class="text-sm text-gray-500 mt-6">
+        Cần hỗ trợ? Vui lòng <a href="lienhe.html" class="text-blue-600 hover:underline">Liên hệ Bộ phận Hỗ trợ</a>.
+      </p>
+    </div>
   </body>
 </html>
