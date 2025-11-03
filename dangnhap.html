@@ -4,67 +4,101 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Đăng nhập - KHÁNH BÁN SUB</title>
+    <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* CSS cho Hiệu ứng Viền Phát Sáng/Nổi bật */
-      .glow-on-hover:hover {
-        /* Màu chủ đạo: Indigo */
-        box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.4);
-        transform: translateY(-2px);
+      /* Thiết lập font chữ Inter */
+      body {
+        font-family: 'Inter', sans-serif;
       }
+      /* Nền với gradient nhẹ nhàng */
+      .bg-soft-gradient {
+        background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 50%, #ffffff 100%);
+      }
+      /* Hiệu ứng focus cho input */
       .input-glow:focus {
-        border-color: #6366f1;
-        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+      }
+      /* Card chính với bóng đổ mềm (Neumorphism nhẹ) */
+      .card-shadow {
+        box-shadow: 10px 10px 30px #d1d9e6, -10px -10px 30px #ffffff;
+      }
+      /* CSS cho hiệu ứng modal */
+      .modal-enter {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      .modal-enter-active {
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 300ms, transform 300ms;
+      }
+      .modal-exit {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .modal-exit-active {
+        opacity: 0;
+        transform: scale(1.2);
+        transition: opacity 300ms, transform 300ms;
       }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   </head>
-  <body
-    class="bg-gray-50 min-h-screen flex items-center justify-center font-sans"
-  >
+  <body class="bg-soft-gradient min-h-screen flex items-center justify-center font-sans">
+    
+    <!-- KHỐI ĐĂNG NHẬP CHÍNH -->
     <div
-      class="bg-white rounded-3xl p-10 w-full max-w-sm text-center border-t-4 border-indigo-600 shadow-2xl transition transform hover:scale-[1.01]"
+      id="loginCard"
+      class="bg-white rounded-3xl p-10 w-full max-w-sm text-center border-t-4 border-indigo-500 card-shadow transition-all duration-300 transform"
     >
       <div class="flex flex-col items-center gap-3 mb-8">
         <img
           src="DVFB.png"
           alt="Logo Shop"
-          class="w-16 h-16 rounded-full shadow-lg border-4 border-indigo-500 p-0.5"
+          class="w-16 h-16 rounded-full shadow-xl border-4 border-indigo-500 p-0.5"
         />
-        <h1 class="text-3xl font-extrabold text-gray-900">KHÁNH BÁN SUB</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">KHÁNH BÁN SUB</h1>
         <p class="text-sm text-gray-500">
           Nền tảng Tăng tương tác | An toàn & Tự động
         </p>
       </div>
 
-      <h2 class="text-xl font-bold mb-6 text-gray-800">
-        🔑 Đăng nhập Hệ thống
+      <h2 class="text-2xl font-bold mb-8 text-indigo-700">
+        Đăng nhập Hệ thống
       </h2>
+
+      <!-- THÔNG BÁO LỖI -->
+      <div id="errorMessage" class="hidden p-3 mb-4 text-sm font-medium text-red-700 bg-red-100 rounded-lg" role="alert">
+        <!-- Nội dung lỗi sẽ được điền bằng JS -->
+      </div>
 
       <form onsubmit="return loginUser(event)" class="space-y-6 text-left">
         <div>
-          <label class="text-sm font-medium text-gray-700">Tên đăng nhập</label>
+          <label for="username" class="text-sm font-medium text-gray-700 block mb-1">Tên đăng nhập</label>
           <input
             id="username"
             type="text"
             placeholder="Tên hoặc Email"
-            class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-xl input-glow transition duration-200 focus:ring-0"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl input-glow transition duration-200 focus:outline-none"
             required
           />
         </div>
         <div>
-          <label class="text-sm font-medium text-gray-700">Mật khẩu</label>
+          <label for="password" class="text-sm font-medium text-gray-700 block mb-1">Mật khẩu</label>
           <input
             id="password"
             type="password"
             placeholder="Mật khẩu của bạn"
-            class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-xl input-glow transition duration-200 focus:ring-0"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl input-glow transition duration-200 focus:outline-none"
             required
           />
         </div>
 
         <button
           type="submit"
-          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl shadow-lg hover:shadow-indigo-500/50 transition font-semibold text-lg glow-on-hover"
+          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl shadow-lg hover:shadow-indigo-500/50 transition duration-300 font-semibold text-lg transform hover:scale-[1.01]"
         >
           Đăng nhập Ngay
         </button>
@@ -74,10 +108,22 @@
         Chưa có tài khoản?
         <a
           href="register.html"
-          class="text-indigo-600 font-bold hover:underline"
+          class="text-indigo-600 font-bold hover:text-indigo-800 transition"
           >Đăng ký ngay</a
         >
       </p>
+    </div>
+
+    <!-- CUSTOM SUCCESS MODAL (THÔNG BÁO THÀNH CÔNG) -->
+    <div id="successMessage" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden flex items-center justify-center z-50 transition-opacity duration-300">
+        <div id="successModalContent" class="bg-white p-10 rounded-3xl shadow-2xl transition-all duration-300 ease-out flex flex-col items-center modal-enter">
+            <!-- Dấu tích tròn xanh -->
+            <svg class="w-24 h-24 text-green-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-4xl font-extrabold text-green-600 mt-4">Thành công!</h3>
+            <p class="text-gray-600 mt-2 text-lg">Đang chuyển hướng...</p>
+        </div>
     </div>
 
     <script>
@@ -85,22 +131,44 @@
         e.preventDefault();
         let user = document.getElementById("username").value.trim();
         let pass = document.getElementById("password").value.trim();
-
-        // Lấy danh sách users từ localStorage
         let users = JSON.parse(localStorage.getItem("users")) || [];
+        
+        const successModal = document.getElementById("successMessage");
+        const successModalContent = document.getElementById("successModalContent");
+        const loginCard = document.getElementById("loginCard");
+        const errorEl = document.getElementById("errorMessage");
 
-        // Kiểm tra có user nào trùng không
+
         let foundUser = users.find(
           (u) => u.username === user && u.password === pass
         );
+        
+        // Ẩn thông báo lỗi cũ
+        errorEl.classList.add('hidden');
+        errorEl.textContent = "";
 
         if (foundUser) {
-          alert("✅ Đăng nhập thành công!");
+          // 1. Lưu thông tin user
           localStorage.setItem("currentUser", foundUser.username);
-          window.location.href = "trangchu.html";
+
+          // 2. Ẩn form và hiện modal
+          loginCard.classList.add('opacity-0', 'scale-95'); // Hiệu ứng ẩn form
+          
+          successModal.classList.remove("hidden");
+          successModalContent.classList.remove("modal-enter");
+          successModalContent.classList.add("modal-enter-active");
+
+          // 3. Chuyển hướng sau 1.5 giây
+          setTimeout(() => {
+            window.location.href = "trangchu.html";
+          }, 1500);
+
         } else {
-          alert("❌ Sai tên đăng nhập hoặc mật khẩu!");
+          // Xử lý lỗi: Hiện thông báo lỗi tùy chỉnh
+          errorEl.textContent = "Sai tên đăng nhập hoặc mật khẩu!";
+          errorEl.classList.remove('hidden');
         }
+        return false;
       }
     </script>
   </body>

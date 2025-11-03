@@ -4,37 +4,71 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Đăng ký - KHÁNH BÁN SUB</title>
+    <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* CSS cho Hiệu ứng Input và Nút */
-      .input-focus-cyan:focus {
-        border-color: #06b6d4; /* Cyan-500 */
-        box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.3);
+      /* Thiết lập font chữ Inter */
+      body {
+        font-family: "Inter", sans-serif;
       }
-      .btn-shadow-cyan:hover {
-        box-shadow: 0 8px 15px rgba(6, 182, 212, 0.3);
-        transform: translateY(-2px);
+      /* Nền với gradient nhẹ nhàng (Đồng bộ với login.html) */
+      .bg-soft-gradient {
+        background: linear-gradient(
+          135deg,
+          #e0e7ff 0%,
+          #f0f4ff 50%,
+          #ffffff 100%
+        );
       }
-      .title-gradient {
-        background: linear-gradient(90deg, #06b6d4, #4f46e5); /* Cyan to Indigo */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+      /* Hiệu ứng focus cho input (Đồng bộ với login.html) */
+      .input-glow:focus {
+        border-color: #4f46e5; /* Indigo-600 */
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+      }
+      /* Card chính với bóng đổ mềm (Neumorphism nhẹ) (Đồng bộ với login.html) */
+      .card-shadow {
+        box-shadow: 10px 10px 30px #d1d9e6, -10px -10px 30px #ffffff;
+      }
+      /* CSS cho hiệu ứng modal (Đồng bộ với login.html) */
+      .modal-enter {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      .modal-enter-active {
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 300ms, transform 300ms;
+      }
+      .modal-exit {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .modal-exit-active {
+        opacity: 0;
+        transform: scale(1.2);
+        transition: opacity 300ms, transform 300ms;
       }
     </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body
-    class="bg-gray-100 min-h-screen flex items-center justify-center font-sans"
+    class="bg-soft-gradient min-h-screen flex items-center justify-center font-sans"
   >
+    <!-- KHỐI ĐĂNG KÝ CHÍNH -->
     <div
-      class="bg-white rounded-2xl p-8 w-full max-w-sm text-center border border-gray-200 shadow-2xl transition duration-300 hover:shadow-cyan-400/30"
+      id="registerCard"
+      class="bg-white rounded-3xl p-10 w-full max-w-sm text-center border-t-4 border-indigo-500 card-shadow transition-all duration-300 transform"
     >
       <div class="flex flex-col items-center gap-3 mb-8">
         <img
           src="DVFB.png"
           alt="Logo Shop"
-          class="w-16 h-16 rounded-full shadow-lg border-4 border-cyan-500 p-0.5"
+          class="w-16 h-16 rounded-full shadow-xl border-4 border-indigo-500 p-0.5"
         />
-        <h1 class="text-3xl font-extrabold title-gradient">
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
           KHÁNH BÁN SUB
         </h1>
         <p class="text-sm text-gray-500">
@@ -42,60 +76,83 @@
         </p>
       </div>
 
-      <h2
-        class="text-xl font-bold mb-6 text-gray-800 tracking-wide"
-      >
-        📝 Đăng ký tài khoản mới
+      <h2 class="text-2xl font-bold mb-8 text-indigo-700">
+        Đăng ký Tài khoản mới
       </h2>
 
-      <form onsubmit="return registerUser(event)" class="space-y-4 text-left">
+      <!-- THÔNG BÁO LỖI -->
+      <div
+        id="errorMessage"
+        class="hidden p-3 mb-4 text-sm font-medium text-red-700 bg-red-100 rounded-lg"
+        role="alert"
+      >
+        <!-- Nội dung lỗi sẽ được điền bằng JS -->
+      </div>
+
+      <form onsubmit="return registerUser(event)" class="space-y-6 text-left">
         <div>
-          <label class="text-sm font-medium text-gray-700">Tên đăng nhập</label>
+          <label
+            for="regUser"
+            class="text-sm font-medium text-gray-700 block mb-1"
+            >Tên đăng nhập</label
+          >
           <input
             id="regUser"
             type="text"
             placeholder="Tên truy cập hệ thống"
-            class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-0 input-focus-cyan transition duration-200"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl input-glow transition duration-200 focus:outline-none"
             required
           />
         </div>
 
         <div>
-          <label class="text-sm font-medium text-gray-700">Gmail</label>
+          <label
+            for="regEmail"
+            class="text-sm font-medium text-gray-700 block mb-1"
+            >Gmail</label
+          >
           <input
             id="regEmail"
             type="email"
             placeholder="Địa chỉ email hợp lệ"
-            class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-0 input-focus-cyan transition duration-200"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl input-glow transition duration-200 focus:outline-none"
             required
           />
         </div>
 
         <div>
-          <label class="text-sm font-medium text-gray-700">Mật khẩu</label>
+          <label
+            for="regPass"
+            class="text-sm font-medium text-gray-700 block mb-1"
+            >Mật khẩu</label
+          >
           <input
             id="regPass"
             type="password"
             placeholder="Ít nhất 6 ký tự"
-            class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-0 input-focus-cyan transition duration-200"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl input-glow transition duration-200 focus:outline-none"
             required
           />
         </div>
 
         <div>
-          <label class="text-sm font-medium text-gray-700">Nhập lại mật khẩu</label>
+          <label
+            for="regPass2"
+            class="text-sm font-medium text-gray-700 block mb-1"
+            >Nhập lại mật khẩu</label
+          >
           <input
             id="regPass2"
             type="password"
             placeholder="Xác nhận mật khẩu"
-            class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-0 input-focus-cyan transition duration-200"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl input-glow transition duration-200 focus:outline-none"
             required
           />
         </div>
 
         <button
           type="submit"
-          class="w-full bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-600 hover:to-indigo-700 text-white py-3 rounded-xl shadow-md btn-shadow-cyan transition font-semibold text-lg"
+          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl shadow-lg hover:shadow-indigo-500/50 transition duration-300 font-semibold text-lg transform hover:scale-[1.01]"
         >
           Đăng ký Tài khoản
         </button>
@@ -105,43 +162,98 @@
         Đã có tài khoản?
         <a
           href="index.html"
-          class="text-indigo-600 font-bold hover:underline"
+          class="text-indigo-600 font-bold hover:text-indigo-800 transition"
           >Đăng nhập</a
         >
       </p>
     </div>
 
-<script>
-  function registerUser(e) {
-    e.preventDefault();
-    let user = document.getElementById("regUser").value;
-    let email = document.getElementById("regEmail").value;
-    let pass = document.getElementById("regPass").value;
-    let pass2 = document.getElementById("regPass2").value;
+    <!-- CUSTOM SUCCESS MODAL (THÔNG BÁO THÀNH CÔNG) -->
+    <div
+      id="successMessage"
+      class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden flex items-center justify-center z-50 transition-opacity duration-300"
+    >
+      <div
+        id="successModalContent"
+        class="bg-white p-10 rounded-3xl shadow-2xl transition-all duration-300 ease-out flex flex-col items-center modal-enter"
+      >
+        <!-- Dấu tích tròn xanh -->
+        <svg
+          class="w-24 h-24 text-green-500 animate-bounce"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <h3 class="text-4xl font-extrabold text-green-600 mt-4">Thành công!</h3>
+        <p class="text-gray-600 mt-2 text-lg">Đang chuyển hướng...</p>
+      </div>
+    </div>
 
-    if (pass !== pass2) {
-      alert("Mật khẩu nhập lại không khớp!");
-      return false;
-    }
+    <script>
+      function registerUser(e) {
+        e.preventDefault();
+        let user = document.getElementById("regUser").value.trim();
+        let email = document.getElementById("regEmail").value.trim();
+        let pass = document.getElementById("regPass").value.trim();
+        let pass2 = document.getElementById("regPass2").value.trim();
 
-    // Kiểm tra xem tên người dùng đã tồn tại chưa
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    let userExists = users.some(u => u.username === user);
+        // Elements for success/error handling
+        const successModal = document.getElementById("successMessage");
+        const successModalContent = document.getElementById(
+          "successModalContent"
+        );
+        const registerCard = document.getElementById("registerCard");
+        const errorEl = document.getElementById("errorMessage");
 
-    if (userExists) {
-      alert("Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác!");
-      return false;
-    }
+        // Reset error message
+        errorEl.classList.add("hidden");
+        errorEl.textContent = "";
 
-    // Lưu thông tin vào localStorage
-    users.push({ username: user, email: email, password: pass });
-    localStorage.setItem("users", JSON.stringify(users));
+        if (pass !== pass2) {
+          errorEl.textContent = "Mật khẩu nhập lại không khớp!";
+          errorEl.classList.remove("hidden");
+          return false;
+        }
 
-    alert("✅ Đăng ký thành công! Vui lòng đăng nhập.");
-    window.location.href = "index.html";
-  }
-</script>
+        // Kiểm tra xem tên người dùng đã tồn tại chưa
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let userExists = users.some((u) => u.username === user);
 
+        if (userExists) {
+          errorEl.textContent =
+            "Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác!";
+          errorEl.classList.remove("hidden");
+          return false;
+        }
 
+        // --- ĐĂNG KÝ THÀNH CÔNG ---
+
+        // 1. Lưu thông tin vào localStorage
+        users.push({ username: user, email: email, password: pass });
+        localStorage.setItem("users", JSON.stringify(users));
+
+        // 2. Ẩn form và hiện modal
+        registerCard.classList.add("opacity-0", "scale-95");
+
+        successModal.classList.remove("hidden");
+        successModalContent.classList.remove("modal-enter");
+        successModalContent.classList.add("modal-enter-active");
+
+        // 3. Chuyển hướng sau 1.5 giây (về trang đăng nhập)
+        setTimeout(() => {
+          window.location.href = "dangnhap.html";
+        }, 1500);
+
+        return false;
+      }
+    </script>
   </body>
 </html>

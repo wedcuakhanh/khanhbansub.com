@@ -1,139 +1,303 @@
 <!DOCTYPE html>
 <html lang="vi">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KHÁNH BÁN SUB - Dịch Vụ Tăng Tương Tác | Chuyên nghiệp</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trang Chủ - KHÁNH BÁN SUB</title>
+    <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* CSS TÙY CHỈNH CHO HIỆU ỨNG CHUYÊN NGHIỆP */
-      .highlight-shadow {
-        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15); /* Bóng đổ màu Indigo nhẹ */
+      /* Thiết lập font chữ Inter */
+      body {
+        font-family: "Inter", sans-serif;
       }
-      .cta-btn-main {
+      /* Nền trắng sạch sẽ */
+      body {
+        background: #f8fafc; /* Màu trắng xám nhẹ */
+      }
+      /* Bóng đổ sâu, rõ nét cho card */
+      .card-shadow-deep {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+      /* Gradient cho tiêu đề chính (Indigo - Amber) */
+      .text-gradient-main {
+        background: linear-gradient(
+          90deg,
+          #4f46e5,
+          #fbbf24
+        ); /* Indigo -> Amber */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      /* Nút chính */
+      .btn-primary {
+        background-color: #4f46e5;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
       }
-      .cta-btn-main:hover {
-        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+      .btn-primary:hover {
+        background-color: #4338ca;
+        box-shadow: 0 8px 15px rgba(79, 70, 229, 0.4);
         transform: translateY(-2px);
       }
-      /* Tăng độ sắc nét cho icon feature */
-      .feature-icon-box {
-        background-color: #eef2ff; /* Indigo-50 */
-        border: 1px solid #c7d2fe; /* Indigo-200 */
+      /* Card tính năng (feature card) */
+      .feature-card-light {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+      }
+      .feature-card-light:hover {
+        transform: translateY(-4px);
+        border-bottom: 4px solid #fcd34d; /* Nhấn nhá màu Amber */
+      }
+      /* CSS cho hình minh họa trừu tượng */
+      .abstract-bg {
+        background-image: radial-gradient(#d1d5db 1px, transparent 1px),
+          radial-gradient(#d1d5db 1px, transparent 1px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+        opacity: 0.5;
       }
     </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="bg-white min-h-screen flex flex-col font-sans text-gray-800">
-    <header
-      class="w-full py-5 px-6 border-b border-gray-200 shadow-sm fixed top-0 z-50 bg-white"
-    >
-      <div class="max-w-6xl mx-auto flex justify-between items-center">
-        <div class="flex items-center gap-3">
-          <img
-            src="DVFB.png"
-            alt="Logo"
-            class="w-10 h-10 rounded-full border-2 border-indigo-500"
-          />
-          <span class="text-2xl font-extrabold text-gray-900 tracking-wide"
-            >KHÁNH BÁN SUB</span
-          >
-        </div>
 
-        <div class="flex space-x-3">
-          <a
-            href="register.html"
-            class="px-5 py-2 border-2 border-gray-300 text-gray-700 rounded-lg text-base font-medium hover:bg-gray-100 transition"
-            >Đăng ký</a
-          >
-          <a
-            href="dangnhap.html"
-            class="px-6 py-2 bg-indigo-600 text-white rounded-lg text-base font-semibold shadow-lg hover:bg-indigo-700 transition"
-            >Đăng nhập</a
-          >
-        </div>
+  <!-- Body sử dụng nền sáng -->
+  <body
+    class="min-h-screen flex flex-col items-center justify-center font-sans p-4 text-gray-900"
+  >
+    <!-- HEADER/NAV MOCKUP -->
+    <header class="w-full max-w-6xl p-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <img
+          src="DVFB.png"
+          alt="Logo"
+          class="w-8 h-8 rounded-full border-2 border-indigo-500"
+        />
+        <span class="text-xl font-extrabold text-indigo-700"
+          >KHÁNH BÁN SUB</span
+        >
       </div>
+      <nav>
+        <a
+          href="dangnhap.html"
+          class="font-bold text-indigo-600 hover:text-indigo-800 transition py-1 px-3 rounded-lg hover:bg-indigo-50"
+          >Đăng nhập</a
+        >
+      </nav>
     </header>
 
-    <main class="flex-grow flex items-center justify-center pt-28 pb-12 px-6">
-      <div class="max-w-5xl text-center">
-        <h1
-          class="text-6xl md:text-8xl font-extrabold leading-tight mb-8 tracking-tighter text-gray-900"
-        >
-          Giải Pháp <span class="text-indigo-600">Tăng Tốc</span> Hiệu Suất Mạng
-          Xã Hội
-        </h1>
-
+    <!-- KHỐI CHÍNH - HERO SECTION -->
+    <div
+      class="w-full max-w-6xl p-6 md:p-16 rounded-3xl transition duration-500 card-shadow-deep bg-white flex flex-col lg:flex-row gap-10 lg:gap-16 mt-6"
+    >
+      <!-- Cột 1: TEXT & CTA -->
+      <div class="lg:w-1/2 text-center lg:text-left pt-6">
         <p
-          class="text-xl md:text-2xl text-gray-600 font-normal mb-12 max-w-3xl mx-auto"
+          class="text-sm font-bold text-amber-500 uppercase tracking-widest mb-4"
         >
-          Hệ thống cung cấp Tương Tác, Follow, Like hàng đầu. Uy tín, Minh bạch
-          và Bảo mật tuyệt đối.
+          #HiệuSuấtTốiĐa
         </p>
 
-        <div class="flex justify-center space-x-6">
+        <h1
+          class="text-5xl md:text-6xl font-extrabold tracking-tighter mb-5 leading-tight"
+        >
+          Tối Ưu Tăng Trưởng Với
+          <span class="text-gradient-main">Nền Tảng Thông Minh</span>
+        </h1>
+
+        <p class="text-xl text-gray-600 mb-10 max-w-lg lg:max-w-none">
+          Hệ thống tự động hóa an toàn, đơn giản hóa việc quản lý tương tác mạng
+          xã hội của bạn.
+        </p>
+
+        <!-- Action Buttons -->
+        <div
+          class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
+        >
+          <!-- Nút Đăng ký (Primary) -->
+          <a
+            href="register.html"
+            class="px-8 py-4 btn-primary text-white font-bold rounded-xl shadow-lg transform active:scale-95"
+          >
+            <svg
+              class="w-5 h-5 inline mr-2 -mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7h8m0 0v8m0-8l-8 8m3-4a4 4 0 11-8 0 4 4 0 018 0z"
+              ></path>
+            </svg>
+            Đăng ký & Bắt đầu
+          </a>
+          <!-- Nút Đăng nhập (Outline) -->
           <a
             href="dangnhap.html"
-            class="px-12 py-4 bg-indigo-600 text-white rounded-lg text-xl font-bold cta-btn-main hover:bg-indigo-700"
+            class="px-8 py-4 border-2 border-indigo-400 text-indigo-600 hover:bg-indigo-50 font-bold rounded-xl transition duration-300 transform active:scale-95"
           >
-            BẮT ĐẦU VÀ GIAO DỊCH
+            <svg
+              class="w-5 h-5 inline mr-2 -mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3v-12a3 3 0 013-3h4a3 3 0 013 3v1"
+              ></path>
+            </svg>
+            Đăng nhập
           </a>
         </div>
+      </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
-          <div
-            class="bg-white p-7 rounded-lg border border-gray-200 shadow-xl highlight-shadow hover:shadow-2xl transition transform hover:-translate-y-2"
-          >
-            <div
-              class="feature-icon-box w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-3"
-            >
-              <span class="text-2xl text-indigo-600">🔒</span>
-            </div>
-            <h3 class="text-xl font-bold text-gray-900">Bảo Mật & Tuân Thủ</h3>
-            <p class="text-sm text-gray-500 mt-2">
-              Dữ liệu được mã hóa, cam kết không lưu trữ mật khẩu.
-            </p>
-          </div>
+      <!-- Cột 2: HÌNH MINH HỌA TRỪU TƯỢNG -->
+      <div
+        class="lg:w-1/2 flex items-center justify-center relative p-8 rounded-xl overflow-hidden bg-indigo-50/50"
+      >
+        <!-- Background Dot Grid -->
+        <div class="absolute inset-0 abstract-bg"></div>
 
-          <div
-            class="bg-white p-7 rounded-lg border border-gray-200 shadow-xl highlight-shadow hover:shadow-2xl transition transform hover:-translate-y-2"
-          >
-            <div
-              class="feature-icon-box w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-3"
-            >
-              <span class="text-2xl text-indigo-600">⚡</span>
-            </div>
-            <h3 class="text-xl font-bold text-gray-900">Tốc Độ Xử Lý Tối Ưu</h3>
-            <p class="text-sm text-gray-500 mt-2">
-              Hệ thống API tự động xử lý đơn hàng tức thời 24/7.
-            </p>
-          </div>
+        <!-- Hình ảnh minh họa -->
+        <div
+          class="relative w-full h-full flex items-center justify-center z-10"
+        >
+          <img
+            src="ack.jpg"
+            alt="Mô phỏng giao diện hệ thống"
+            class="w-full max-w-sm rounded-xl shadow-2xl transition duration-500 transform hover:scale-[1.03]"
+          />
+        </div>
 
-          <div
-            class="bg-white p-7 rounded-lg border border-gray-200 shadow-xl highlight-shadow hover:shadow-2xl transition transform hover:-translate-y-2"
-          >
-            <div
-              class="feature-icon-box w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-3"
-            >
-              <span class="text-2xl text-indigo-600">🤝</span>
-            </div>
-            <h3 class="text-xl font-bold text-gray-900">Minh Bạch & Hỗ Trợ</h3>
-            <p class="text-sm text-gray-500 mt-2">
-              Cung cấp báo cáo đầy đủ, đội ngũ hỗ trợ chuyên nghiệp.
-            </p>
-          </div>
+        <!-- Thẻ Mô tả Phụ -->
+        <div
+          class="absolute bottom-5 right-5 p-3 bg-white rounded-lg shadow-lg text-xs font-medium text-gray-700"
+        >
+          Hiệu suất: 99.9%
         </div>
       </div>
-    </main>
+    </div>
 
-    <footer
-      class="w-full py-4 border-t border-gray-200 text-center text-gray-500 text-sm bg-white"
-    >
-      <p>KHÁNH BÁN SUB © 2025 | Corporate Social Growth Solutions.</p>
-      <p class="mt-1">
-        Liên hệ Hỗ trợ: <span class="text-indigo-600">0376447206</span>
-      </p>
-    </footer>
+    <!-- SECTION 2: TÍNH NĂNG NỔI BẬT (4 Cột - Thêm nền tảng hỗ trợ vào đây) -->
+    <div class="w-full max-w-6xl mt-12 mb-12 text-center">
+      <h2
+        class="text-3xl font-bold text-gray-800 mb-10 border-b border-indigo-100 pb-3"
+      >
+        Các Tính Năng & Hỗ Trợ Chính
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Thẻ 1: Bảo mật (Icon Shield) -->
+        <div
+          class="p-6 rounded-2xl feature-card-light text-left card-shadow-deep transition duration-300 hover:scale-[1.03]"
+        >
+          <svg
+            class="w-8 h-8 text-green-500 mb-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m5.657-4.657a9 9 0 11-12.72 0 9 9 0 0112.72 0z"
+            ></path>
+          </svg>
+          <h3 class="text-lg font-bold text-gray-900 mb-1">
+            Bảo mật Tuyệt đối
+          </h3>
+          <p class="text-gray-600 text-xs">
+            Không yêu cầu mật khẩu mạng xã hội. Dữ liệu được mã hóa.
+          </p>
+        </div>
+
+        <!-- Thẻ 2: Tốc độ (Icon Lightning) -->
+        <div
+          class="p-6 rounded-2xl feature-card-light text-left card-shadow-deep transition duration-300 hover:scale-[1.03]"
+        >
+          <svg
+            class="w-8 h-8 text-yellow-500 mb-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            ></path>
+          </svg>
+          <h3 class="text-lg font-bold text-gray-900 mb-1">Tốc độ Tức thì</h3>
+          <p class="text-gray-600 text-xs">
+            Xử lý đơn hàng 24/7. Hỗ trợ delivery ngay lập tức.
+          </p>
+        </div>
+
+        <!-- Thẻ 3: Hỗ trợ (Icon Support) -->
+        <div
+          class="p-6 rounded-2xl feature-card-light text-left card-shadow-deep transition duration-300 hover:scale-[1.03]"
+        >
+          <svg
+            class="w-8 h-8 text-indigo-500 mb-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V8a2 2 0 00-2-2h-4a2 2 0 00-2 2v4a2 2 0 01-2 2z"
+            ></path>
+          </svg>
+          <h3 class="text-lg font-bold text-gray-900 mb-1">
+            Hỗ trợ Chuyên nghiệp
+          </h3>
+          <p class="text-gray-600 text-xs">
+            Đội ngũ kỹ thuật túc trực. Giải quyết mọi vấn đề nhanh chóng.
+          </p>
+        </div>
+
+        <!-- Thẻ 4: Nền tảng (Icon Globe) -->
+        <div
+          class="p-6 rounded-2xl feature-card-light text-left card-shadow-deep transition duration-300 hover:scale-[1.03]"
+        >
+          <svg
+            class="w-8 h-8 text-amber-500 mb-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1a2 2 0 002-2v-1a2 2 0 012-2h2.945M20 7v3m0 0v3m0-3h-2.945M4.055 7H2a2 2 0 00-2 2v1a2 2 0 01-2 2h-1a2 2 0 01-2-2v-1a2 2 0 00-2-2h-2.945"
+            ></path>
+          </svg>
+          <h3 class="text-lg font-bold text-gray-900 mb-1">Đa dạng Nền tảng</h3>
+          <p class="text-gray-600 text-xs">
+            Hỗ trợ đầy đủ các mạng xã hội lớn nhất hiện nay: FB, TikTok, IG, YT.
+          </p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
