@@ -3,173 +3,157 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dịch Vụ Đang Phát Triển</title>
-    <!-- Tải Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Dịch vụ đang được cập nhật</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <style>
-      /* Thiết lập font chữ Inter cho giao diện hiện đại */
       body {
-        font-family: "Inter", sans-serif;
+        font-family: "Poppins", sans-serif;
+        background-color: #f4f7f9; /* Màu nền trắng xám nhẹ */
+        color: #333;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
       }
-      /* Định nghĩa các lớp CSS tùy chỉnh cho khối đếm ngược (Nền sáng, Bỏ hiệu ứng) */
-      .countdown-item {
-        /* Nền sáng, sạch sẽ */
-        @apply flex flex-col items-center justify-center p-5 bg-indigo-50 rounded-2xl shadow-md 
-                   border border-indigo-200; /* Loại bỏ transition và hover:scale */
+
+      .icon-container {
+        width: 100px; /* Nhỏ hơn một chút */
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          #36d1dc,
+          #5b86e5
+        ); /* Gradient màu xanh mát mẻ hơn */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Shadow nhẹ nhàng */
+        margin-bottom: 30px;
       }
-      .countdown-number {
-        /* Số lớn, màu nhấn Indigo */
-        @apply text-6xl font-extrabold text-indigo-700;
-        text-shadow: none; /* Bỏ bóng đổ */
+
+      .icon-cog {
+        font-size: 50px; /* Kích thước icon */
+        color: #ffffff;
+        animation: spin 3s linear infinite; /* Hiệu ứng quay nhẹ nhàng */
       }
-      .countdown-label {
-        /* Chữ nhỏ, màu Indigo nhạt */
-        @apply text-base font-medium text-indigo-500 uppercase mt-2 tracking-wider;
+
+      /* Hiệu ứng quay */
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      h1 {
+        font-size: 30px;
+        color: #5b86e5;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .typing {
+        font-size: 20px;
+        color: #6c757d;
+        border-right: 3px solid #5b86e5;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        animation: typing 3s steps(25) 1s forwards, blink 0.7s infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        /* Chiều rộng đủ cho "Đang được cập nhật..." */
+        to {
+          width: 300px;
+        }
+      }
+
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+
+      p {
+        font-size: 17px;
+        color: #666;
+        margin-top: 25px;
+      }
+
+      .btn {
+        margin-top: 30px;
+        padding: 12px 30px;
+        background: linear-gradient(
+          135deg,
+          #5b86e5,
+          #36d1dc
+        ); /* Sử dụng lại gradient màu */
+        color: white;
+        border: none;
+        border-radius: 40px; /* bo tròn hơn */
+        font-size: 17px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Căn biểu tượng và chữ */
+      .btn i {
+        margin-right: 8px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px); /* Hiệu ứng bay lên nhẹ */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-secondary {
+        margin-left: 15px;
+        background: #ced4da; /* Màu xám hiện đại hơn */
+        color: #495057;
+        box-shadow: none;
+      }
+
+      .btn-secondary:hover {
+        background: #adb5bd;
+        transform: translateY(-2px);
       }
     </style>
-    <!-- Tải Font Inter -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
   </head>
-  <!-- Nền sáng, đơn giản -->
-  <body class="h-screen flex items-center justify-center bg-gray-100">
-    <!-- Đã điều chỉnh lớp để container rộng hơn, chiếm tối đa 5xl -->
-    <div
-      class="w-11/12 max-w-5xl mx-auto p-10 text-center bg-white rounded-3xl shadow-xl border border-gray-200"
-    >
-      <!-- Icon Biểu Thị Phát Triển (Bỏ hiệu ứng, đổi màu) -->
-      <div class="mb-8">
-        <!-- Icon màu Indigo, không có animate-pulse -->
-        <svg
-          class="w-28 h-28 mx-auto text-indigo-600"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <!-- Biểu tượng bánh răng và cờ lê (Work in Progress) -->
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.561.342 1.28.324 1.834-.012z"
-          ></path>
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-          ></path>
-        </svg>
-      </div>
-
-      <!-- Tiêu đề (Đổi màu chữ) -->
-      <h1
-        class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4 leading-tight"
-      >
-        DỊCH VỤ <span class="text-indigo-600">ĐANG PHÁT TRIỂN</span>
-      </h1>
-
-      <!-- Nội dung (Đổi màu chữ) -->
-      <p class="text-xl text-gray-600 mb-10 font-light">
-        Chúng tôi đang hoàn thiện và tối ưu hóa dịch vụ này. Sự chờ đợi của bạn
-        sẽ được đền đáp xứng đáng!
-      </p>
-
-      <!-- Khối đếm ngược -->
-      <div id="countdown" class="grid grid-cols-4 gap-6 mb-12">
-        <div class="countdown-item">
-          <span id="days" class="countdown-number">00</span>
-          <span class="countdown-label">NGÀY</span>
-        </div>
-        <div class="countdown-item">
-          <span id="hours" class="countdown-number">00</span>
-          <span class="countdown-label">GIỜ</span>
-        </div>
-        <div class="countdown-item">
-          <span id="minutes" class="countdown-number">00</span>
-          <span class="countdown-label">PHÚT</span>
-        </div>
-        <div class="countdown-item">
-          <span id="seconds" class="countdown-number">00</span>
-          <span class="countdown-label">GIÂY</span>
-        </div>
-      </div>
-
-      <!-- Nút hành động (Đổi màu và loại bỏ hiệu ứng scale) -->
-      <a
-        href="trangchu.html"
-        class="inline-flex items-center justify-center px-10 py-4 border border-transparent text-lg font-bold rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 shadow-lg transition-colors duration-200"
-      >
-        <svg
-          class="w-6 h-6 mr-3"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"
-          ></path>
-        </svg>
-        QUAY LẠI TRANG CHỦ
-      </a>
-      <p class="text-sm text-gray-500 mt-6">
-        Khánh Bán Sub - Cập nhật lúc 00:00:00 ngày 03/11/2025
-      </p>
+  <body>
+    <div class="icon-container">
+      <i class="fas fa-cog icon-cog"></i>
     </div>
 
-    <!-- JavaScript cho chức năng Đếm Ngược -->
-    <script>
-      // Thiết lập ngày và giờ đích (Ví dụ: 3 ngày kể từ bây giờ)
-      const targetDate = new Date();
-      targetDate.setDate(targetDate.getDate() + 100); // Đếm ngược 3 ngày
+    <h1>Dịch vụ của chúng tôi</h1>
+    <div class="typing">Đang được cập nhật...</div>
+    <p>Vui lòng quay lại sau để trải nghiệm các tính năng mới nhất!</p>
 
-      const countdownFunction = setInterval(function () {
-        const now = new Date().getTime();
-        const distance = targetDate.getTime() - now;
+    <div>
+      <a href="trangchu.html" class="btn">
+        <i class="fas fa-desktop"></i> Quay về trang chủ
+      </a>
 
-        // Tính toán thời gian
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Hàm thêm số 0 ở đầu
-        const pad = (num) => (num < 10 ? "0" + num : num);
-
-        // Hiển thị kết quả
-        document.getElementById("days").innerHTML = pad(days);
-        document.getElementById("hours").innerHTML = pad(hours);
-        document.getElementById("minutes").innerHTML = pad(minutes);
-        document.getElementById("seconds").innerHTML = pad(seconds);
-
-        // Khi hết thời gian
-        if (distance < 0) {
-          clearInterval(countdownFunction);
-          document.getElementById("countdown").innerHTML =
-            '<div class="col-span-4 text-3xl font-bold text-indigo-600">Dịch Vụ Đã Sẵn Sàng!</div>';
-        }
-      }, 1000);
-
-      // Cập nhật thời gian thông báo
-      const now = new Date();
-      const dateString = now.toLocaleDateString("vi-VN", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      });
-      const timeString = now.toLocaleTimeString("vi-VN");
-      document.querySelector(
-        ".text-gray-500"
-      ).textContent = `Khánh Bán Sub - Cập nhật lúc ${timeString} ngày ${dateString}`;
-    </script>
+      <button class="btn btn-secondary" onclick="window.location.reload()">
+        <i class="fas fa-redo"></i> Làm mới
+      </button>
+    </div>
   </body>
 </html>

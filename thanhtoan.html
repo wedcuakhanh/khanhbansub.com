@@ -1,81 +1,144 @@
 <!DOCTYPE html>
 <html lang="vi">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cảm ơn - Chờ duyệt</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Giao Dịch Hoàn Tất - Cảm Ơn Bạn!</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      @keyframes fadeInUp {
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #f0f3ff;
+      }
+
+      .minimal-card {
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        animation: slideIn 0.8s ease-out;
+      }
+
+      @keyframes slideIn {
         from {
           opacity: 0;
-          transform: translateY(20px);
+          transform: translateY(50px);
         }
         to {
           opacity: 1;
           transform: translateY(0);
         }
       }
-      .fade-in-up {
-        animation: fadeInUp 0.8s ease-out forwards;
+
+      /* CSS cho DẤU TÍCH VẼ NÉT */
+      .success-checkmark {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 30px;
+        display: block;
+        stroke-width: 3;
+        stroke: #4caf50; /* Xanh lá cây */
+        stroke-miterlimit: 10;
+        box-shadow: 0 0 25px rgba(76, 175, 80, 0.6);
+        border-radius: 50%;
+        animation: scale 0.5s ease-in-out 0.1s both;
+      }
+
+      .checkmark__circle {
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        stroke-width: 3;
+        stroke-miterlimit: 10;
+        stroke: #4caf50;
+        fill: none;
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+      }
+
+      .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+      }
+
+      @keyframes stroke {
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @keyframes scale {
+        0% {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
       }
     </style>
   </head>
-  <body
-    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 via-indigo-50 to-purple-100 p-6"
-  >
+  <body class="min-h-screen flex items-center justify-center p-4">
     <div
-      class="bg-white shadow-2xl rounded-3xl w-full max-w-lg p-8 text-center fade-in-up"
+      class="minimal-card bg-white rounded-3xl p-10 md:p-16 w-full max-w-md text-center border-b-8 border-blue-500"
     >
-      <!-- Icon success -->
-      <div
-        class="w-20 h-20 mx-auto mb-6 flex items-center justify-center rounded-full bg-green-100 text-green-600"
+      <svg
+        class="success-checkmark"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 52 52"
       >
-        <svg
-          class="w-12 h-12"
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path
+          class="checkmark__check"
           fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 12l2 2l4-4m5 2a9 9 0 11-18 0a9 9 0 0118 0z"
-          />
-        </svg>
-      </div>
+          d="M14.1 27.2l7.1 7.2 16.7-16.8"
+        />
+      </svg>
 
-      <!-- Tiêu đề -->
-      <h1 class="text-3xl font-extrabold text-indigo-600 mb-3">
-        Cảm ơn bạn đã đặt hàng 🎉
+      <h1 class="text-4xl font-extrabold text-indigo-700 mb-2">
+        Giao Dịch Hoàn Tất!
       </h1>
-      <p class="text-gray-600 leading-relaxed mb-6">
-        Đơn hàng của bạn đã được ghi nhận thành công.<br />
-        Vui lòng chờ Admin duyệt trong vòng
-        <span class="text-sky-500 font-semibold">24 giờ</span>. Nếu cần hỗ trợ
-        gấp, hãy liên hệ ngay bên dưới.
+      <p class="text-xl font-semibold text-blue-600 mb-8">
+        Cảm ơn bạn đã tin tưởng dịch vụ.
       </p>
 
-      <!-- Nút hành động -->
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a
-          href="trangchu.html"
-          class="px-5 py-3 rounded-xl border border-gray-200 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium shadow transition"
-        >
-          🏠 Về trang chủ
-        </a>
-        <a
-          href="https://www.facebook.com/profile.php?id=61580607883714"
-          target="_blank"
-          class="px-5 py-3 rounded-xl bg-gradient-to-r from-sky-400 to-indigo-500 text-white font-medium shadow hover:shadow-lg hover:scale-105 transition"
-        >
-          📞 Liên hệ Admin
-        </a>
+      <div class="bg-gray-50 p-6 rounded-xl space-y-3 mb-10 text-left">
+        <p class="text-sm text-gray-700">
+          <span class="font-bold text-blue-600">Mã đơn hàng:</span> DH-245-947
+        </p>
+        <p class="text-sm text-gray-700">
+          <span class="font-bold text-blue-600">Thời gian xử lý:</span> 24h
+        </p>
+        <p class="text-sm text-gray-700">
+          <span class="font-bold text-blue-600">Theo dõi tại:</span>
+          <a href="#" class="text-indigo-500 hover:underline"
+            >khanhbansub.online</a
+          >
+        </p>
       </div>
 
-      <!-- Footer nhỏ -->
-      <p class="text-xs text-gray-400 mt-8">Khánh Bán Sub</p>
+      <div class="space-y-3">
+        <a
+          href="trangchu.html"
+          class="inline-flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl shadow-md transition duration-200 font-semibold"
+        >
+          <i class="fas fa-home mr-3"></i> Quay về Trang chủ
+        </a>
+
+        <a
+          href="https://www.facebook.com/quoc.khanh.83590"
+          target="_blank"
+          class="inline-flex items-center justify-center w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-xl transition duration-200 font-semibold"
+        >
+          <i class="fab fa-facebook-messenger mr-3"></i> Hỗ trợ qua Facebook
+        </a>
+      </div>
     </div>
   </body>
 </html>

@@ -4,16 +4,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Đăng nhập - KHÁNH BÁN SUB</title>
-    <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <style>
       /* Thiết lập font chữ Inter */
       body {
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
       }
       /* Nền với gradient nhẹ nhàng */
       .bg-soft-gradient {
-        background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 50%, #ffffff 100%);
+        background: linear-gradient(
+          135deg,
+          #e0e7ff 0%,
+          #f0f4ff 50%,
+          #ffffff 100%
+        );
       }
       /* Hiệu ứng focus cho input */
       .input-glow:focus {
@@ -34,21 +42,62 @@
         transform: scale(1);
         transition: opacity 300ms, transform 300ms;
       }
-      .modal-exit {
-        opacity: 1;
-        transform: scale(1);
+      /* CSS cho Dấu Tích Thành Công (Vẽ nét) */
+      .success-checkmark {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        display: block;
+        stroke-width: 3;
+        stroke: #4caf50;
+        stroke-miterlimit: 10;
+        box-shadow: 0 0 20px rgba(76, 175, 80, 0.4);
+        margin: 0 auto;
+        animation: scale 0.5s ease-in-out 0.1s both;
       }
-      .modal-exit-active {
-        opacity: 0;
-        transform: scale(1.2);
-        transition: opacity 300ms, transform 300ms;
+
+      .checkmark__circle {
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        stroke-width: 3;
+        stroke-miterlimit: 10;
+        stroke: #4caf50;
+        fill: none;
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+      }
+
+      .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+      }
+
+      @keyframes stroke {
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @keyframes scale {
+        0% {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
       }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="bg-soft-gradient min-h-screen flex items-center justify-center font-sans">
-    
-    <!-- KHỐI ĐĂNG NHẬP CHÍNH -->
+  <body
+    class="bg-soft-gradient min-h-screen flex items-center justify-center font-sans"
+  >
     <div
       id="loginCard"
       class="bg-white rounded-3xl p-10 w-full max-w-sm text-center border-t-4 border-indigo-500 card-shadow transition-all duration-300 transform"
@@ -59,7 +108,9 @@
           alt="Logo Shop"
           class="w-16 h-16 rounded-full shadow-xl border-4 border-indigo-500 p-0.5"
         />
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">KHÁNH BÁN SUB</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+          KHÁNH BÁN SUB
+        </h1>
         <p class="text-sm text-gray-500">
           Nền tảng Tăng tương tác | An toàn & Tự động
         </p>
@@ -69,31 +120,47 @@
         Đăng nhập Hệ thống
       </h2>
 
-      <!-- THÔNG BÁO LỖI -->
-      <div id="errorMessage" class="hidden p-3 mb-4 text-sm font-medium text-red-700 bg-red-100 rounded-lg" role="alert">
-        <!-- Nội dung lỗi sẽ được điền bằng JS -->
-      </div>
+      <div
+        id="errorMessage"
+        class="hidden p-3 mb-4 text-sm font-medium text-red-700 bg-red-100 rounded-lg"
+        role="alert"
+      ></div>
 
       <form onsubmit="return loginUser(event)" class="space-y-6 text-left">
         <div>
-          <label for="username" class="text-sm font-medium text-gray-700 block mb-1">Tên đăng nhập</label>
+          <label
+            for="username"
+            class="text-sm font-medium text-gray-700 block mb-1"
+            >Tên đăng nhập</label
+          >
           <input
             id="username"
             type="text"
-            placeholder="Tên hoặc Email"
+            placeholder="Tên truy cập đã đăng ký"
             class="w-full px-4 py-3 border border-gray-200 rounded-xl input-glow transition duration-200 focus:outline-none"
             required
           />
         </div>
-        <div>
-          <label for="password" class="text-sm font-medium text-gray-700 block mb-1">Mật khẩu</label>
+
+        <div class="relative">
+          <label
+            for="password"
+            class="text-sm font-medium text-gray-700 block mb-1"
+            >Mật khẩu</label
+          >
           <input
             id="password"
             type="password"
             placeholder="Mật khẩu của bạn"
-            class="w-full px-4 py-3 border border-gray-200 rounded-xl input-glow transition duration-200 focus:outline-none"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl input-glow transition duration-200 focus:outline-none pr-10"
             required
           />
+          <span
+            class="absolute inset-y-0 right-0 top-6 pr-3 flex items-center cursor-pointer text-gray-500"
+            onclick="togglePassword('password', this)"
+          >
+            <i class="far fa-eye"></i>
+          </span>
         </div>
 
         <button
@@ -112,61 +179,107 @@
           >Đăng ký ngay</a
         >
       </p>
+
+      <p class="text-xs mt-3 text-gray-400">
+        <a href="user_data.html" class="hover:text-indigo-600 transition"
+          >Xem danh sách tài khoản đã đăng ký</a
+        >
+      </p>
     </div>
 
-    <!-- CUSTOM SUCCESS MODAL (THÔNG BÁO THÀNH CÔNG) -->
-    <div id="successMessage" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden flex items-center justify-center z-50 transition-opacity duration-300">
-        <div id="successModalContent" class="bg-white p-10 rounded-3xl shadow-2xl transition-all duration-300 ease-out flex flex-col items-center modal-enter">
-            <!-- Dấu tích tròn xanh -->
-            <svg class="w-24 h-24 text-green-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <h3 class="text-4xl font-extrabold text-green-600 mt-4">Thành công!</h3>
-            <p class="text-gray-600 mt-2 text-lg">Đang chuyển hướng...</p>
-        </div>
+    <div
+      id="successMessage"
+      class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden flex items-center justify-center z-50 transition-opacity duration-300"
+    >
+      <div
+        id="successModalContent"
+        class="bg-white p-10 rounded-3xl shadow-2xl transition-all duration-300 ease-out flex flex-col items-center modal-enter"
+      >
+        <svg
+          class="success-checkmark"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 52 52"
+        >
+          <circle
+            class="checkmark__circle"
+            cx="26"
+            cy="26"
+            r="25"
+            fill="none"
+          />
+          <path
+            class="checkmark__check"
+            fill="none"
+            d="M14.1 27.2l7.1 7.2 16.7-16.8"
+          />
+        </svg>
+
+        <h3 class="text-4xl font-extrabold text-green-600 mt-4">Thành công!</h3>
+        <p class="text-gray-600 mt-2 text-lg">Đang chuyển hướng...</p>
+      </div>
     </div>
 
     <script>
+      /**
+       * Chuyển đổi loại input (password/text) để hiện/ẩn mật khẩu
+       */
+      function togglePassword(inputId, iconElement) {
+        const input = document.getElementById(inputId);
+        const icon = iconElement.querySelector("i");
+
+        if (input.type === "password") {
+          input.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash"); // Icon gạch chéo
+        } else {
+          input.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye"); // Icon mắt mở
+        }
+      }
+
       function loginUser(e) {
         e.preventDefault();
         let user = document.getElementById("username").value.trim();
         let pass = document.getElementById("password").value.trim();
         let users = JSON.parse(localStorage.getItem("users")) || [];
-        
+
         const successModal = document.getElementById("successMessage");
-        const successModalContent = document.getElementById("successModalContent");
+        const successModalContent = document.getElementById(
+          "successModalContent"
+        );
         const loginCard = document.getElementById("loginCard");
         const errorEl = document.getElementById("errorMessage");
 
-
         let foundUser = users.find(
+          // Tìm người dùng khớp tên đăng nhập VÀ mật khẩu
           (u) => u.username === user && u.password === pass
         );
-        
+
         // Ẩn thông báo lỗi cũ
-        errorEl.classList.add('hidden');
+        errorEl.classList.add("hidden");
         errorEl.textContent = "";
 
         if (foundUser) {
-          // 1. Lưu thông tin user
-          localStorage.setItem("currentUser", foundUser.username);
+          // 1. LƯU TOÀN BỘ ĐỐI TƯỢNG USER (ĐỂ DÙNG CHO PROFILE.HTML)
+          localStorage.setItem("currentUser", JSON.stringify(foundUser));
 
           // 2. Ẩn form và hiện modal
-          loginCard.classList.add('opacity-0', 'scale-95'); // Hiệu ứng ẩn form
-          
+          loginCard.classList.add("opacity-0", "scale-95"); // Hiệu ứng ẩn form
+
           successModal.classList.remove("hidden");
           successModalContent.classList.remove("modal-enter");
           successModalContent.classList.add("modal-enter-active");
 
           // 3. Chuyển hướng sau 1.5 giây
           setTimeout(() => {
+            // Chuyển hướng đến trang hồ sơ người dùng
             window.location.href = "trangchu.html";
           }, 1500);
-
         } else {
           // Xử lý lỗi: Hiện thông báo lỗi tùy chỉnh
           errorEl.textContent = "Sai tên đăng nhập hoặc mật khẩu!";
-          errorEl.classList.remove('hidden');
+          errorEl.classList.remove("hidden");
         }
         return false;
       }

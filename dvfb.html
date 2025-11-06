@@ -251,79 +251,106 @@
     </div>
 
     <script>
-      function closeNotice() {
+    function closeNotice() {
         document.getElementById("paymentNotice").style.display = "none";
-      }
+    }
 
-      function toggleEmotion() {
+    function toggleEmotion() {
         const service = document.getElementById("serviceName").value;
         document.getElementById("emotionGroup").style.display =
-          service === "like" ? "block" : "none";
-      }
+            service === "like" ? "block" : "none";
+        tinhTien();
+    }
 
-      function tinhTien() {
+    const PRICES = {
+        'like': 22,
+        'follow': 35,
+        'view': 11,
+        'share': 29,
+        'review': 90
+    };
+
+    function getServiceNameDisplay(serviceId) {
+        switch (serviceId) {
+            case 'like': return '👍 Like (Cảm xúc)';
+            case 'follow': return '👤 Follow Facebook';
+            case 'view': return '👀 View Video';
+            case 'share': return '🔄 Share Video';
+            case 'review': return '⭐ Review Fanpage';
+            default: return 'Khác';
+        }
+    }
+
+    function tinhTien() {
         const qty = parseInt(document.getElementById("quantity").value) || 0;
         const service = document.getElementById("serviceName").value;
-        let pricePerUnit = 0;
-
-        switch (service) {
-          case "like":
-            pricePerUnit = 22;
-            break;
-          case "follow":
-            pricePerUnit = 35;
-            break;
-          case "view":
-            pricePerUnit = 11;
-            break;
-          case "share":
-            pricePerUnit = 29;
-            break;
-          case "review":
-            pricePerUnit = 90;
-            break;
-        }
+        let pricePerUnit = PRICES[service] || 0;
 
         const total = qty * pricePerUnit;
         document.getElementById("totalPrice").textContent =
-          "Tổng tiền: " + total.toLocaleString() + " VNĐ";
+            "Tổng tiền: " + total.toLocaleString() + " VNĐ";
         document.getElementById("hiddenTotal").value = total;
-      }
+    }
 
-      function copyText(id) {
+    function copyText(id) {
         const text = document.getElementById(id).innerText;
         navigator.clipboard.writeText(text);
         alert("Đã copy: " + text);
-      }
+    }
 
-      async function submitOrder(e) {
+    // Hàm tạo ID đơn hàng ngẫu nhiên đơn giản
+    function generateOrderId() {
+        return 'ORDER-' + Math.floor(Math.random() * 900000 + 100000);
+    }
+
+    async function submitOrder(e) {
         e.preventDefault();
-        const service = document.getElementById("serviceName").value;
-        const emotion =
-          service === "like" ? document.getElementById("emotion").value : "";
-        document.getElementById("hiddenEmotion").value = emotion;
 
-        const form = document.getElementById("orderForm");
-        const response = await fetch("https://formspree.io/f/mqayelqy", {
-          method: "POST",
-          body: new FormData(form),
-          headers: { Accept: "application/json" },
-        });
+        // 1. Thu thập dữ liệu
+        const serviceId = document.getElementById("serviceName").value;
+        const emotion = serviceId === "like" ? document.getElementById("emotion").value : "";
+        const targetLink = document.getElementById("targetLink").value.trim();
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const total = parseInt(document.getElementById("hiddenTotal").value);
+        const serviceName = getServiceNameDisplay(serviceId);
+        
+        const newOrder = {
+            id: generateOrderId(),
+            service: serviceName,
+            emotion: emotion,
+            link: targetLink,
+            quantity: quantity,
+            total: total,
+            status: 'Chờ thanh toán',
+            date: new Date().toLocaleString('vi-VN'),
+        };
 
-        if (response.ok) {
-          alert("✅ Vui lòng thanh toán, admin sẽ duyệt đơn trong 24h.");
-          window.location.href = "thanhtoan.html";
-        } else {
-          alert("❌ Có lỗi xảy ra, vui lòng thử lại.");
-        }
-      }
+        // 2. LƯU VÀO LOCALSTORAGE
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders.unshift(newOrder); // Thêm đơn hàng mới nhất lên đầu
+        localStorage.setItem("orders", JSON.stringify(orders));
+        
+        // 3. (Tùy chọn) Gửi lên Formspree (Nếu bạn vẫn muốn dùng)
+         const form = document.getElementById("orderForm");
+         const response = await fetch("https://formspree.io/f/mqayelqy", {
+            method: "POST",
+             body: new FormData(form),
+             headers: { Accept: "application/json" },
+         });
 
-      function goBack() {
-        window.location.href = "trangchu.html";
-      }
+        // 4. Thông báo và chuyển hướng
+        alert(`✅ Đơn hàng ${newOrder.id} đã được tạo thành công! Vui lòng thanh toán.`);
+        // Chuyển hướng đến trang Lịch sử đơn hàng
+        window.location.href = "thanhtoan.html"; 
+    }
 
-      toggleEmotion();
-      tinhTien();
-    </script>
+    function goBack() {
+        window.location.href = "trangchu.html"; // Giả sử đây là trang chủ
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        toggleEmotion();
+    });
+</script>
   </body>
 </html>
