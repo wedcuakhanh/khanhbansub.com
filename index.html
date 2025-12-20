@@ -1,197 +1,227 @@
 <!DOCTYPE html>
 <html lang="vi">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DV KHANH - Giải Pháp Mạng Xã Hội Tối Ưu</title>
-    <meta
-      name="description"
-      content="Trang đón chào trước khi đăng nhập / đăng ký"
-    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUỐC KHÁNH BÁN SUB | Kỷ Nguyên Tương Tác Mới</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
+      :root {
+        --accent: #00f2ff;
+        --bg: #030303;
+      }
       body {
-        background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
-        color: #f1f5f9;
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: white;
+        overflow-x: hidden;
       }
-      .glass {
-        background: rgba(255, 255, 255, 0.05);
+      .font-special {
+        font-family: "Syncopate", sans-serif;
+      }
+
+      .laser-grid {
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          );
+        background-size: 50px 50px;
+        perspective: 1000px;
+        transform: rotateX(60deg) translateY(-100px);
+        z-index: -1;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 50%,
+          transparent
+        );
+      }
+
+      .btn-neon {
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn-neon:hover {
+        background: var(--accent);
+        color: black;
+        box-shadow: 0 0 40px rgba(0, 242, 255, 0.6);
+      }
+
+      .hero-glow {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 300px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 242, 255, 0.15) 0%,
+          transparent 70%
+        );
+        filter: blur(80px);
+        pointer-events: none;
+      }
+
+      .bento-node {
+        background: rgba(10, 10, 10, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        transition: border 0.3s;
+      }
+      .bento-node:hover {
+        border-color: var(--accent);
+      }
+
+      .logo-image-wrapper {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(8px);
       }
-      .btn-primary {
-        background: linear-gradient(90deg, #3b82f6, #06b6d4);
-        transition: all 0.3s ease;
-      }
-      .btn-primary:hover {
-        opacity: 0.9;
-      }
-      .btn-outline {
-        border: 1px solid #38bdf8;
-        color: #38bdf8;
-        transition: all 0.3s ease;
-      }
-      .btn-outline:hover {
-        background: #38bdf8;
-        color: #0f172a;
-      }
-      .image-content {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 0.75rem;
+      .logo-container:hover .logo-image-wrapper {
+        transform: rotate(10deg) scale(1.1);
+        border-color: var(--accent);
+        box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
       }
     </style>
   </head>
-  <body class="min-h-screen flex flex-col">
-    <!-- HEADER -->
-    <header
-      class="max-w-6xl mx-auto w-full p-6 flex items-center justify-between"
-    >
-      <div class="flex items-center gap-3">
-        <!-- Ảnh đại diện / logo -->
-        <label for="avatarInput" class="relative cursor-pointer">
-          <img
-            id="avatarPreview"
-            src="./DVFB.png"
-            alt="Ảnh đại diện"
-            class="w-10 h-10 rounded-full object-cover border-2 border-cyan-400 shadow-md"
-            onerror="this.src='https://placehold.co/100x100/1e293b/38bdf8?text=KT'"
-          />
-          <input
-            type="file"
-            id="avatarInput"
-            accept="image/*"
-            class="hidden"
-            onchange="previewAvatar(event)"
-          />
-        </label>
+  <body>
+    <div class="laser-grid"></div>
+    <div class="hero-glow"></div>
 
-        <div class="leading-tight">
-          <div class="text-lg font-semibold text-cyan-300">KHÁNH BÁN SUB</div>
-          <div class="text-xs text-gray-400">Dịch vụ /An Toàn</div>
+    <nav
+      class="fixed w-full top-0 z-[100] p-10 flex justify-between items-center bg-transparent"
+    >
+      <div class="flex items-center gap-4 logo-container cursor-pointer group">
+        <div
+          class="logo-image-wrapper w-14 h-14 overflow-hidden bg-white/5 border border-white/10 rounded-lg"
+        >
+          <img
+            src="./img/ack.jpg"
+            alt="Logo"
+            class="w-full h-full object-cover"
+            onerror="this.src='https://cdn-icons-png.flaticon.com/512/3661/3661313.png'"
+          />
+        </div>
+        <div class="font-special text-2xl font-bold tracking-tighter uppercase">
+          QUỐC KHÁNH
+          <span class="text-cyan-400 group-hover:animate-pulse">.</span>
         </div>
       </div>
 
-      <!-- Nút đăng nhập / đăng ký -->
-      <div class="flex items-center gap-3">
+      <div class="flex gap-4">
         <a
-          href="dangnhap.html"
-          class="px-4 py-2 rounded-full btn-primary text-sm font-semibold shadow-md"
+          href="#"
+          class="px-6 py-2 text-sm font-bold opacity-60 hover:opacity-100 flex items-center"
+          >DỊCH VỤ</a
+        >
+        <a
+          href="dangnhap1.html"
+          class="btn-neon px-8 py-2 rounded-sm font-bold text-xs tracking-widest uppercase"
         >
           Đăng nhập
         </a>
-        <a
-          href="register.html"
-          class="px-4 py-2 rounded-full btn-outline text-sm font-semibold"
-        >
-          Đăng ký
-        </a>
       </div>
-    </header>
+    </nav>
 
-    <!-- MAIN -->
-    <main class="flex-1 flex items-center justify-center px-6">
-      <section
-        class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
-      >
-        <div class="space-y-6">
-          <h1
-            class="text-4xl md:text-5xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300"
+    <section
+      class="min-h-screen flex flex-col justify-center items-center px-6 pt-32"
+    >
+      <div class="text-center space-y-6 max-w-5xl">
+        <h1
+          class="font-special text-5xl md:text-8xl font-bold leading-none tracking-tighter"
+        >
+          DICH VU MXH <br />
+          <span
+            class="italic text-transparent"
+            style="-webkit-text-stroke: 1px white"
+            >KHANH BÁN SUB</span
           >
-            Chào mừng đến với dịch vụ KHÁNH BÁN SUB
-          </h1>
-          <p class="text-lg text-gray-300">
-            Giải pháp mạng xã hội tối ưu — an toàn, nhanh và thân thiện. Hãy
-            tham gia cùng chúng tôi ngay hôm nay!
-          </p>
-          <div class="flex items-center gap-3">
-            <a
-              href="dangnhap.html"
-              class="px-5 py-3 rounded-full btn-primary font-semibold shadow-lg"
-            >
-              Bắt đầu — Đăng nhập
-            </a>
-            <a
-              href="register.html"
-              class="px-5 py-3 rounded-full btn-outline font-semibold"
-            >
-              Tạo tài khoản
-            </a>
-          </div>
-
-          <div
-            class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm text-gray-400 mt-4"
+        </h1>
+        <p
+          class="text-gray-400 text-lg md:text-xl font-light tracking-widest max-w-2xl mx-auto uppercase"
+        >
+          Hệ thống tăng tương tác dành cho doanh nghiệp và thương hiệu cá nhân
+          dẫn đầu.
+        </p>
+        <div class="pt-10 flex gap-6 justify-center">
+          <a
+            href="dangnhap1.html"
+            class="bg-white text-black font-black px-12 py-5 text-sm tracking-widest hover:scale-105 transition uppercase"
           >
-            <div class="glass p-3 rounded-lg text-center">
-              Miễn phí dùng thử
-            </div>
-            <div class="glass p-3 rounded-lg text-center">Hỗ trợ 24/7</div>
-            <div class="glass p-3 rounded-lg text-center">Tích hợp dễ dàng</div>
-          </div>
+            KHỞI ĐỘNG HỆ THỐNG
+          </a>
+          <a
+            href="dangnhap1.html"
+            class="border border-white/20 px-12 py-5 text-sm font-bold hover:bg-white/5 transition uppercase"
+          >
+            BẢNG GIÁ
+          </a>
         </div>
-
-        <div class="hidden md:block">
-          <div
-            class="w-full h-80 rounded-2xl overflow-hidden shadow-2xl glass p-3 flex flex-col justify-between border border-gray-700"
-          >
-            <div class="flex-1 flex items-center justify-center relative">
-              <img
-                src="./acuakhanh.png"
-                alt="Ảnh cá nhân của DV Khanh"
-                class="image-content"
-                onerror="this.onerror=null; this.src='https://placehold.co/400x400/1e293b/38bdf8?text=DV+Khanh'"
-              />
-            </div>
-            <div class="text-center text-xs text-gray-400 pt-3">
-              An toàn - Nhanh - Dễ dùng
-            </div>
+      </div>
+      <div class="mt-32 w-full max-w-6xl grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div
+          class="bento-node col-span-2 p-10 flex flex-col justify-between h-64 rounded-xl"
+        >
+          <div class="text-cyan-400 text-xs font-bold tracking-[0.3em]">
+           Dịch Vụ Tăng Tương Tác MXh
+          </div>
+          <h3 class="text-2xl font-medium italic">
+            Tăng trưởng tự động theo thuật toán Meta 2025.
+          </h3>
+        </div>
+        <div
+          class="bento-node p-10 flex flex-col items-center justify-center rounded-xl"
+        >
+          <div class="text-4xl font-black">99.9%</div>
+          <div class="text-[10px] opacity-40 mt-2 tracking-widest">
+            THỜI GIAN
           </div>
         </div>
-      </section>
-    </main>
-
-    <!-- FEATURES -->
-    <section id="features" class="max-w-6xl mx-auto w-full py-12 px-6">
-      <h2 class="text-2xl font-bold mb-6 text-cyan-300">Tính năng nổi bật</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="p-5 rounded-lg glass">
-          <h3 class="font-semibold text-blue-400">Bảo mật</h3>
-          <p class="text-sm text-gray-300">
-            Mã hoá, xác thực 2 lớp và quản lý phiên.
-          </p>
-        </div>
-        <div class="p-5 rounded-lg glass">
-          <h3 class="font-semibold text-blue-400">Tốc độ</h3>
-          <p class="text-sm text-gray-300">
-            Tối ưu trải nghiệm người dùng, phản hồi nhanh.
-          </p>
-        </div>
-        <div class="p-5 rounded-lg glass">
-          <h3 class="font-semibold text-blue-400">Tùy biến</h3>
-          <p class="text-sm text-gray-300">
-            Thay đổi logo, màu sắc, nội dung dễ dàng.
-          </p>
-        </div>
-        <div class="p-5 rounded-lg glass">
-          <h3 class="font-semibold text-blue-400">Hỗ trợ</h3>
-          <p class="text-sm text-gray-300">
-            Đội ngũ hỗ trợ nhanh chóng và tận tâm.
-          </p>
+        <div
+          class="bento-node p-10 flex flex-col items-center justify-center rounded-xl border-cyan-500/30"
+        >
+          <div class="text-4xl font-black text-cyan-400">AN TOÀN</div>
+          <div class="text-[10px] opacity-40 mt-2 tracking-widest">
+            CHẤT LƯỢNG
+          </div>
         </div>
       </div>
     </section>
 
-    <script>
-      function previewAvatar(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          document.getElementById("avatarPreview").src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    </script>
+    <div class="py-20 border-y border-white/5 bg-white/[0.02]">
+      <div
+        class="max-w-7xl mx-auto flex flex-wrap justify-around opacity-30 grayscale gap-10 px-6"
+      >
+        <i class="fab fa-facebook-f text-3xl"></i>
+        <i class="fab fa-instagram text-3xl"></i>
+        <i class="fab fa-tiktok text-3xl"></i>
+        <i class="fab fa-twitter text-3xl"></i>
+        <i class="fab fa-youtube text-3xl"></i>
+      </div>
+    </div>
+
+    <footer class="p-20 text-center">
+      <div class="font-special text-xs opacity-20 tracking-[0.5em]">
+        Trần Quốc Khánh
+      </div>
+    </footer>
   </body>
 </html>

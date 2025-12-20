@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUỐC KHÁNH BÁN SUB | Lịch Sử Giao Dịch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+      :root {
+        --accent: #00f2ff;
+        --bg: #030303;
+        --card-bg: rgba(255, 255, 255, 0.02);
+        --border: rgba(0, 242, 255, 0.2);
+        --admin-glow: rgba(0, 242, 255, 0.1);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: white;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .font-special {
+        font-family: "Syncopate", sans-serif;
+      }
+
+      .laser-grid {
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          );
+        background-size: 50px 50px;
+        perspective: 1000px;
+        transform: rotateX(60deg) translateY(-100px);
+        z-index: -1;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 50%,
+          transparent
+        );
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        width: 280px;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.01);
+        backdrop-filter: blur(25px);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 50;
+      }
+
+      .sidebar::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--accent),
+          transparent
+        );
+      }
+
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid var(--border);
+        filter: drop-shadow(0 0 8px var(--accent));
+        margin-right: 12px;
+      }
+
+      .nav-item {
+        padding: 14px 25px;
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.4);
+        transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 10px;
+        border-left: 3px solid transparent;
+        cursor: pointer;
+      }
+
+      .nav-item:hover,
+      .nav-item.active {
+        color: var(--accent);
+        background: rgba(0, 242, 255, 0.05);
+        border-left: 3px solid var(--accent);
+        text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+      }
+
+      /* TABLE STYLE */
+      .main-content {
+        margin-left: 280px;
+        padding: 40px;
+      }
+
+      .nexus-table-container {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        box-shadow: 0 0 20px var(--admin-glow);
+        overflow: hidden;
+      }
+
+      .nexus-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11px;
+      }
+
+      .nexus-table th {
+        background: rgba(0, 242, 255, 0.05);
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        padding: 20px 15px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nexus-table td {
+        padding: 18px 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        color: #a0a0a0;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        background: rgba(0, 242, 255, 0.1);
+        color: var(--accent);
+        border: 1px solid var(--border);
+        font-size: 9px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .status-pulse {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="laser-grid"></div>
+
+    <aside class="sidebar">
+      <div class="p-8">
+        <div
+          class="flex items-center cursor-pointer"
+          onclick="window.location.href='trangchu.html'"
+        >
+          <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
+          <h2 class="font-special text-xl font-bold tracking-tighter">
+            Khánh Bán<span class="text-cyan-400">Sub</span>
+          </h2>
+        </div>
+        <div class="flex items-center mt-3 space-x-2">
+          <div class="status-pulse"></div>
+          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]"
+            >Hệ thống trực tuyến</span
+          >
+        </div>
+      </div>
+
+      <nav class="mt-4">
+        <div class="nav-item" onclick="window.location.href='trangchu.html'">
+          <i class="fas fa-th-large mr-4 w-4"></i> Quản Lý Chung
+        </div>
+
+        <div
+          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
+        >
+          Danh mục lệnh
+        </div>
+
+        <div class="nav-item" onclick="window.location.href='facebook.html'">
+          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook Giao thức
+        </div>
+
+        <div class="nav-item" onclick="window.location.href='tiktok.html'">
+          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok Giao thức
+        </div>
+
+        <div class="nav-item" onclick="window.location.href='instagram.html'">
+          <i class="fab fa-instagram mr-4 w-4"></i> Instagram Giao thức
+        </div>
+
+        <div class="nav-item" onclick="window.location.href='youtube.html'">
+          <i class="fab fa-youtube mr-4 w-4"></i> YouTube Giao thức
+        </div>
+
+        <div
+          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
+        >
+          Dữ liệu
+        </div>
+
+        <div class="nav-item active">
+          <i class="fas fa-history mr-4 w-4"></i> Lịch sử giao dịch
+        </div>
+
+        <div
+          class="nav-item text-red-500/70 hover:text-red-500 mt-6"
+          onclick="if(confirm('Xác nhận ngắt kết nối?')) window.location.href='login.html'"
+        >
+          <i class="fas fa-power-off mr-4 w-4"></i> Logout
+        </div>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="mb-10 border-l-2 border-cyan-400 pl-6">
+        <h1 class="font-special text-3xl uppercase tracking-tighter">
+          Transaction <span class="text-cyan-400">History</span>
+        </h1>
+        <p
+          class="text-[10px] text-gray-600 tracking-[0.4em] mt-2 uppercase italic"
+        >
+          Truy xuất dữ liệu giao dịch gần nhất
+        </p>
+      </div>
+
+      <div class="nexus-table-container">
+        <table class="nexus-table">
+          <thead>
+            <tr>
+              <th>ID/Thời gian</th>
+              <th>Dịch vụ</th>
+              <th>Địa chỉ mục tiêu</th>
+              <th>Số lượng</th>
+              <th>Thanh toán</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+        <div
+          id="empty-msg"
+          class="hidden p-20 text-center text-gray-600 uppercase text-[10px] tracking-[0.5em]"
+        >
+          <i class="fas fa-database block text-2xl mb-4"></i>
+          Chưa có bản ghi giao dịch nào
+        </div>
+      </div>
+    </main>
+
+    <script>
+      window.onload = () => {
+        const historyBody = document.getElementById("history-body");
+        const emptyMsg = document.getElementById("empty-msg");
+
+        // Lấy dữ liệu từ localStorage
+        const lastOrder = JSON.parse(localStorage.getItem("nexusOrder"));
+
+        if (!lastOrder) {
+          emptyMsg.classList.remove("hidden");
+          return;
+        }
+
+        // Tạo dòng dữ liệu
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td><span class="text-[9px] text-gray-500 block mb-1">#NX-${Math.floor(
+            Math.random() * 9999
+          )}</span>${lastOrder.Time}</td>
+          <td class="text-white font-bold">${lastOrder.Dịch_Vụ || "N/A"}</td>
+          <td class="text-cyan-400 italic lowercase underline">${lastOrder.Link.substring(
+            0,
+            25
+          )}...</td>
+          <td class="text-white font-mono">${lastOrder.Số_Lượng}</td>
+          <td class="text-cyan-400 font-bold">${lastOrder.Tổng_Tiền}</td>
+          <td><span class="status-badge"><i class="fas fa-spinner fa-spin mr-1"></i> Đang chạy</span></td>
+        `;
+        historyBody.appendChild(row);
+      };
+    </script>
+  </body>
+</html>

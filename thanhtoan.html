@@ -1,144 +1,440 @@
 <!DOCTYPE html>
 <html lang="vi">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Giao Dịch Hoàn Tất - Cảm Ơn Bạn!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUỐC KHÁNH BÁN SUB | Gateway Payment</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
+      :root {
+        --accent: #00f2ff;
+        --bg: #030303;
+        --card-bg: rgba(255, 255, 255, 0.02);
+        --border: rgba(0, 242, 255, 0.2);
+        --admin-glow: rgba(0, 242, 255, 0.1);
+      }
+
       body {
-        font-family: "Montserrat", sans-serif;
-        background-color: #f0f3ff;
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: white;
+        min-height: 100vh;
+        overflow-x: hidden;
       }
 
-      .minimal-card {
-        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
-        animation: slideIn 0.8s ease-out;
+      .font-special {
+        font-family: "Syncopate", sans-serif;
       }
 
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(50px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      .laser-grid {
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          );
+        background-size: 50px 50px;
+        perspective: 1000px;
+        transform: rotateX(60deg) translateY(-100px);
+        z-index: -1;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 50%,
+          transparent
+        );
       }
 
-      /* CSS cho DẤU TÍCH VẼ NÉT */
-      .success-checkmark {
-        width: 100px;
-        height: 100px;
-        margin: 0 auto 30px;
-        display: block;
-        stroke-width: 3;
-        stroke: #4caf50; /* Xanh lá cây */
-        stroke-miterlimit: 10;
-        box-shadow: 0 0 25px rgba(76, 175, 80, 0.6);
+      /* SIDEBAR */
+      .sidebar {
+        width: 280px;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.01);
+        backdrop-filter: blur(25px);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 50;
+      }
+
+      .sidebar::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--accent),
+          transparent
+        );
+      }
+
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
         border-radius: 50%;
-        animation: scale 0.5s ease-in-out 0.1s both;
+        border: 2px solid var(--border);
+        filter: drop-shadow(0 0 8px var(--accent));
+        margin-right: 12px;
+        transition: 0.5s ease;
       }
 
-      .checkmark__circle {
-        stroke-dasharray: 166;
-        stroke-dashoffset: 166;
-        stroke-width: 3;
-        stroke-miterlimit: 10;
-        stroke: #4caf50;
-        fill: none;
-        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+      .brand-logo:hover {
+        transform: rotate(360deg);
       }
 
-      .checkmark__check {
-        transform-origin: 50% 50%;
-        stroke-dasharray: 48;
-        stroke-dashoffset: 48;
-        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+      .nav-item {
+        padding: 14px 25px;
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.4);
+        transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 10px;
+        border-left: 3px solid transparent;
+        cursor: pointer;
       }
 
-      @keyframes stroke {
-        100% {
-          stroke-dashoffset: 0;
-        }
+      .nav-item:hover,
+      .nav-item.active {
+        color: var(--accent);
+        background: rgba(0, 242, 255, 0.05);
+        border-left: 3px solid var(--accent);
+        text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
       }
 
-      @keyframes scale {
+      .main-content {
+        margin-left: 280px;
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .nexus-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 15px var(--admin-glow);
+      }
+
+      /* HIỆU ỨNG QUÉT QR */
+      .status-scanner {
+        height: 2px;
+        background: var(--accent);
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: scan 3s linear infinite;
+        box-shadow: 0 0 15px var(--accent);
+        z-index: 10;
+      }
+
+      @keyframes scan {
         0% {
-          transform: scale(0.8);
-          opacity: 0;
+          top: 0;
         }
         100% {
-          transform: scale(1);
+          top: 100%;
+        }
+      }
+
+      .qr-frame {
+        background: white;
+        padding: 10px;
+        border-radius: 4px;
+        width: 240px;
+        height: 240px;
+        position: relative;
+      }
+
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .label-tech {
+        font-size: 9px;
+        color: var(--accent);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .copy-btn {
+        color: var(--accent);
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .copy-btn:hover {
+        transform: scale(1.2);
+      }
+
+      #confirm-payment-btn {
+        display: none;
+        opacity: 0;
+      }
+
+      .btn-glow:hover {
+        box-shadow: 0 0 20px var(--accent);
+        text-shadow: 0 0 8px var(--accent);
+      }
+
+      .status-pulse {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
           opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
         }
       }
     </style>
   </head>
-  <body class="min-h-screen flex items-center justify-center p-4">
-    <div
-      class="minimal-card bg-white rounded-3xl p-10 md:p-16 w-full max-w-md text-center border-b-8 border-blue-500"
-    >
-      <svg
-        class="success-checkmark"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 52 52"
-      >
-        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-        <path
-          class="checkmark__check"
-          fill="none"
-          d="M14.1 27.2l7.1 7.2 16.7-16.8"
-        />
-      </svg>
+  <body>
+    <div class="laser-grid"></div>
 
-      <h1 class="text-4xl font-extrabold text-indigo-700 mb-2">
-        Giao Dịch Hoàn Tất!
-      </h1>
-      <p class="text-xl font-semibold text-blue-600 mb-8">
-        Cảm ơn bạn đã tin tưởng dịch vụ.
-      </p>
-
-      <div class="bg-gray-50 p-6 rounded-xl space-y-3 mb-10 text-left">
-        <p class="text-sm text-gray-700">
-          <span class="font-bold text-blue-600">Mã đơn hàng:</span> DH-245-947
-        </p>
-        <p class="text-sm text-gray-700">
-          <span class="font-bold text-blue-600">Thời gian xử lý:</span> 24h
-        </p>
-        <p class="text-sm text-gray-700">
-          <span class="font-bold text-blue-600">Theo dõi tại:</span>
-          <a href="#" class="text-indigo-500 hover:underline"
-            >khanhbansub.online</a
+    <aside class="sidebar">
+      <div class="p-8">
+        <div
+          class="flex items-center cursor-pointer"
+          onclick="location.href='trangchu.html'"
+        >
+          <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
+          <h2 class="font-special text-xl font-bold tracking-tighter">
+            Khánh Bán<span class="text-cyan-400">Sub</span>
+          </h2>
+        </div>
+        <div class="flex items-center mt-3 space-x-2">
+          <div class="status-pulse"></div>
+          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]"
+            >Hệ thống trực tuyến</span
           >
-        </p>
+        </div>
       </div>
-
-      <div class="space-y-3">
-        <a
-          href="trangchu.html"
-          class="inline-flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl shadow-md transition duration-200 font-semibold"
+      <nav class="mt-4">
+        <div class="nav-item" onclick="location.href='trangchu.html'">
+          <i class="fas fa-th-large mr-4 w-4"></i> Quản Lý Chung
+        </div>
+        <div
+          class="px-8 py-4 text-[9px] text-gray-600 uppercase font-bold tracking-widest"
         >
-          <i class="fas fa-home mr-3"></i> Quay về Trang chủ
-        </a>
-
-        <a
-          href="https://www.facebook.com/quoc.khanh.83590"
-          target="_blank"
-          class="inline-flex items-center justify-center w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-xl transition duration-200 font-semibold"
+          Danh mục lệnh
+        </div>
+        <div class="nav-item" onclick="location.href='facebook.html'">
+          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook
+        </div>
+        <div class="nav-item" onclick="location.href='tiktok.html'">
+          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok
+        </div>
+        <div class="nav-item" onclick="location.href='instagram.html'">
+          <i class="fab fa-instagram mr-4 w-4"></i> Instagram
+        </div>
+        <div class="nav-item" onclick="location.href='youtube.html'">
+          <i class="fab fa-youtube mr-4 w-4"></i> YouTube
+        </div>
+        <div
+          class="px-8 py-4 text-[9px] text-gray-600 uppercase font-bold tracking-widest"
         >
-          <i class="fab fa-facebook-messenger mr-3"></i> Hỗ trợ qua Facebook
-        </a>
+          Dữ liệu hệ thống
+        </div>
+        <div class="nav-item" onclick="location.href='lichsu.html'">
+          <i class="fas fa-history mr-4 w-4"></i> Lịch sử giao dịch
+        </div>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="w-full max-w-[900px]">
+        <div class="mb-10 border-l-2 border-cyan-400 pl-6">
+          <h1 class="font-special text-3xl uppercase tracking-tighter">
+            Gateway <span class="text-cyan-400">Payment</span>
+          </h1>
+          <p class="text-[10px] text-gray-600 tracking-[0.4em] mt-2 uppercase">
+            Xác thực lệnh nạp hệ thống
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div
+            class="nexus-card p-10 flex flex-col items-center justify-center"
+          >
+            <div class="status-scanner"></div>
+            <label class="label-tech mb-6">Vui Lòng Quét QR Bên Dưới</label>
+            <div class="qr-frame">
+              <img
+                id="qr-image"
+                src="./img/nganhang.jpg"
+                alt="QR"
+                class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500"
+              />
+            </div>
+          </div>
+
+          <div
+            id="payment-details-card"
+            class="nexus-card p-8 transition-all duration-500"
+          >
+            <label class="label-tech mb-6">// Transfer Details</label>
+
+            <div class="info-row">
+              <span class="text-[10px] text-gray-500 uppercase">Ngân hàng</span>
+              <span class="text-[12px] font-bold text-white uppercase"
+                >MB BANK (Quân Đội)</span
+              >
+            </div>
+
+            <div class="info-row">
+              <span class="text-[10px] text-gray-500 uppercase"
+                >Số tài khoản</span
+              >
+              <div class="flex items-center space-x-3">
+                <span class="text-[14px] font-mono text-cyan-400 font-bold"
+                  >0376447206</span
+                >
+                <i
+                  class="far fa-copy copy-btn"
+                  onclick="copyText('0376447206')"
+                ></i>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <span class="text-[10px] text-gray-500 uppercase">Số tiền</span>
+              <span class="text-[16px] font-bold text-white" id="display-total"
+                >Loadding...</span
+              >
+            </div>
+
+            <div class="info-row">
+              <span class="text-[10px] text-gray-500 uppercase"
+                >Nội dung nạp</span
+              >
+              <div class="flex items-center space-x-3">
+                <span
+                  class="text-[12px] font-mono bg-cyan-400/10 px-3 py-1 text-cyan-400 border border-cyan-400/20"
+                  id="display-content"
+                  >NAP_TIEN</span
+                >
+                <i
+                  class="far fa-copy copy-btn"
+                  onclick="copyText(document.getElementById('display-content').innerText)"
+                ></i>
+              </div>
+            </div>
+
+            <div
+              class="mt-10 p-5 bg-white/5 border border-white/5 relative mb-6"
+            >
+              <div class="flex items-center space-x-3 text-[11px] mb-2">
+                <i class="fas fa-circle-notch fa-spin text-cyan-400"></i>
+                <span class="text-gray-300 uppercase tracking-[0.2em]"
+                  >Đang đợi tín hiệu ngân hàng...</span
+                >
+              </div>
+            </div>
+
+            <button
+              id="confirm-payment-btn"
+              onclick="handleConfirmPayment()"
+              class="w-full mb-4 py-4 bg-cyan-400 text-black text-[10px] font-black uppercase tracking-[0.3em] transition duration-300 btn-glow"
+            >
+              Tôi đã thanh toán
+            </button>
+
+            <button
+              class="w-full py-4 border border-cyan-400/30 text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400 hover:bg-cyan-400/20 transition duration-300"
+              onclick="location.href='trangchu.html'"
+            >
+              Hủy bỏ giao dịch
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </main>
+
+    <script>
+      window.onload = function () {
+        // Lấy dữ liệu từ localStorage đã lưu ở trang Facebook/Tiktok
+        const savedOrder = localStorage.getItem("nexusOrder");
+        if (savedOrder) {
+          const order = JSON.parse(savedOrder);
+          document.getElementById("display-total").innerText =
+            order.total || order.Tổng_Tiền || "0 VNĐ";
+          // Tạo nội dung nạp tiền ngẫu nhiên hoặc theo ID để dễ kiểm soát
+          document.getElementById("display-content").innerText =
+            "KHANH" + Math.floor(1000 + Math.random() * 9000);
+        }
+
+        // Hiện nút sau 5 giây để người dùng kịp đọc thông tin
+        setTimeout(function () {
+          const btn = document.getElementById("confirm-payment-btn");
+          if (btn) {
+            btn.style.display = "block";
+            setTimeout(() => {
+              btn.style.opacity = "1";
+            }, 50);
+          }
+        }, 5000);
+      };
+
+      function copyText(text) {
+        navigator.clipboard.writeText(text);
+        alert("Đã sao chép: " + text);
+      }
+
+      function handleConfirmPayment() {
+        const card = document.getElementById("payment-details-card");
+        card.style.opacity = "0";
+
+        setTimeout(() => {
+          card.innerHTML = `
+            <div class="flex flex-col items-center justify-center py-10 text-center">
+              <div class="w-20 h-20 bg-cyan-400/20 rounded-full flex items-center justify-center mb-6 border border-cyan-400/50">
+                <i class="fas fa-check text-cyan-400 text-3xl"></i>
+              </div>
+              <h2 class="font-special text-lg text-white mb-4">GỬI YÊU CẦU THÀNH CÔNG</h2>
+              <p class="text-[11px] text-gray-400 uppercase tracking-[0.2em] mb-8">
+                Hệ thống đang đối soát giao dịch.<br>Giao Dịch Của Bạn Sẽ Được Xử Lý Trong 24H.
+              </p>
+              <button onclick="location.href='trangchu.html'" class="w-full py-4 bg-cyan-400 text-black text-[10px] font-black uppercase">
+                Trở về trang chủ
+              </button>
+            </div>
+          `;
+          card.style.opacity = "1";
+        }, 500);
+      }
+    </script>
   </body>
 </html>

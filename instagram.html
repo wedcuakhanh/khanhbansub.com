@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUỐC KHÁNH BÁN SUB | Instagram Giao Thức - Đang Cập Nhật</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+      :root {
+        --accent: #00f2ff;
+        --bg: #030303;
+        --card-bg: rgba(255, 255, 255, 0.02);
+        --border: rgba(0, 242, 255, 0.2);
+        --admin-glow: rgba(0, 242, 255, 0.1);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: white;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .font-special {
+        font-family: "Syncopate", sans-serif;
+      }
+
+      /* LƯỚI NỀN */
+      .laser-grid {
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          );
+        background-size: 50px 50px;
+        perspective: 1000px;
+        transform: rotateX(60deg) translateY(-100px);
+        z-index: -1;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 50%,
+          transparent
+        );
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        width: 280px;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.01);
+        backdrop-filter: blur(25px);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 50;
+      }
+
+      .sidebar::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--accent),
+          transparent
+        );
+      }
+
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid var(--border);
+        filter: drop-shadow(0 0 8px var(--accent));
+        margin-right: 12px;
+        transition: transform 0.5s ease;
+      }
+
+      .brand-logo:hover {
+        transform: rotate(360deg);
+      }
+
+      .nav-item {
+        padding: 14px 25px;
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.4);
+        transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 10px;
+        border-left: 3px solid transparent;
+        cursor: pointer;
+      }
+
+      .nav-item:hover,
+      .nav-item.active {
+        color: var(--accent);
+        background: rgba(0, 242, 255, 0.05);
+        border-left: 3px solid var(--accent);
+        text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+      }
+
+      /* NỘI DUNG THÔNG BÁO */
+      .main-content {
+        margin-left: 280px;
+        padding: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .maintenance-container {
+        max-width: 600px;
+        width: 100%;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        padding: 50px 30px;
+        text-align: center;
+        box-shadow: 0 0 30px var(--admin-glow);
+        position: relative;
+        backdrop-filter: blur(10px);
+      }
+
+      .maintenance-container::before {
+        content: "INSTAGRAM_RESTRICTION";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent);
+        color: black;
+        font-size: 8px;
+        font-weight: bold;
+        padding: 2px 12px;
+      }
+
+      .status-pulse {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+        display: inline-block;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      .gear-anim {
+        font-size: 50px;
+        color: var(--accent);
+        margin-bottom: 25px;
+        animation: spin 4s linear infinite;
+      }
+
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="laser-grid"></div>
+
+    <aside class="sidebar">
+      <div class="p-8">
+        <div
+          class="flex items-center cursor-pointer"
+          onclick="navigateTo('trangchu.html')"
+        >
+          <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
+          <h2 class="font-special text-xl font-bold tracking-tighter">
+            Khánh Bán<span class="text-cyan-400">Sub</span>
+          </h2>
+        </div>
+        <div class="flex items-center mt-3 space-x-2">
+          <div class="status-pulse"></div>
+          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]"
+            >Hệ thống trực tuyến</span
+          >
+        </div>
+      </div>
+      <nav class="mt-4">
+        <div class="nav-item" onclick="navigateTo('trangchu.html')">
+          <i class="fas fa-th-large mr-4 w-4"></i> Quản Lý Chung
+        </div>
+        <div
+          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
+        >
+          Danh mục lệnh
+        </div>
+        <div class="nav-item" onclick="navigateTo('facebook.html')">
+          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook Giao thức
+        </div>
+        <div class="nav-item" onclick="navigateTo('tiktok.html')">
+          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok Giao thức
+        </div>
+        <div class="nav-item active">
+          <i class="fab fa-instagram mr-4 w-4"></i> Instagram Giao thức
+        </div>
+        <div class="nav-item" onclick="navigateTo('youtube.html')">
+          <i class="fab fa-youtube mr-4 w-4"></i> YouTube Giao thức
+        </div>
+        <div
+          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
+        >
+          Dữ liệu hệ thống
+        </div>
+        <div class="nav-item" onclick="navigateTo('lichsu.html')">
+          <i class="fas fa-history mr-4 w-4"></i> Lịch sử giao dịch
+        </div>
+        <div
+          class="nav-item text-red-500/70 hover:text-red-500 mt-6"
+          onclick="logout()"
+        >
+          <i class="fas fa-power-off mr-4 w-4"></i> Logout
+        </div>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="maintenance-container">
+        <i class="fas fa-microchip gear-anim"></i>
+
+        <h1 class="font-special text-2xl mb-6 tracking-tighter uppercase">
+          Instagram <span class="text-cyan-400">Update</span>
+        </h1>
+
+        <div class="space-y-4">
+          <p class="text-gray-300 text-sm leading-relaxed">
+            Hệ thống giao tiếp API
+            <span class="text-cyan-400 font-bold uppercase">Instagram</span>
+            đang được nâng cấp định kỳ để đảm bảo tính ổn định.
+          </p>
+
+          <p
+            class="text-gray-400 text-[11px] italic uppercase tracking-[0.2em] leading-loose"
+          >
+            Vui lòng quay lại sau ít phút.
+            <br />KHÁNH BÁN SUB Trân trọng cảm ơn!
+          </p>
+        </div>
+
+        <div class="mt-10 pt-6 border-t border-white/5">
+          <button
+            onclick="navigateTo('trangchu.html')"
+            class="px-8 py-3 bg-cyan-400 text-black text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_15px_rgba(0,242,255,0.3)]"
+          >
+            <i class="fas fa-home mr-2"></i> Trở lại trung tâm lệnh
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      function navigateTo(url) {
+        document.body.style.opacity = "0.5";
+        setTimeout(() => {
+          window.location.href = url;
+        }, 200);
+      }
+
+      function logout() {
+        if (confirm("Xác nhận ngắt kết nối khỏi hệ thống?"))
+          window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

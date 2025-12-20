@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUỐC KHÁNH BÁN SUB | Xác Thực Hệ Thống</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+      :root {
+        --accent: #00f2ff;
+        --error: #ff4b4b;
+        --bg: #030303;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: white;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .font-special {
+        font-family: "Syncopate", sans-serif;
+      }
+      .laser-grid {
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          );
+        background-size: 50px 50px;
+        perspective: 1000px;
+        transform: rotateX(60deg) translateY(-100px);
+        z-index: -1;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 50%,
+          transparent
+        );
+      }
+      .auth-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+        max-width: 450px;
+        padding: 50px 40px;
+        border-radius: 4px;
+        position: relative;
+        transition: 0.3s;
+      }
+      .auth-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+      }
+      .shake {
+        animation: shake 0.4s ease-in-out;
+        border-color: var(--error) !important;
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-10px);
+        }
+        75% {
+          transform: translateX(10px);
+        }
+      }
+      .input-field {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 14px 16px;
+        color: white;
+        outline: none;
+        transition: 0.3s;
+        border-radius: 2px;
+      }
+      .input-field:focus {
+        border-color: var(--accent);
+        background: rgba(0, 242, 255, 0.05);
+      }
+      .btn-auth {
+        width: 100%;
+        background: white;
+        color: black;
+        font-weight: 900;
+        padding: 16px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 12px;
+        cursor: pointer;
+        border: none;
+        margin-top: 10px;
+        transition: 0.3s;
+      }
+      .btn-auth:hover:not(:disabled) {
+        background: var(--accent);
+        box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+      }
+      .btn-auth:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      #errorMessage {
+        color: var(--error);
+        font-size: 10px;
+        margin-top: 15px;
+        display: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="laser-grid"></div>
+    <div class="auth-card" id="card">
+      <div class="text-center mb-10">
+        <h2 class="font-special text-2xl font-bold tracking-widest">
+          ĐĂNG NHẬP
+        </h2>
+        <p class="text-[10px] text-gray-500 tracking-[0.3em] mt-2 uppercase">
+          Xác thực quyền truy cập Khánh Bán Sub
+        </p>
+      </div>
+      <form id="loginForm">
+        <div class="mb-6">
+          <input
+            type="text"
+            id="username"
+            placeholder="TÊN ĐĂNG NHẬP"
+            class="input-field"
+            required
+          />
+        </div>
+        <div class="relative mb-2">
+          <input
+            type="password"
+            id="password"
+            placeholder="MẬT KHẨU"
+            class="input-field"
+            required
+          />
+          <i
+            class="far fa-eye absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-white/30 hover:text-cyan-400 transition"
+            id="toggleIcon"
+            onclick="togglePassword()"
+          ></i>
+        </div>
+        <div id="errorMessage" class="text-center">
+          <i class="fas fa-exclamation-triangle mr-2"></i> THÔNG TIN TRUY CẬP
+          SAI!
+        </div>
+        <button type="submit" class="btn-auth">VÀO HỆ THỐNG</button>
+      </form>
+      <div class="mt-8 text-center">
+        <a
+          href="dangky.html"
+          class="text-[10px] text-gray-500 hover:text-cyan-400 transition tracking-widest uppercase"
+        >
+          Chưa có tài khoản?
+          <span class="text-white underline">Đăng ký ngay</span>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        const eyeIcon = document.getElementById("toggleIcon");
+        passwordInput.type =
+          passwordInput.type === "password" ? "text" : "password";
+        eyeIcon.classList.toggle("fa-eye");
+        eyeIcon.classList.toggle("fa-eye-slash");
+      }
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const card = document.getElementById("card");
+          const errorMsg = document.getElementById("errorMessage");
+          const btn = this.querySelector("button");
+
+          const inputUser = document.getElementById("username").value;
+          const inputPass = document.getElementById("password").value;
+
+          // Kiểm tra trong localStorage
+          const savedData = JSON.parse(localStorage.getItem("nexus_account"));
+
+          btn.innerText = "ĐANG QUÉT VÂN TAY...";
+          btn.disabled = true;
+          errorMsg.style.display = "none";
+          card.classList.remove("shake");
+
+          setTimeout(() => {
+            if (
+              savedData &&
+              inputUser === savedData.username &&
+              inputPass === savedData.password
+            ) {
+              btn.innerText = "TRUY CẬP ĐƯỢC CHẤP NHẬN";
+              btn.style.background = "#00f2ff";
+              setTimeout(() => {
+                window.location.href = "trangchu.html";
+              }, 800);
+            } else {
+              btn.innerText = "VÀO HỆ THỐNG";
+              btn.disabled = false;
+              errorMsg.style.display = "block";
+              card.classList.add("shake");
+            }
+          }, 1200);
+        });
+    </script>
+  </body>
+</html>

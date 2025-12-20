@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUỐC KHÁNH BÁN SUB | Đăng Ký Hệ Thống</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+      :root {
+        --accent: #00f2ff;
+        --bg: #030303;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: white;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .font-special {
+        font-family: "Syncopate", sans-serif;
+      }
+      .laser-grid {
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          );
+        background-size: 50px 50px;
+        perspective: 1000px;
+        transform: rotateX(60deg) translateY(-100px);
+        z-index: -1;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 50%,
+          transparent
+        );
+      }
+      .auth-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+        max-width: 450px;
+        padding: 40px;
+        border-radius: 4px;
+        position: relative;
+      }
+      .auth-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+      }
+      .input-group {
+        position: relative;
+        margin-bottom: 20px;
+      }
+      .input-field {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 12px 16px;
+        color: white;
+        outline: none;
+        transition: 0.3s;
+        border-radius: 2px;
+      }
+      .input-field:focus {
+        border-color: var(--accent);
+        background: rgba(0, 242, 255, 0.05);
+        box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+      }
+      .eye-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.3);
+      }
+      .btn-auth {
+        width: 100%;
+        background: white;
+        color: black;
+        font-weight: 900;
+        padding: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 12px;
+        transition: 0.3s;
+        margin-top: 10px;
+        cursor: pointer;
+        border: none;
+      }
+      .btn-auth:hover {
+        background: var(--accent);
+        box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="laser-grid"></div>
+    <div class="auth-card">
+      <div class="text-center mb-10">
+        <h2 class="font-special text-2xl font-bold tracking-widest">ĐĂNG KÝ</h2>
+        <p class="text-[10px] text-gray-500 tracking-[0.3em] mt-2 uppercase">
+          TRang Đăng Ký Hệ Thống Khánh Bán Sub
+        </p>
+      </div>
+      <form id="registerForm">
+        <div class="input-group">
+          <input
+            type="text"
+            id="regUser"
+            placeholder="TÊN ĐĂNG NHẬP"
+            class="input-field"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="email"
+            id="emailInput"
+            placeholder="GMAIL"
+            class="input-field"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <input
+            type="password"
+            id="password"
+            placeholder="MẬT KHẨU"
+            class="input-field"
+            required
+          />
+          <i
+            class="far fa-eye eye-icon"
+            onclick="togglePassword('password', this)"
+          ></i>
+        </div>
+        <div class="input-group">
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="NHẬP LẠI MẬT KHẨU"
+            class="input-field"
+            required
+          />
+          <i
+            class="far fa-eye eye-icon"
+            onclick="togglePassword('confirmPassword', this)"
+          ></i>
+        </div>
+        <button type="submit" class="btn-auth">TẠO TÀI KHOẢN</button>
+      </form>
+      <div class="mt-8 text-center">
+        <a
+          href="dangnhap1.html"
+          class="text-[10px] text-gray-500 hover:text-cyan-400 transition tracking-widest uppercase font-bold"
+          >ĐÃ CÓ TÀI KHOẢN? ĐĂNG NHẬP NGAY</a
+        >
+      </div>
+    </div>
+
+    <script>
+      function togglePassword(inputId, icon) {
+        const input = document.getElementById(inputId);
+        input.type = input.type === "password" ? "text" : "password";
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
+      }
+
+      // Tự động thêm @gmail.com
+      document
+        .getElementById("emailInput")
+        .addEventListener("blur", function () {
+          if (this.value && !this.value.includes("@")) {
+            this.value += "@gmail.com";
+          }
+        });
+
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const username = document.getElementById("regUser").value;
+          const email = document.getElementById("emailInput").value;
+          const pass = document.getElementById("password").value;
+          const confirm = document.getElementById("confirmPassword").value;
+
+          if (pass !== confirm) {
+            alert("Mật khẩu nhập lại không khớp!");
+            return;
+          }
+
+          // Lưu dữ liệu vào localStorage
+          const userData = { username: username, password: pass, email: email };
+          localStorage.setItem("nexus_account", JSON.stringify(userData));
+
+          alert("Đăng ký thành công! Đang chuyển hướng đến cổng xác thực.");
+          window.location.href = "dangnhap1.html";
+        });
+    </script>
+  </body>
+</html>
