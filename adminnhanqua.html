@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LIÊN HỆ ADMIN | KHÁNH BÁN SUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+      :root {
+        --accent: #00f2ff;
+        --bg: #030303;
+        --border: rgba(0, 242, 255, 0.2);
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .font-special {
+        font-family: "Syncopate", sans-serif;
+      }
+
+      .laser-grid {
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(0, 242, 255, 0.05) 1px,
+            transparent 1px
+          );
+        background-size: 50px 50px;
+        perspective: 1000px;
+        transform: rotateX(60deg) translateY(-100px);
+        z-index: -1;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 50%,
+          transparent
+        );
+      }
+
+      .admin-card {
+        background: rgba(10, 10, 10, 0.8);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(20px);
+        width: 100%;
+        max-width: 450px;
+        padding: 40px;
+        position: relative;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+
+      .admin-card::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+      }
+
+      .contact-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 15px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: 0.3s;
+      }
+
+      .contact-box:hover {
+        border-color: var(--accent);
+        background: rgba(0, 242, 255, 0.02);
+      }
+
+      .btn-copy {
+        font-size: 10px;
+        color: var(--accent);
+        text-transform: uppercase;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .btn-copy:active {
+        transform: scale(0.9);
+      }
+
+      .avatar-glow {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+        padding: 5px;
+        box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+        margin: 0 auto 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="laser-grid"></div>
+
+    <div class="admin-card text-center">
+      <div class="avatar-glow">
+        <img
+          src="./img/ack.jpg"
+          class="w-full h-full rounded-full object-cover"
+          alt="Admin"
+        />
+      </div>
+
+      <h1 class="font-special text-xl font-bold tracking-widest mb-1 uppercase">
+        KHÁNH <span class="text-cyan-400">ADMIN</span>
+      </h1>
+      <p
+        class="text-[9px] text-gray-500 uppercase tracking-[0.3em] mb-8 italic"
+      >
+        Vui lòng liên hệ để nhận quà từ hệ thống
+      </p>
+
+      <div class="text-left space-y-3">
+        <div class="contact-box">
+          <div class="flex items-center">
+            <i class="fab fa-facebook-f text-blue-500 w-8"></i>
+            <div>
+              <p class="text-[8px] text-gray-500 uppercase">Facebook Cá Nhân</p>
+              <p class="text-sm font-bold">Trần Khánh</p>
+            </div>
+          </div>
+          <a
+            href="https://www.facebook.com/quoc.khanh.280706"
+            target="_blank"
+            class="btn-copy"
+            >Truy cập</a
+          >
+        </div>
+
+        <div class="contact-box">
+          <div class="flex items-center">
+            <i class="fab fa-telegram text-sky-400 w-8"></i>
+            <div>
+              <p class="text-[8px] text-gray-500 uppercase">Telegram Support</p>
+              <p class="text-sm font-bold">Đang Cập Nhật</p>
+            </div>
+          </div>
+          <div class="btn-copy" onclick="copyText('https://www.facebook.com/quoc.khanh.280706')">
+            Sao chép
+          </div>
+        </div>
+
+        <div class="contact-box">
+          <div class="flex items-center">
+            <i class="fas fa-phone-alt text-green-500 w-8"></i>
+            <div>
+              <p class="text-[8px] text-gray-500 uppercase">Zalo / Hotline</p>
+              <p class="text-sm font-bold">0376447206</p>
+            </div>
+          </div>
+          <div class="btn-copy" onclick="copyText('0376447206')">Sao chép</div>
+        </div>
+      </div>
+
+      <div class="mt-8 p-4 border border-dashed border-gray-800">
+        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">
+          <i class="fas fa-info-circle text-cyan-400 mr-1"></i>
+          Chụp ảnh màn hình mục
+          <span class="text-white">"Lịch sử giao dịch"</span> phần trúng quà và
+          gửi cho Admin để được xử lý.
+        </p>
+      </div>
+
+      <button
+        onclick="location.href='trangchu.html'"
+        class="mt-8 text-[9px] text-gray-600 uppercase tracking-widest hover:text-white transition"
+      >
+        <i class="fas fa-arrow-left mr-2"></i> Quay lại trang chủ
+      </button>
+    </div>
+
+    <script>
+      function copyText(text) {
+        navigator.clipboard.writeText(text);
+        alert("Đã sao chép: " + text);
+      }
+    </script>
+  </body>
+</html>

@@ -1,347 +1,198 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QUỐC KHÁNH BÁN SUB | Instagram - Đang Cập Nhật</title>
+    <title>LUCKY SPIN | KHÁNH BÁN SUB</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
-      :root {
-        --accent: #00f2ff;
-        --bg: #030303;
-        --card-bg: rgba(255, 255, 255, 0.02);
-        --border: rgba(0, 242, 255, 0.2);
-        --admin-glow: rgba(0, 242, 255, 0.1);
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: var(--bg);
-        color: white;
-        min-height: 100vh;
-        overflow-x: hidden;
-      }
-
-      .font-special {
-        font-family: "Syncopate", sans-serif;
-      }
-
-      /* LƯỚI NỀN */
-      .laser-grid {
-        position: fixed;
-        inset: 0;
-        background-image: linear-gradient(
-            to right,
-            rgba(0, 242, 255, 0.05) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            to bottom,
-            rgba(0, 242, 255, 0.05) 1px,
-            transparent 1px
-          );
-        background-size: 50px 50px;
-        perspective: 1000px;
-        transform: rotateX(60deg) translateY(-100px);
-        z-index: -1;
-        mask-image: linear-gradient(
-          to bottom,
-          transparent,
-          black 50%,
-          transparent
-        );
-      }
-
-      /* SIDEBAR RESPONSIVE */
-      .sidebar {
-        width: 280px;
-        height: 100vh;
-        background: rgba(5, 5, 5, 0.95);
-        backdrop-filter: blur(25px);
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
-        position: fixed;
-        left: -280px;
-        top: 0;
-        z-index: 100;
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .sidebar.active {
-        left: 0;
-      }
-
-      @media (min-width: 1024px) {
-        .sidebar {
-          left: 0;
-          background: rgba(255, 255, 255, 0.01);
+        :root { --accent: #00f2ff; --bg: #030303; --border: rgba(0, 242, 255, 0.2); }
+        body { font-family: "Inter", sans-serif; background: var(--bg); color: white; min-height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .font-special { font-family: "Syncopate", sans-serif; }
+        
+        .laser-grid {
+            position: fixed; inset: 0;
+            background-image: linear-gradient(to right, rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px; perspective: 1000px;
+            transform: rotateX(60deg) translateY(-100px); z-index: -1;
+            mask-image: linear-gradient(to bottom, transparent, black 50%, transparent);
         }
-      }
 
-      .sidebar::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 1px;
-        height: 100%;
-        background: linear-gradient(
-          to bottom,
-          transparent,
-          var(--accent),
-          transparent
-        );
-      }
+        .wheel-box { position: relative; width: 320px; height: 320px; margin-bottom: 30px; }
+        @media (min-width: 768px) { .wheel-box { width: 450px; height: 450px; } }
 
-      /* MOBILE HEADER */
-      .mobile-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 60px;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
-        z-index: 80;
-        border-bottom: 1px solid var(--border);
-      }
+        #wheel-canvas { width: 100%; height: 100%; border-radius: 50%; border: 10px solid #111; box-shadow: 0 0 50px rgba(0, 242, 255, 0.1); transition: transform 5s cubic-bezier(0.15, 0, 0.15, 1); }
+        .pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 40px; z-index: 20; filter: drop-shadow(0 0 10px var(--accent)); }
+        
+        .btn-main { background: var(--accent); color: black; font-weight: 900; padding: 15px 40px; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); transition: 0.4s; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
+        .btn-main:hover:not(:disabled) { box-shadow: 0 0 30px var(--accent); transform: scale(1.05); }
+        .btn-main:disabled { background: #222; color: #555; cursor: not-allowed; }
 
-      @media (min-width: 1024px) {
-        .mobile-header { display: none; }
-      }
+        .btn-home { position: fixed; top: 20px; left: 20px; color: rgba(255,255,255,0.5); font-size: 10px; text-transform: uppercase; letter-spacing: 2px; border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px; transition: 0.3s; }
+        .btn-home:hover { color: var(--accent); border-color: var(--accent); }
 
-      .brand-logo {
-        width: 35px;
-        height: 35px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 2px solid var(--border);
-        filter: drop-shadow(0 0 8px var(--accent));
-        margin-right: 12px;
-      }
-
-      .nav-item {
-        padding: 14px 25px;
-        display: flex;
-        align-items: center;
-        color: rgba(255, 255, 255, 0.4);
-        transition: 0.3s;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 10px;
-        border-left: 3px solid transparent;
-        cursor: pointer;
-      }
-
-      .nav-item:hover,
-      .nav-item.active {
-        color: var(--accent);
-        background: rgba(0, 242, 255, 0.05);
-        border-left: 3px solid var(--accent);
-        text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
-      }
-
-      /* NỘI DUNG THÔNG BÁO */
-      .main-content {
-        padding: 80px 20px 40px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        transition: 0.4s;
-      }
-
-      @media (min-width: 1024px) {
-        .main-content {
-          margin-left: 280px;
-          padding: 40px;
-        }
-      }
-
-      .maintenance-container {
-        max-width: 600px;
-        width: 100%;
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        padding: 40px 20px;
-        text-align: center;
-        box-shadow: 0 0 30px var(--admin-glow);
-        position: relative;
-        backdrop-filter: blur(10px);
-      }
-
-      @media (min-width: 640px) {
-        .maintenance-container { padding: 50px 30px; }
-      }
-
-      .maintenance-container::before {
-        content: "INSTAGRAM_RESTRICTION";
-        position: absolute;
-        top: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--accent);
-        color: black;
-        font-size: 8px;
-        font-weight: bold;
-        padding: 2px 12px;
-        white-space: nowrap;
-      }
-
-      .status-pulse {
-        width: 8px;
-        height: 8px;
-        background: var(--accent);
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-        display: inline-block;
-      }
-
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.3; }
-      }
-
-      .gear-anim {
-        font-size: 40px;
-        color: var(--accent);
-        margin-bottom: 20px;
-        animation: spin 4s linear infinite;
-      }
-
-      @media (min-width: 640px) {
-        .gear-anim { font-size: 50px; margin-bottom: 25px; }
-      }
-
-      @keyframes spin {
-        100% { transform: rotate(360deg); }
-      }
-
-      /* Overlay */
-      .sidebar-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.6);
-        z-index: 90;
-      }
-      .sidebar-overlay.active { display: block; }
+        #claim-section { display: none; margin-top: 20px; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        #countdown { font-family: monospace; color: #ff3e3e; font-size: 14px; margin-top: 10px; }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="laser-grid"></div>
 
-    <header class="mobile-header">
-      <button onclick="toggleMenu()" class="text-white text-2xl mr-4">
-        <i class="fas fa-bars text-cyan-400"></i>
-      </button>
-      <h2 class="font-special text-sm font-bold tracking-tighter uppercase">
-        Khánh Bán<span class="text-cyan-400">Sub</span>
-      </h2>
-    </header>
+    <a href="trangchu.html" class="btn-home font-special"><i class="fas fa-arrow-left mr-2"></i> Trang Chủ</a>
 
-    <div class="sidebar-overlay" id="overlay" onclick="toggleMenu()"></div>
+    <div class="flex flex-col items-center w-full max-w-2xl px-4">
+        <div class="text-center mb-8">
+            <h1 class="font-special text-3xl md:text-5xl uppercase tracking-tighter mb-2">Lucky <span class="text-cyan-400">Spin</span></h1>
+            <p id="status-text" class="text-[10px] text-gray-500 uppercase tracking-[0.4em]">Mỗi lượt cách nhau 24 giờ</p>
+        </div>
 
-    <aside class="sidebar" id="sidebar">
-      <div class="p-8">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center cursor-pointer" onclick="navigateTo('trangchu.html')">
-              <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
-              <h2 class="font-special text-lg font-bold tracking-tighter">
-                Khánh Bán<span class="text-cyan-400">Sub</span>
-              </h2>
-            </div>
-            <button onclick="toggleMenu()" class="lg:hidden text-gray-500">
-                <i class="fas fa-times"></i>
+        <div class="wheel-box">
+            <img src="https://cdn-icons-png.flaticon.com/512/8213/8213522.png" class="pointer" />
+            <canvas id="wheel-canvas" width="500" height="500"></canvas>
+        </div>
+
+        <button id="spin-btn" onclick="spinNow()" class="btn-main font-special">Kích hoạt vòng quay</button>
+
+        <div id="claim-section" class="text-center">
+            <p id="reward-text" class="text-xl font-bold text-cyan-400 mb-6 font-mono uppercase"></p>
+            <button onclick="claimReward()" class="btn-main bg-white hover:bg-cyan-400">
+                <i class="fas fa-gift mr-2"></i> Nhận quà ngay
             </button>
         </div>
-        <div class="flex items-center mt-3 space-x-2">
-          <div class="status-pulse"></div>
-          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]">Hệ thống trực tuyến</span>
-        </div>
-      </div>
-      <nav class="mt-4">
-        <div class="nav-item" onclick="navigateTo('trangchu.html')">
-          <i class="fas fa-th-large mr-4 w-4"></i> Quản Lý Chung
-        </div>
-        <div class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold">Danh Sách Dịch Vụ</div>
-        <div class="nav-item" onclick="navigateTo('facebook.html')">
-          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook 
-        </div>
-        <div class="nav-item" onclick="navigateTo('tiktok.html')">
-          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok 
-        </div>
-        <div class="nav-item active">
-          <i class="fab fa-instagram mr-4 w-4"></i> Instagram 
-        </div>
-        <div class="nav-item" onclick="navigateTo('youtube.html')">
-          <i class="fab fa-youtube mr-4 w-4"></i> YouTube 
-        </div>
-        <div class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold">Dữ liệu hệ thống</div>
-        <div class="nav-item" onclick="navigateTo('lichsu.html')">
-          <i class="fas fa-history mr-4 w-4"></i> Lịch sử giao dịch
-        </div>
-        <div class="nav-item text-red-500/70 hover:text-red-500 mt-6" onclick="logout()">
-          <i class="fas fa-power-off mr-4 w-4"></i> Logout
-        </div>
-      </nav>
-    </aside>
 
-    <main class="main-content">
-      <div class="maintenance-container">
-        <i class="fas fa-microchip gear-anim"></i>
-
-        <h1 class="font-special text-xl lg:text-2xl mb-6 tracking-tighter uppercase">
-          Instagram <span class="text-cyan-400">Update</span>
-        </h1>
-
-        <div class="space-y-4">
-          <p class="text-gray-300 text-sm leading-relaxed px-4">
-            Hệ thống giao tiếp API
-            <span class="text-cyan-400 font-bold uppercase">Instagram</span>
-            đang được nâng cấp định kỳ để đảm bảo tính ổn định.
-          </p>
-
-          <p class="text-gray-400 text-[10px] lg:text-[11px] italic uppercase tracking-[0.2em] leading-loose">
-            Vui lòng quay lại sau ít phút.
-            <br />KHÁNH BÁN SUB Trân trọng cảm ơn!
-          </p>
+        <div id="lock-msg" class="hidden mt-6 text-center">
+            <p class="text-red-500 font-special text-[10px] uppercase tracking-widest bg-red-500/10 p-4 border border-red-500/20">
+                Bạn đã hết lượt quay hôm nay!
+            </p>
+            <div id="countdown" class="font-bold"></div>
         </div>
-
-        <div class="mt-10 pt-6 border-t border-white/5">
-          <button
-            onclick="navigateTo('trangchu.html')"
-            class="w-full sm:w-auto px-8 py-3 bg-cyan-400 text-black text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_15px_rgba(0,242,255,0.3)]"
-          >
-            <i class="fas fa-home mr-2"></i> Trở lại trung tâm lệnh
-          </button>
-        </div>
-      </div>
-    </main>
+    </div>
 
     <script>
-      function toggleMenu() {
-        document.getElementById('sidebar').classList.toggle('active');
-        document.getElementById('overlay').classList.toggle('active');
-      }
+        const canvas = document.getElementById("wheel-canvas");
+        const ctx = canvas.getContext("2d");
+        const spinBtn = document.getElementById("spin-btn");
+        const claimSection = document.getElementById("claim-section");
+        const rewardText = document.getElementById("reward-text");
+        const lockMsg = document.getElementById("lock-msg");
+        const statusText = document.getElementById("status-text");
+        const countdownDisplay = document.getElementById("countdown");
 
-      function navigateTo(url) {
-        document.body.style.opacity = "0.5";
-        setTimeout(() => {
-          window.location.href = url;
-        }, 200);
-      }
+        const rewards = ["100 SUB FB", "50 LIKE TT", "300 VIEW TT", "MAY MẮN NHÉ", "50 SUB TT", "200 LIKE FB", "100 SHARE FB", "1000 VIEW TT"];
+        const colors = ["#000000", "#00f2ff", "#000000", "#111111", "#000000", "#00f2ff", "#000000", "#111111"];
+        let currentRotation = 0;
+        let wonReward = "";
 
-      function logout() {
-        if (confirm("Xác nhận ngắt kết nối khỏi hệ thống?"))
-          window.location.href = "index.html";
-      }
+        window.onload = () => {
+            drawWheel();
+            checkSpinLimit();
+        };
+
+        function drawWheel() {
+            const arc = Math.PI / (rewards.length / 2);
+            for (let i = 0; i < rewards.length; i++) {
+                const angle = i * arc;
+                ctx.beginPath();
+                ctx.fillStyle = colors[i];
+                ctx.moveTo(250, 250);
+                ctx.arc(250, 250, 250, angle, angle + arc);
+                ctx.fill();
+                ctx.save();
+                ctx.translate(250, 250);
+                ctx.rotate(angle + arc / 2);
+                ctx.fillStyle = i % 2 === 0 ? "#00f2ff" : "#fff";
+                ctx.font = "bold 16px Inter";
+                ctx.fillText(rewards[i], 120, 10);
+                ctx.restore();
+            }
+        }
+
+        function checkSpinLimit() {
+            const lastSpin = localStorage.getItem('lastSpinTimestamp');
+            if (lastSpin) {
+                const now = new Date().getTime();
+                const diff = now - parseInt(lastSpin);
+                const twentyFourHours = 24 * 60 * 60 * 1000;
+
+                if (diff < twentyFourHours) {
+                    showLocked(twentyFourHours - diff);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function showLocked(msRemaining) {
+            spinBtn.disabled = true;
+            spinBtn.style.display = "none";
+            lockMsg.classList.remove('hidden');
+            
+            // Cập nhật đếm ngược mỗi giây
+            const timer = setInterval(() => {
+                msRemaining -= 1000;
+                if (msRemaining <= 0) {
+                    clearInterval(timer);
+                    location.reload(); // Reset để quay lại trạng thái có thể quay
+                }
+                const h = Math.floor(msRemaining / 3600000);
+                const m = Math.floor((msRemaining % 3600000) / 60000);
+                const s = Math.floor((msRemaining % 60000) / 1000);
+                countdownDisplay.innerText = `Lượt mới sau: ${h}h ${m}m ${s}s`;
+            }, 1000);
+        }
+
+        function spinNow() {
+            if (checkSpinLimit()) return;
+            
+            spinBtn.disabled = true;
+            statusText.innerText = "ĐANG PHÂN TÍCH QUỸ ĐẠO...";
+
+            const spinAdd = Math.floor(Math.random() * 360) + 3600; 
+            currentRotation += spinAdd;
+            canvas.style.transform = `rotate(${currentRotation}deg)`;
+
+            setTimeout(() => {
+                const actualDeg = currentRotation % 360;
+                const rewardIndex = Math.floor((360 - actualDeg) / (360 / rewards.length)) % rewards.length;
+                wonReward = rewards[rewardIndex];
+
+                spinBtn.style.display = "none";
+                rewardText.innerText = "BẠN TRÚNG: " + wonReward;
+                
+                // Lưu thời gian quay ngay lập tức
+                localStorage.setItem('lastSpinTimestamp', new Date().getTime().toString());
+
+                if(wonReward !== "MAY MẮN NHÉ") {
+                    claimSection.style.display = "block";
+                } else {
+                    statusText.innerText = "HẸN GẶP LẠI SAU 24 GIỜ!";
+                    setTimeout(() => location.href = "trangchu.html", 3000);
+                }
+            }, 5000);
+        }
+
+        function claimReward() {
+            let history = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+            history.unshift({
+                platform: "GIFT",
+                service: "Vòng Quay May Mắn",
+                id: 'SPIN' + Math.floor(Math.random() * 9999),
+                link: "Quà tặng 24h",
+                quantity: "1",
+                total: wonReward,
+                status: 'CHỜ NHẬN',
+                date: new Date().toLocaleString('vi-VN')
+            });
+            localStorage.setItem('orderHistory', JSON.stringify(history));
+            
+            alert("Đã lưu quà. Hãy chụp ảnh lịch sử và gửi cho Admin!");
+            window.location.href = "adminnhanqua.html";
+        }
     </script>
-  </body>
+</body>
 </html>
