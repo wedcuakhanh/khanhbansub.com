@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QUỐC KHÁNH BÁN SUB | YouTube Giao Thức - Đang Cập Nhật</title>
+    <title>QUỐC KHÁNH BÁN SUB | YouTube - Đang Cập Nhật</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
@@ -35,69 +35,71 @@
       .laser-grid {
         position: fixed;
         inset: 0;
-        background-image: linear-gradient(
-            to right,
-            rgba(0, 242, 255, 0.05) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            to bottom,
-            rgba(0, 242, 255, 0.05) 1px,
-            transparent 1px
-          );
+        background-image: linear-gradient(to right, rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
         background-size: 50px 50px;
         perspective: 1000px;
         transform: rotateX(60deg) translateY(-100px);
         z-index: -1;
-        mask-image: linear-gradient(
-          to bottom,
-          transparent,
-          black 50%,
-          transparent
-        );
+        mask-image: linear-gradient(to bottom, transparent, black 50%, transparent);
       }
 
-      /* SIDEBAR */
+      /* MOBILE HEADER */
+      .mobile-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        z-index: 100;
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+      }
+
+      @media (min-width: 1024px) {
+        .mobile-header { display: none; }
+      }
+
+      /* SIDEBAR TỐI ƯU MOBILE */
       .sidebar {
         width: 280px;
         height: 100vh;
-        background: rgba(255, 255, 255, 0.01);
+        background: rgba(5, 5, 5, 0.98);
         backdrop-filter: blur(25px);
         border-right: 1px solid rgba(255, 255, 255, 0.1);
         position: fixed;
-        left: 0;
+        left: -280px;
         top: 0;
-        z-index: 50;
+        z-index: 150;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .sidebar::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 1px;
-        height: 100%;
-        background: linear-gradient(
-          to bottom,
-          transparent,
-          var(--accent),
-          transparent
-        );
+      .sidebar.active { left: 0; }
+
+      @media (min-width: 1024px) {
+        .sidebar { left: 0; background: rgba(255, 255, 255, 0.01); }
       }
+
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.8);
+        z-index: 140;
+      }
+      .sidebar-overlay.active { display: block; }
 
       .brand-logo {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         object-fit: cover;
         border-radius: 50%;
         border: 2px solid var(--border);
-        filter: drop-shadow(0 0 8px var(--accent));
-        margin-right: 12px;
-        transition: transform 0.5s ease;
-      }
-
-      .brand-logo:hover {
-        transform: rotate(360deg);
+        filter: drop-shadow(0 0 5px var(--accent));
       }
 
       .nav-item {
@@ -113,8 +115,7 @@
         cursor: pointer;
       }
 
-      .nav-item:hover,
-      .nav-item.active {
+      .nav-item:hover, .nav-item.active {
         color: var(--accent);
         background: rgba(0, 242, 255, 0.05);
         border-left: 3px solid var(--accent);
@@ -123,20 +124,23 @@
 
       /* NỘI DUNG CHÍNH */
       .main-content {
-        margin-left: 280px;
-        padding: 40px;
+        padding: 80px 20px 40px 20px;
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
       }
 
+      @media (min-width: 1024px) {
+        .main-content { margin-left: 280px; padding: 40px; }
+      }
+
       .maintenance-container {
-        max-width: 600px;
+        max-width: 500px;
         width: 100%;
         background: var(--card-bg);
         border: 1px solid var(--border);
-        padding: 50px 30px;
+        padding: 40px 20px;
         text-align: center;
         box-shadow: 0 0 30px var(--admin-glow);
         position: relative;
@@ -166,83 +170,73 @@
       }
 
       @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-        }
+        0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--accent); }
+        50% { opacity: 0.3; }
       }
 
       .gear-anim {
-        font-size: 50px;
+        font-size: 40px;
         color: var(--accent);
-        margin-bottom: 25px;
+        margin-bottom: 20px;
         animation: spin 4s linear infinite;
       }
 
-      @keyframes spin {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
+      @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
   </head>
   <body>
     <div class="laser-grid"></div>
 
-    <aside class="sidebar">
+    <header class="mobile-header">
+      <button onclick="toggleSidebar()" class="text-cyan-400 text-xl mr-4">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="flex items-center">
+        <img src="./img/ack.jpg" alt="Logo" class="brand-logo mr-2" />
+        <h2 class="font-special text-[10px] font-bold tracking-tighter">Khánh Bán<span class="text-cyan-400">Sub</span></h2>
+      </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <aside class="sidebar" id="sidebarMenu">
       <div class="p-8">
-        <div
-          class="flex items-center cursor-pointer"
-          onclick="navigateTo('trangchu.html')"
-        >
-          <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
-          <h2 class="font-special text-xl font-bold tracking-tighter">
-            Khánh Bán<span class="text-cyan-400">Sub</span>
-          </h2>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center cursor-pointer" onclick="navigateTo('trangchu.html')">
+            <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
+            <h2 class="font-special text-lg font-bold tracking-tighter ml-3">
+              Khánh Bán<span class="text-cyan-400">Sub</span>
+            </h2>
+          </div>
+          <button onclick="toggleSidebar()" class="lg:hidden text-gray-500"><i class="fas fa-times"></i></button>
         </div>
         <div class="flex items-center mt-3 space-x-2">
           <div class="status-pulse"></div>
-          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]"
-            >Hệ thống trực tuyến</span
-          >
+          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]">Hệ thống trực tuyến</span>
         </div>
       </div>
       <nav class="mt-4">
         <div class="nav-item" onclick="navigateTo('trangchu.html')">
           <i class="fas fa-th-large mr-4 w-4"></i> Quản Lý Chung
         </div>
-        <div
-          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
-        >
-          Danh mục lệnh
-        </div>
+        <div class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold">Danh mục lệnh</div>
         <div class="nav-item" onclick="navigateTo('facebook.html')">
-          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook Giao thức
+          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook 
         </div>
         <div class="nav-item" onclick="navigateTo('tiktok.html')">
-          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok Giao thức
+          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok 
         </div>
         <div class="nav-item" onclick="navigateTo('instagram.html')">
-          <i class="fab fa-instagram mr-4 w-4"></i> Instagram Giao thức
+          <i class="fab fa-instagram mr-4 w-4"></i> Instagram 
         </div>
         <div class="nav-item active">
-          <i class="fab fa-youtube mr-4 w-4"></i> YouTube Giao thức
+          <i class="fab fa-youtube mr-4 w-4"></i> YouTube 
         </div>
-        <div
-          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
-        >
-          Dữ liệu hệ thống
-        </div>
+        <div class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold">Dữ liệu hệ thống</div>
         <div class="nav-item" onclick="navigateTo('lichsu.html')">
           <i class="fas fa-history mr-4 w-4"></i> Lịch sử giao dịch
         </div>
-        <div
-          class="nav-item text-red-500/70 hover:text-red-500 mt-6"
-          onclick="logout()"
-        >
+        <div class="nav-item text-red-500/70 hover:text-red-500 mt-6" onclick="logout()">
           <i class="fas fa-power-off mr-4 w-4"></i> Logout
         </div>
       </nav>
@@ -252,29 +246,27 @@
       <div class="maintenance-container">
         <i class="fas fa-sync gear-anim"></i>
 
-        <h1 class="font-special text-2xl mb-6 tracking-tighter uppercase">
+        <h1 class="font-special text-xl mb-4 tracking-tighter uppercase">
           YouTube <span class="text-cyan-400">Protocol</span>
         </h1>
 
-        <div class="space-y-4">
-          <p class="text-gray-300 text-sm leading-relaxed">
+        <div class="space-y-4 px-2">
+          <p class="text-gray-300 text-xs leading-relaxed">
             Xin lỗi vì đã làm phiền, dịch vụ
             <span class="text-cyan-400 font-bold uppercase">YouTube</span> này
             đang cập nhật hệ thống lõi.
           </p>
 
-          <p
-            class="text-gray-400 text-[11px] italic uppercase tracking-[0.2em] leading-loose"
-          >
+          <p class="text-gray-400 text-[10px] italic uppercase tracking-[0.1em] leading-loose">
             Vui lòng quay lại sau.
             <br />Cảm ơn sự kiên nhẫn của bạn!
           </p>
         </div>
 
-        <div class="mt-10 pt-6 border-t border-white/5">
+        <div class="mt-8 pt-6 border-t border-white/5">
           <button
             onclick="navigateTo('trangchu.html')"
-            class="px-8 py-3 bg-cyan-400 text-black text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_15px_rgba(0,242,255,0.3)]"
+            class="w-full sm:w-auto px-8 py-3 bg-cyan-400 text-black text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_15px_rgba(0,242,255,0.3)]"
           >
             Trở lại trung tâm lệnh
           </button>
@@ -283,6 +275,11 @@
     </main>
 
     <script>
+      function toggleSidebar() {
+        document.getElementById('sidebarMenu').classList.toggle('active');
+        document.getElementById('sidebarOverlay').classList.toggle('active');
+      }
+
       function navigateTo(url) {
         document.body.style.opacity = "0.5";
         setTimeout(() => {

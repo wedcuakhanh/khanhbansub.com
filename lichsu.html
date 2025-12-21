@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QUỐC KHÁNH BÁN SUB | Lịch Sử Giao Dịch</title>
+    <title>QUỐC KHÁNH BÁN SUB | Instagram - Đang Cập Nhật</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
@@ -31,6 +31,7 @@
         font-family: "Syncopate", sans-serif;
       }
 
+      /* LƯỚI NỀN */
       .laser-grid {
         position: fixed;
         inset: 0;
@@ -56,17 +57,29 @@
         );
       }
 
-      /* SIDEBAR */
+      /* SIDEBAR RESPONSIVE */
       .sidebar {
         width: 280px;
         height: 100vh;
-        background: rgba(255, 255, 255, 0.01);
+        background: rgba(5, 5, 5, 0.95);
         backdrop-filter: blur(25px);
         border-right: 1px solid rgba(255, 255, 255, 0.1);
         position: fixed;
-        left: 0;
+        left: -280px;
         top: 0;
-        z-index: 50;
+        z-index: 100;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      @media (min-width: 1024px) {
+        .sidebar {
+          left: 0;
+          background: rgba(255, 255, 255, 0.01);
+        }
       }
 
       .sidebar::after {
@@ -84,9 +97,28 @@
         );
       }
 
+      /* MOBILE HEADER */
+      .mobile-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        z-index: 80;
+        border-bottom: 1px solid var(--border);
+      }
+
+      @media (min-width: 1024px) {
+        .mobile-header { display: none; }
+      }
+
       .brand-logo {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         object-fit: cover;
         border-radius: 50%;
         border: 2px solid var(--border);
@@ -115,50 +147,51 @@
         text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
       }
 
-      /* TABLE STYLE */
+      /* NỘI DUNG THÔNG BÁO */
       .main-content {
-        margin-left: 280px;
-        padding: 40px;
+        padding: 80px 20px 40px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        transition: 0.4s;
       }
 
-      .nexus-table-container {
+      @media (min-width: 1024px) {
+        .main-content {
+          margin-left: 280px;
+          padding: 40px;
+        }
+      }
+
+      .maintenance-container {
+        max-width: 600px;
+        width: 100%;
         background: var(--card-bg);
         border: 1px solid var(--border);
-        box-shadow: 0 0 20px var(--admin-glow);
-        overflow: hidden;
+        padding: 40px 20px;
+        text-align: center;
+        box-shadow: 0 0 30px var(--admin-glow);
+        position: relative;
+        backdrop-filter: blur(10px);
       }
 
-      .nexus-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 11px;
+      @media (min-width: 640px) {
+        .maintenance-container { padding: 50px 30px; }
       }
 
-      .nexus-table th {
-        background: rgba(0, 242, 255, 0.05);
-        color: var(--accent);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        padding: 20px 15px;
-        text-align: left;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .nexus-table td {
-        padding: 18px 15px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        color: #a0a0a0;
-      }
-
-      .status-badge {
-        display: inline-block;
-        padding: 4px 10px;
-        background: rgba(0, 242, 255, 0.1);
-        color: var(--accent);
-        border: 1px solid var(--border);
-        font-size: 9px;
-        font-weight: 900;
-        text-transform: uppercase;
+      .maintenance-container::before {
+        content: "INSTAGRAM_RESTRICTION";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent);
+        color: black;
+        font-size: 8px;
+        font-weight: bold;
+        padding: 2px 12px;
+        white-space: nowrap;
       }
 
       .status-pulse {
@@ -167,152 +200,148 @@
         background: var(--accent);
         border-radius: 50%;
         animation: pulse 2s infinite;
+        display: inline-block;
       }
+
       @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-        }
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
       }
+
+      .gear-anim {
+        font-size: 40px;
+        color: var(--accent);
+        margin-bottom: 20px;
+        animation: spin 4s linear infinite;
+      }
+
+      @media (min-width: 640px) {
+        .gear-anim { font-size: 50px; margin-bottom: 25px; }
+      }
+
+      @keyframes spin {
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Overlay */
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 90;
+      }
+      .sidebar-overlay.active { display: block; }
     </style>
   </head>
   <body>
     <div class="laser-grid"></div>
 
-    <aside class="sidebar">
+    <header class="mobile-header">
+      <button onclick="toggleMenu()" class="text-white text-2xl mr-4">
+        <i class="fas fa-bars text-cyan-400"></i>
+      </button>
+      <h2 class="font-special text-sm font-bold tracking-tighter uppercase">
+        Khánh Bán<span class="text-cyan-400">Sub</span>
+      </h2>
+    </header>
+
+    <div class="sidebar-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <aside class="sidebar" id="sidebar">
       <div class="p-8">
-        <div
-          class="flex items-center cursor-pointer"
-          onclick="window.location.href='trangchu.html'"
-        >
-          <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
-          <h2 class="font-special text-xl font-bold tracking-tighter">
-            Khánh Bán<span class="text-cyan-400">Sub</span>
-          </h2>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center cursor-pointer" onclick="navigateTo('trangchu.html')">
+              <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
+              <h2 class="font-special text-lg font-bold tracking-tighter">
+                Khánh Bán<span class="text-cyan-400">Sub</span>
+              </h2>
+            </div>
+            <button onclick="toggleMenu()" class="lg:hidden text-gray-500">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
         <div class="flex items-center mt-3 space-x-2">
           <div class="status-pulse"></div>
-          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]"
-            >Hệ thống trực tuyến</span
-          >
+          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]">Hệ thống trực tuyến</span>
         </div>
       </div>
-
       <nav class="mt-4">
-        <div class="nav-item" onclick="window.location.href='trangchu.html'">
+        <div class="nav-item" onclick="navigateTo('trangchu.html')">
           <i class="fas fa-th-large mr-4 w-4"></i> Quản Lý Chung
         </div>
-
-        <div
-          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
-        >
-          Danh mục lệnh
+        <div class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold">Danh Sách Dịch Vụ</div>
+        <div class="nav-item" onclick="navigateTo('facebook.html')">
+          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook 
         </div>
-
-        <div class="nav-item" onclick="window.location.href='facebook.html'">
-          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook Giao thức
+        <div class="nav-item" onclick="navigateTo('tiktok.html')">
+          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok 
         </div>
-
-        <div class="nav-item" onclick="window.location.href='tiktok.html'">
-          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok Giao thức
-        </div>
-
-        <div class="nav-item" onclick="window.location.href='instagram.html'">
-          <i class="fab fa-instagram mr-4 w-4"></i> Instagram Giao thức
-        </div>
-
-        <div class="nav-item" onclick="window.location.href='youtube.html'">
-          <i class="fab fa-youtube mr-4 w-4"></i> YouTube Giao thức
-        </div>
-
-        <div
-          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
-        >
-          Dữ liệu
-        </div>
-
         <div class="nav-item active">
+          <i class="fab fa-instagram mr-4 w-4"></i> Instagram 
+        </div>
+        <div class="nav-item" onclick="navigateTo('youtube.html')">
+          <i class="fab fa-youtube mr-4 w-4"></i> YouTube 
+        </div>
+        <div class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold">Dữ liệu hệ thống</div>
+        <div class="nav-item" onclick="navigateTo('lichsu.html')">
           <i class="fas fa-history mr-4 w-4"></i> Lịch sử giao dịch
         </div>
-
-        <div
-          class="nav-item text-red-500/70 hover:text-red-500 mt-6"
-          onclick="if(confirm('Xác nhận ngắt kết nối?')) window.location.href='login.html'"
-        >
+        <div class="nav-item text-red-500/70 hover:text-red-500 mt-6" onclick="logout()">
           <i class="fas fa-power-off mr-4 w-4"></i> Logout
         </div>
       </nav>
     </aside>
 
     <main class="main-content">
-      <div class="mb-10 border-l-2 border-cyan-400 pl-6">
-        <h1 class="font-special text-3xl uppercase tracking-tighter">
-          Transaction <span class="text-cyan-400">History</span>
-        </h1>
-        <p
-          class="text-[10px] text-gray-600 tracking-[0.4em] mt-2 uppercase italic"
-        >
-          Truy xuất dữ liệu giao dịch gần nhất
-        </p>
-      </div>
+      <div class="maintenance-container">
+        <i class="fas fa-microchip gear-anim"></i>
 
-      <div class="nexus-table-container">
-        <table class="nexus-table">
-          <thead>
-            <tr>
-              <th>ID/Thời gian</th>
-              <th>Dịch vụ</th>
-              <th>Địa chỉ mục tiêu</th>
-              <th>Số lượng</th>
-              <th>Thanh toán</th>
-              <th>Trạng thái</th>
-            </tr>
-          </thead>
-          <tbody id="history-body"></tbody>
-        </table>
-        <div
-          id="empty-msg"
-          class="hidden p-20 text-center text-gray-600 uppercase text-[10px] tracking-[0.5em]"
-        >
-          <i class="fas fa-database block text-2xl mb-4"></i>
-          Chưa có bản ghi giao dịch nào
+        <h1 class="font-special text-xl lg:text-2xl mb-6 tracking-tighter uppercase">
+          Instagram <span class="text-cyan-400">Update</span>
+        </h1>
+
+        <div class="space-y-4">
+          <p class="text-gray-300 text-sm leading-relaxed px-4">
+            Hệ thống giao tiếp API
+            <span class="text-cyan-400 font-bold uppercase">Instagram</span>
+            đang được nâng cấp định kỳ để đảm bảo tính ổn định.
+          </p>
+
+          <p class="text-gray-400 text-[10px] lg:text-[11px] italic uppercase tracking-[0.2em] leading-loose">
+            Vui lòng quay lại sau ít phút.
+            <br />KHÁNH BÁN SUB Trân trọng cảm ơn!
+          </p>
+        </div>
+
+        <div class="mt-10 pt-6 border-t border-white/5">
+          <button
+            onclick="navigateTo('trangchu.html')"
+            class="w-full sm:w-auto px-8 py-3 bg-cyan-400 text-black text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_15px_rgba(0,242,255,0.3)]"
+          >
+            <i class="fas fa-home mr-2"></i> Trở lại trung tâm lệnh
+          </button>
         </div>
       </div>
     </main>
 
     <script>
-      window.onload = () => {
-        const historyBody = document.getElementById("history-body");
-        const emptyMsg = document.getElementById("empty-msg");
+      function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+      }
 
-        // Lấy dữ liệu từ localStorage
-        const lastOrder = JSON.parse(localStorage.getItem("nexusOrder"));
+      function navigateTo(url) {
+        document.body.style.opacity = "0.5";
+        setTimeout(() => {
+          window.location.href = url;
+        }, 200);
+      }
 
-        if (!lastOrder) {
-          emptyMsg.classList.remove("hidden");
-          return;
-        }
-
-        // Tạo dòng dữ liệu
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td><span class="text-[9px] text-gray-500 block mb-1">#NX-${Math.floor(
-            Math.random() * 9999
-          )}</span>${lastOrder.Time}</td>
-          <td class="text-white font-bold">${lastOrder.Dịch_Vụ || "N/A"}</td>
-          <td class="text-cyan-400 italic lowercase underline">${lastOrder.Link.substring(
-            0,
-            25
-          )}...</td>
-          <td class="text-white font-mono">${lastOrder.Số_Lượng}</td>
-          <td class="text-cyan-400 font-bold">${lastOrder.Tổng_Tiền}</td>
-          <td><span class="status-badge"><i class="fas fa-spinner fa-spin mr-1"></i> Đang chạy</span></td>
-        `;
-        historyBody.appendChild(row);
-      };
+      function logout() {
+        if (confirm("Xác nhận ngắt kết nối khỏi hệ thống?"))
+          window.location.href = "index.html";
+      }
     </script>
   </body>
 </html>

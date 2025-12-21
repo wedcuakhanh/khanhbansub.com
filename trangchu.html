@@ -31,74 +31,75 @@
         font-family: "Syncopate", sans-serif;
       }
 
-      /* Hiệu ứng lưới nền */
+      /* Lưới nền */
       .laser-grid {
         position: fixed;
         inset: 0;
-        background-image: linear-gradient(
-            to right,
-            rgba(0, 242, 255, 0.05) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            to bottom,
-            rgba(0, 242, 255, 0.05) 1px,
-            transparent 1px
-          );
+        background-image: linear-gradient(to right, rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
         background-size: 50px 50px;
         perspective: 1000px;
         transform: rotateX(60deg) translateY(-100px);
         z-index: -1;
-        mask-image: linear-gradient(
-          to bottom,
-          transparent,
-          black 50%,
-          transparent
-        );
+        mask-image: linear-gradient(to bottom, transparent, black 50%, transparent);
       }
 
-      /* Sidebar */
+      /* Mobile Header */
+      .mobile-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        z-index: 100;
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+      }
+
+      @media (min-width: 1024px) {
+        .mobile-header { display: none; }
+      }
+
+      /* Sidebar tối ưu Mobile */
       .sidebar {
         width: 280px;
         height: 100vh;
-        background: rgba(255, 255, 255, 0.01);
+        background: rgba(5, 5, 5, 0.98);
         backdrop-filter: blur(25px);
         border-right: 1px solid rgba(255, 255, 255, 0.1);
         position: fixed;
-        left: 0;
+        left: -280px;
         top: 0;
-        z-index: 50;
+        z-index: 150;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .sidebar::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 1px;
-        height: 100%;
-        background: linear-gradient(
-          to bottom,
-          transparent,
-          var(--accent),
-          transparent
-        );
+      .sidebar.active { left: 0; }
+
+      @media (min-width: 1024px) {
+        .sidebar { left: 0; background: rgba(255, 255, 255, 0.01); }
       }
 
-      /* LOGO TRÒN */
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.8);
+        z-index: 140;
+      }
+      .sidebar-overlay.active { display: block; }
+
       .brand-logo {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         object-fit: cover;
         border-radius: 50%;
         border: 2px solid var(--border);
-        filter: drop-shadow(0 0 8px var(--accent));
-        margin-right: 12px;
-        transition: transform 0.5s ease;
-      }
-
-      .brand-logo:hover {
-        transform: rotate(360deg);
+        filter: drop-shadow(0 0 5px var(--accent));
       }
 
       .nav-item {
@@ -114,8 +115,7 @@
         cursor: pointer;
       }
 
-      .nav-item:hover,
-      .nav-item.active {
+      .nav-item:hover, .nav-item.active {
         color: var(--accent);
         background: rgba(0, 242, 255, 0.05);
         border-left: 3px solid var(--accent);
@@ -123,89 +123,37 @@
       }
 
       .main-content {
-        margin-left: 280px;
-        padding: 40px;
-        display: flex;
-        justify-content: center;
+        padding: 80px 15px 40px 15px;
+        transition: 0.3s;
       }
 
-      .feed-container {
-        width: 100%;
-        max-width: 600px;
+      @media (min-width: 1024px) {
+        .main-content { margin-left: 280px; padding: 40px; }
       }
 
-      /* Bài viết Admin */
       .admin-post {
         background: var(--card-bg);
         border: 1px solid var(--border);
         border-radius: 4px;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
         box-shadow: 0 0 15px var(--admin-glow);
         overflow: hidden;
+        backdrop-filter: blur(5px);
       }
 
-      .post-header {
-        display: flex;
-        align-items: center;
-        padding: 20px;
-        border-bottom: 1px solid rgba(0, 242, 255, 0.1);
-      }
-
-      .admin-avatar {
-        width: 45px;
-        height: 45px;
-        border: 1px solid var(--accent);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 242, 255, 0.1);
-        border-radius: 2px;
-      }
-
-      .post-body {
-        padding: 20px;
-      }
-
-      /* CONTAINER ẢNH TRONG BÀI VIẾT */
       .post-image-container {
         margin-top: 15px;
-        position: relative;
         border: 1px solid rgba(0, 242, 255, 0.2);
-        border-radius: 4px;
-        overflow: hidden;
         background: #000;
+        overflow: hidden;
       }
 
       .post-image-container img {
         width: 100%;
         height: auto;
-        display: block;
         opacity: 0.85;
-        transition: 0.5s ease;
       }
 
-      .post-image-container:hover img {
-        opacity: 1;
-        transform: scale(1.03);
-      }
-
-      .post-tag {
-        font-size: 9px;
-        color: var(--accent);
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-        display: block;
-        font-weight: bold;
-      }
-
-      .post-content {
-        font-size: 13px;
-        color: #aaa;
-        line-height: 1.6;
-      }
-
-      /* Đèn tín hiệu trực tuyến */
       .status-pulse {
         width: 8px;
         height: 8px;
@@ -215,28 +163,12 @@
       }
 
       @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-          box-shadow: 0 0 5px var(--accent);
-        }
-        50% {
-          opacity: 0.3;
-          box-shadow: 0 0 0px var(--accent);
-        }
-      }
-      /* Hiệu ứng mờ nền cho nội dung chính */
-      #main-content-wrapper {
-        transition: filter 0.6s ease;
+        0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--accent); }
+        50% { opacity: 0.3; }
       }
 
-      .blur-bg {
-        filter: blur(15px);
-        pointer-events: none;
-        user-select: none;
-      }
+      .blur-bg { filter: blur(15px); pointer-events: none; }
 
-      /* Giao diện Bảng thông báo trung tâm */
       #notice-modal {
         position: fixed;
         inset: 0;
@@ -244,215 +176,150 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.85);
       }
 
       .notice-box {
         background: #0a0a0a;
         border: 1px solid #00f2ff;
-        width: 90%;
-        max-width: 450px;
-        padding: 30px;
-        box-shadow: 0 0 50px rgba(0, 242, 255, 0.2);
-        position: relative;
-        animation: fadeIn 0.5s ease;
-      }
-
-      .notice-header {
-        border-bottom: 1px solid rgba(0, 242, 255, 0.2);
-        padding-bottom: 15px;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .btn-confirm {
-        background: #00f2ff;
-        color: #000;
         width: 100%;
-        padding: 12px;
-        font-family: "Syncopate", sans-serif;
-        font-size: 10px;
-        font-weight: bold;
-        margin-top: 25px;
-        transition: 0.3s;
-        text-transform: uppercase;
-      }
-
-      .btn-confirm:hover {
-        letter-spacing: 2px;
-        box-shadow: 0 0 20px #00f2ff;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        max-width: 450px;
+        padding: 25px;
+        box-shadow: 0 0 50px rgba(0, 242, 255, 0.2);
       }
     </style>
   </head>
   <body>
     <div id="notice-modal">
       <div class="notice-box">
-        <div class="notice-header">
+        <div class="flex items-center gap-3 border-b border-cyan-400/20 pb-4 mb-4">
           <i class="fas fa-bullhorn text-cyan-400 text-xl"></i>
-          <h2 class="font-special text-sm tracking-widest text-cyan-400">
-            THÔNG BÁO QUAN TRỌNG
-          </h2>
+          <h2 class="font-special text-xs tracking-widest text-cyan-400">THÔNG BÁO QUAN TRỌNG</h2>
         </div>
 
-        <div class="space-y-4 text-[11px] text-gray-400 uppercase tracking-wider leading-relaxed">
-          <p>> <span class="text-white">FANPAGE MỚI:</span> 
+        <div class="space-y-4 text-[10px] text-gray-400 uppercase tracking-wider leading-relaxed">
+          <p>> <span class="text-white">FANPAGE CHÍNH THỨC:</span> 
             <a href="https://www.facebook.com/profile.php?id=61580607883714" target="_blank" class="text-cyan-400 underline ml-1">Khánh Bán Sub</a>
           </p>
+          <p>> <span class="text-white">CẢNH BÁO:</span> HIỆN TẠI CÓ NHIỀU TRANG GIẢ MẠO, VUI LÒNG CHỈ GIAO DỊCH TẠI ĐÂY.</p>
+          <p>> <span class="text-white">BẢO TRÌ:</span> HỆ THỐNG NẠP THẺ CÀO SẼ BẢO TRÌ VÀO 12H ĐÊM NAY.</p>
           
-          <p>
-            > <span class="text-white">HỖ TRỢ:</span> VUI LÒNG LIÊN HỆ QUA FANPAGE MỚI ĐỂ ĐƯỢC XỬ LÝ DỊCH VỤ TỐT NHẤT.
-          </p>
-
-          <p>
-            > <span class="text-white">ADMIN:</span> 
-            <a href="https://www.facebook.com/quoc.khanh.280706" target="_blank" class="text-cyan-400 underline ml-1">Trần Khánh </a>
-          </p>
-
-          <div class="p-3 bg-cyan-400/5 border border-cyan-400/10 italic text-cyan-400 normal-case">
-            Cảm ơn bạn đã đồng hành cùng Khánh Bán Sub Chúng tôi xin lỗi vì sự bất tiện này! ❤️
+          <div class="p-3 bg-cyan-400/5 border border-cyan-400/10 italic text-cyan-400 normal-case text-center">
+            "Sự hài lòng của khách hàng là ưu tiên số 1 của chúng tôi!"
           </div>
         </div>
 
-        <button class="btn-confirm" onclick="acceptNotice()">
+        <button class="w-full bg-cyan-400 text-black py-3 mt-6 font-special text-[10px] font-bold tracking-widest hover:tracking-[0.2em] transition-all" onclick="acceptNotice()">
           XÁC NHẬN & TRUY CẬP
         </button>
       </div>
     </div>
 
-    <div id="main-content-wrapper" class="blur-bg"></div>
-    <div class="laser-grid"></div>
-</body>
-    <aside class="sidebar">
-      <div class="p-8">
-        <div
-          class="flex items-center cursor-pointer"
-          onclick="navigateTo('trangchu.html')"
-        >
-          <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
-          <h2 class="font-special text-xl font-bold tracking-tighter">
-            Khánh Bán<span class="text-cyan-400">Sub</span>
-          </h2>
-        </div>
-        <div class="flex items-center mt-3 space-x-2">
-          <div class="status-pulse"></div>
-          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]"
-            >Hệ thống trực tuyến</span
-          >
-        </div>
+    <header class="mobile-header">
+      <button onclick="toggleSidebar()" class="text-cyan-400 text-xl mr-4">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="flex items-center">
+        <img src="./img/ack.jpg" alt="Logo" class="brand-logo mr-2" />
+        <h2 class="font-special text-xs font-bold tracking-tighter">Khánh Bán<span class="text-cyan-400">Sub</span></h2>
       </div>
+    </header>
 
-      <nav class="mt-4">
-        <div class="nav-item active" onclick="navigateTo('trangchu.html')">
-          <i class="fas fa-th-large mr-4 w-4"></i> Quản Lý Chung
-        </div>
-        <div
-          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
-        >
-          Danh mục lệnh
-        </div>
-        <div class="nav-item" onclick="navigateTo('facebook.html')">
-          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook Giao thức
-        </div>
-        <div class="nav-item" onclick="navigateTo('tiktok.html')">
-          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok Giao thức
-        </div>
-        <div class="nav-item" onclick="navigateTo('instagram.html')">
-          <i class="fab fa-instagram mr-4 w-4"></i> Instagram Giao thức
-        </div>
-        <div class="nav-item" onclick="navigateTo('youtube.html')">
-          <i class="fab fa-youtube mr-4 w-4"></i> YouTube Giao thức
-        </div>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-        <div
-          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
-        >
-          Dữ liệu hệ thống
-        </div>
-        <div class="nav-item" onclick="navigateTo('lichsu.html')">
-          <i class="fas fa-history mr-4 w-4"></i> Lịch sử giao dịch
-        </div>
-
-        <div
-          class="nav-item text-red-500/70 hover:text-red-500 mt-6"
-          onclick="logout()"
-        >
-          <i class="fas fa-power-off mr-4 w-4"></i> Logout
-        </div>
-      </nav>
-    </aside>
-
-    <main class="main-content">
-      <div class="feed-container">
-        <div class="mb-12 border-l-2 border-cyan-400 pl-6">
-          <h1 class="font-special text-3xl uppercase tracking-tighter">
-            Quản Lý <span class="text-cyan-400">Hệ Thống</span>
-          </h1>
-          <p class="text-[10px] text-gray-600 tracking-[0.5em] mt-2 uppercase">
-            Giao thức bảo mật mã hóa 256-BIT
-          </p>
-        </div>
-
-        <div class="admin-post">
-          <div class="post-header">
-            <div class="admin-avatar">
-              <i class="fas fa-user-cog text-cyan-400"></i>
+    <div id="main-content-wrapper" class="blur-bg">
+      <div class="laser-grid"></div>
+      
+      <aside class="sidebar" id="sidebarMenu">
+        <div class="p-8">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center cursor-pointer" onclick="navigateTo('trangchu.html')">
+              <img src="./img/ack.jpg" alt="Logo" class="brand-logo mr-3" />
+              <h2 class="font-special text-lg font-bold tracking-tighter">Khánh Bán<span class="text-cyan-400">Sub</span></h2>
             </div>
-            <div class="ml-4">
-              <h4
-                class="font-special text-[11px] text-white tracking-widest uppercase"
-              >
-                Khánh Bán Sub
-              </h4>
-              <p class="text-[9px] text-gray-500 uppercase mt-1">
-                Ghim hệ thống • Vừa xong
-              </p>
-            </div>
+            <button onclick="toggleSidebar()" class="lg:hidden text-gray-500"><i class="fas fa-times"></i></button>
           </div>
-          <div class="post-body">
-            <span class="post-tag">// Thông tin quản lý</span>
-            <p class="post-content">
-              Chào mừng Operator quay lại giao diện quản lý chung. Tại đây bạn
-              có thể theo dõi toàn bộ trạng thái của các module dịch vụ. Tất cả
-              hệ thống nạp tiền và xử lý đơn hàng đang ở trạng thái tối ưu.
-            </p>
+          <div class="flex items-center mt-3 space-x-2">
+            <div class="status-pulse"></div>
+            <span class="text-[9px] text-gray-500 uppercase tracking-widest">Hệ thống trực tuyến</span>
+          </div>
+        </div>
 
-            <div class="post-image-container">
-              <img
-                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80"
-                alt="System Status"
-              />
-              <div
-                class="absolute bottom-0 left-0 w-full p-2 bg-black/70 text-[8px] text-cyan-400 font-mono border-t border-cyan-900/50"
-              >
-                <i class="fas fa-shield-alt mr-2"></i>DATA_ENCRYPTED: TRUE //
-                STATUS: SECURED
+        <nav class="mt-4">
+          <div class="nav-item active" onclick="navigateTo('trangchu.html')"><i class="fas fa-th-large mr-4 w-4"></i> Quản Lý Chung</div>
+          <div class="px-8 py-4 text-[9px] text-gray-600 uppercase font-bold">Dịch vụ mạng xã hội</div>
+          <div class="nav-item" onclick="navigateTo('facebook.html')"><i class="fab fa-facebook-f mr-4 w-4"></i> Facebook</div>
+          <div class="nav-item" onclick="navigateTo('tiktok.html')"><i class="fab fa-tiktok mr-4 w-4"></i> TikTok</div>
+          <div class="nav-item" onclick="navigateTo('instagram.html')"><i class="fab fa-instagram mr-4 w-4"></i> Instagram</div>
+          <div class="nav-item" onclick="navigateTo('youtube.html')"><i class="fab fa-youtube mr-4 w-4"></i> YouTube</div>
+          <div class="px-8 py-4 text-[9px] text-gray-600 uppercase font-bold">Cá nhân</div>
+          <div class="nav-item" onclick="navigateTo('lichsu.html')"><i class="fas fa-history mr-4 w-4"></i> Lịch sử đơn</div>
+          <div class="nav-item text-red-500/70 mt-6" onclick="logout()"><i class="fas fa-power-off mr-4 w-4"></i> Logout</div>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <div class="max-w-[600px] mx-auto">
+          <div class="mb-10 border-l-2 border-cyan-400 pl-4 lg:pl-6">
+            <h1 class="font-special text-xl lg:text-3xl uppercase tracking-tighter">Hệ Thống <span class="text-cyan-400">Điều Hành</span></h1>
+            <p class="text-[8px] lg:text-[10px] text-gray-600 tracking-[0.3em] mt-2 uppercase">Giao thức bảo mật mã hóa 256-BIT</p>
+          </div>
+
+          <div class="admin-post">
+            <div class="flex items-center p-4 border-b border-white/5">
+              <div class="w-10 h-10 border border-cyan-400 flex items-center justify-center bg-cyan-400/10 rounded">
+                <i class="fas fa-user-cog text-cyan-400"></i>
+              </div>
+              <div class="ml-4">
+                <h4 class="font-special text-[10px] text-white">Khánh Bán Sub</h4>
+                <p class="text-[8px] text-gray-500 uppercase mt-1">Ghim hệ thống • Vừa xong</p>
+              </div>
+            </div>
+            <div class="p-4">
+              <span class="text-[9px] text-cyan-400 font-bold block mb-2">// THÔNG BÁO CẬP NHẬT</span>
+              <p class="text-xs text-gray-400 leading-relaxed">
+                Hệ thống vừa cập nhật thêm cụm Server Facebook mới (Speed cực nhanh). 
+                Các đơn hàng tăng Like/Sub sẽ được xử lý ngay lập tức sau khi nhấn thanh toán.
+              </p>
+              <div class="post-image-container">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Status" />
+                <div class="p-2 bg-black/80 text-[7px] text-cyan-400 font-mono">STATUS: OPTIMIZED // SERVER_LOAD: 12%</div>
               </div>
             </div>
           </div>
+
+          <div class="admin-post">
+            <div class="flex items-center p-4 border-b border-white/5">
+              <div class="w-10 h-10 border border-cyan-400 flex items-center justify-center bg-cyan-400/10 rounded">
+                <i class="fas fa-shield-alt text-cyan-400"></i>
+              </div>
+              <div class="ml-4">
+                <h4 class="font-special text-[10px] text-white">Security Center</h4>
+                <p class="text-[8px] text-gray-500 uppercase mt-1">Bảo mật • 2 giờ trước</p>
+              </div>
+            </div>
+            <div class="p-4">
+              <span class="text-[9px] text-cyan-400 font-bold block mb-2">// HƯỚNG DẪN BẢO MẬT</span>
+              <p class="text-xs text-gray-400 leading-relaxed">
+                Để đảm bảo an toàn cho tài khoản, vui lòng không chia sẻ mật khẩu hoặc nội dung chuyển khoản cho người lạ. 
+                Hệ thống chỉ hỗ trợ qua Fanpage chính chủ duy nhất.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
 
     <script>
+      function toggleSidebar() {
+        document.getElementById('sidebarMenu').classList.toggle('active');
+        document.getElementById('sidebarOverlay').classList.toggle('active');
+      }
+
       function navigateTo(url) {
         document.body.style.opacity = "0.5";
-        document.body.style.transition = "0.3s";
-        setTimeout(() => {
-          window.location.href = url;
-        }, 200);
+        setTimeout(() => { window.location.href = url; }, 200);
       }
 
       function logout() {
@@ -460,19 +327,149 @@
           window.location.href = "index.html";
         }
       }
+
       function acceptNotice() {
         const modal = document.getElementById("notice-modal");
         const wrapper = document.getElementById("main-content-wrapper");
-
-        // Hiệu ứng biến mất mượt mà
         modal.style.opacity = "0";
         modal.style.transition = "0.5s";
-
         setTimeout(() => {
           modal.style.display = "none";
-          wrapper.classList.remove("blur-bg"); // Gỡ bỏ mờ
+          wrapper.classList.remove("blur-bg");
         }, 500);
       }
     </script>
   </body>
 </html>
+<div id="cyber-chat" class="fixed bottom-5 right-5 z-[9999] font-sans">
+    <button onclick="toggleChat()" id="chat-trigger" class="relative group">
+        <div class="absolute -inset-1 bg-cyan-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+        <div class="relative w-14 h-14 bg-black border border-cyan-400 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,242,255,0.4)] overflow-hidden">
+            <img src="./img/ack.jpg" class="w-full h-full object-cover" onerror="this.src='https://i.imgur.com/8Km9tpg.png'">
+        </div>
+        <div class="absolute top-0 right-0 w-4 h-4 bg-green-500 border-2 border-black rounded-full animate-pulse"></div>
+    </button>
+
+    <div id="chat-window" class="hidden absolute bottom-20 right-0 w-[320px] sm:w-[400px] bg-[#050505] border border-cyan-400 shadow-[0_0_50px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden rounded-xl">
+        
+        <div class="bg-gradient-to-r from-cyan-950 to-black border-b border-cyan-400/30 p-0">
+            <div class="flex justify-between items-center p-4 pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="font-special text-[10px] text-cyan-400 tracking-tighter">KHÁNH BÁN SUB SYSTEM</span>
+                </div>
+                <button onclick="toggleChat()" class="text-gray-500 hover:text-cyan-400"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="flex text-[9px] font-bold uppercase tracking-widest cursor-pointer">
+                <div id="tab-bot" onclick="switchTab('bot')" class="flex-1 py-2 text-center border-b-2 border-cyan-400 text-cyan-400">Trợ Lý AI</div>
+                <div id="tab-global" onclick="switchTab('global')" class="flex-1 py-2 text-center border-b-2 border-transparent text-gray-500 hover:text-cyan-200">Cộng Đồng</div>
+            </div>
+        </div>
+
+        <div id="chat-messages" class="h-96 overflow-y-auto p-4 space-y-4 text-[12px] scrollbar-thin bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
+            </div>
+
+        <div class="p-3 border-t border-cyan-400/20 bg-black/80">
+            <div class="flex gap-2 items-center">
+                <input type="text" id="chat-input" placeholder="Nhập tin nhắn..." class="flex-1 bg-cyan-950/20 border border-cyan-900 px-3 py-2 text-xs text-cyan-100 focus:outline-none focus:border-cyan-400">
+                <button onclick="sendMessage()" class="bg-cyan-400 text-black px-4 py-2 text-[10px] font-black uppercase hover:bg-white transition-all">Gửi</button>
+            </div>
+            <div class="mt-2 flex justify-center gap-4">
+                <a href="https://www.facebook.com/quoc.khanh.280706" target="_blank" class="text-[9px] text-gray-500 hover:text-blue-400"><i class="fab fa-facebook-messenger mr-1"></i> Messenger</a>
+                <a href="0376447206" target="_blank" class="text-[9px] text-gray-500 hover:text-blue-300"><i class="fas fa-phone-alt mr-1"></i> Zalo Admin</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #chat-window { animation: chatAppear 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28); }
+    @keyframes chatAppear { from { transform: scale(0.8) translateY(100px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+    .msg-bubble { padding: 10px; border-radius: 10px; max-width: 85%; position: relative; border: 1px solid rgba(0, 242, 255, 0.1); }
+    .user-style { background: rgba(0, 242, 255, 0.1); border-color: rgba(0, 242, 255, 0.3); align-self: flex-end; color: #fff; }
+    .bot-style { background: rgba(255, 255, 255, 0.05); align-self: flex-start; color: #ccc; }
+    .global-user-style { background: rgba(255, 255, 255, 0.02); border-color: rgba(255, 255, 255, 0.1); align-self: flex-start; }
+</style>
+
+<script>
+   let currentTab = 'bot';
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+
+    // Danh sách nội dung chat ảo cho thật nhất
+    const virtualUsers = ["Hoàng Nam", "Minh Tuấn", "Thanh Hằng", "User_99x", "Admin_Support", "Khách_Ẩn_Danh", "Trùm_Sub", "Quốc Anh", "Mai Phương"];
+    const virtualMessages = [
+        "Vừa nạp 100k, hệ thống duyệt nhanh quá!",
+        "Dịch vụ bên Khánh lúc nào cũng uy tín.",
+        "Mọi người cho hỏi gói sub nào lên nhanh nhất?",
+        "Tăng 1000 follow TikTok chỉ mất 10 phút, quá đỉnh!",
+        "Ae nạp tiền cứ quét mã QR là nhanh nhất nhé.",
+        "Check ib hỗ trợ mình với admin ơi.",
+        "Hệ thống mượt thật, không thấy lag tí nào.",
+        "Follow này có bảo hành không mọi người?",
+        "Mới test thử 20k follow, lên đều lắm ae.",
+        "Bảo hành bù sub ở đâu vậy ạ?",
+        "Cảm ơn Admin Khánh nhé, đơn xong rồi ạ.",
+        "Tăng view YouTube có bị tụt không nhỉ?"
+    ];
+
+    // Hàm chuyển Tab
+    function switchTab(tab) {
+        currentTab = tab;
+        document.getElementById('tab-bot').className = `flex-1 py-2 text-center border-b-2 ${tab === 'bot' ? 'border-cyan-400 text-cyan-400' : 'border-transparent text-gray-500'}`;
+        document.getElementById('tab-global').className = `flex-1 py-2 text-center border-b-2 ${tab === 'global' ? 'border-cyan-400 text-cyan-400' : 'border-transparent text-gray-500'}`;
+        
+        chatMessages.innerHTML = '';
+        if (tab === 'bot') {
+            loadBotWelcome();
+        } else {
+            // Load tin nhắn cũ khi vào tab cộng đồng
+            appendMsg('Admin_Khánh', 'Chào mừng mọi người đến với nhóm chat chung!', 'bot-style');
+        }
+    }
+
+    // Gửi tin nhắn
+    function sendMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+        appendMsg('BẠN', text, 'user-style');
+        chatInput.value = '';
+
+        if (currentTab === 'bot') {
+            setTimeout(() => botReply(text.toLowerCase()), 700);
+        }
+    }
+
+    // Hàm hiển thị tin nhắn
+    function appendMsg(sender, text, style) {
+        const div = document.createElement('div');
+        div.className = `flex flex-col ${sender === 'BẠN' ? 'items-end' : 'items-start'} animate-fadeIn mb-4`;
+        div.innerHTML = `
+            <span class="text-[8px] text-gray-500 mb-1 px-1 font-mono">${sender} • ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+            <div class="msg-bubble ${style} text-[11px]">${text}</div>
+        `;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // LOGIC CHAT ẢO (MỖI 8 GIÂY)
+    setInterval(() => {
+        if (currentTab === 'global') {
+            const randomUser = virtualUsers[Math.floor(Math.random() * virtualUsers.length)];
+            const randomMsg = virtualMessages[Math.floor(Math.random() * virtualMessages.length)];
+            
+            // Chỉ gửi tin nhắn ảo nếu Tab đang mở là Cộng Đồng
+            appendMsg(randomUser, randomMsg, 'global-user-style shadow-[0_0_10px_rgba(255,255,255,0.02)]');
+        }
+    }, 8000); // 8000ms = 8 giây
+
+    function botReply(input) {
+        let r = "Hệ thống chưa hiểu lệnh. Nhập 'ADMIN' để gặp Trần Khánh.";
+        if (input.includes('nạp')) r = "Bạn quét QR Bank, tiền sẽ vào tài khoản sau 1-5p.";
+        if (input.includes('giá')) r = "Giá được cập nhật tại trang dịch vụ, cam kết rẻ nhất.";
+        if (input.includes('admin')) r = "Liên hệ Admin qua Messenger: <a href='https://m.me/quoc.khanh.280706' target='_blank' class='text-cyan-400 underline'>Tại đây</a>";
+        appendMsg('BOT_AI', r, 'bot-style');
+    }
+
+    function toggleChat() { document.getElementById('chat-window').classList.toggle('hidden'); }
+    switchTab('bot'); // Khởi tạo
+</script>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QUỐC KHÁNH BÁN SUB | Instagram Giao Thức - Đang Cập Nhật</title>
+    <title>QUỐC KHÁNH BÁN SUB | Instagram - Đang Cập Nhật</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
@@ -57,17 +57,29 @@
         );
       }
 
-      /* SIDEBAR */
+      /* SIDEBAR RESPONSIVE */
       .sidebar {
         width: 280px;
         height: 100vh;
-        background: rgba(255, 255, 255, 0.01);
+        background: rgba(5, 5, 5, 0.95);
         backdrop-filter: blur(25px);
         border-right: 1px solid rgba(255, 255, 255, 0.1);
         position: fixed;
-        left: 0;
+        left: -280px;
         top: 0;
-        z-index: 50;
+        z-index: 100;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      @media (min-width: 1024px) {
+        .sidebar {
+          left: 0;
+          background: rgba(255, 255, 255, 0.01);
+        }
       }
 
       .sidebar::after {
@@ -85,19 +97,35 @@
         );
       }
 
+      /* MOBILE HEADER */
+      .mobile-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        z-index: 80;
+        border-bottom: 1px solid var(--border);
+      }
+
+      @media (min-width: 1024px) {
+        .mobile-header {
+          display: none;
+        }
+      }
+
       .brand-logo {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         object-fit: cover;
         border-radius: 50%;
         border: 2px solid var(--border);
         filter: drop-shadow(0 0 8px var(--accent));
         margin-right: 12px;
-        transition: transform 0.5s ease;
-      }
-
-      .brand-logo:hover {
-        transform: rotate(360deg);
       }
 
       .nav-item {
@@ -123,12 +151,19 @@
 
       /* NỘI DUNG THÔNG BÁO */
       .main-content {
-        margin-left: 280px;
-        padding: 40px;
+        padding: 80px 20px 40px 20px;
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
+        transition: 0.4s;
+      }
+
+      @media (min-width: 1024px) {
+        .main-content {
+          margin-left: 280px;
+          padding: 40px;
+        }
       }
 
       .maintenance-container {
@@ -136,11 +171,17 @@
         width: 100%;
         background: var(--card-bg);
         border: 1px solid var(--border);
-        padding: 50px 30px;
+        padding: 40px 20px;
         text-align: center;
         box-shadow: 0 0 30px var(--admin-glow);
         position: relative;
         backdrop-filter: blur(10px);
+      }
+
+      @media (min-width: 640px) {
+        .maintenance-container {
+          padding: 50px 30px;
+        }
       }
 
       .maintenance-container::before {
@@ -154,6 +195,7 @@
         font-size: 8px;
         font-weight: bold;
         padding: 2px 12px;
+        white-space: nowrap;
       }
 
       .status-pulse {
@@ -176,10 +218,17 @@
       }
 
       .gear-anim {
-        font-size: 50px;
+        font-size: 40px;
         color: var(--accent);
-        margin-bottom: 25px;
+        margin-bottom: 20px;
         animation: spin 4s linear infinite;
+      }
+
+      @media (min-width: 640px) {
+        .gear-anim {
+          font-size: 50px;
+          margin-bottom: 25px;
+        }
       }
 
       @keyframes spin {
@@ -187,21 +236,49 @@
           transform: rotate(360deg);
         }
       }
+
+      /* Overlay */
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 90;
+      }
+      .sidebar-overlay.active {
+        display: block;
+      }
     </style>
   </head>
   <body>
     <div class="laser-grid"></div>
 
-    <aside class="sidebar">
+    <header class="mobile-header">
+      <button onclick="toggleMenu()" class="text-white text-2xl mr-4">
+        <i class="fas fa-bars text-cyan-400"></i>
+      </button>
+      <h2 class="font-special text-sm font-bold tracking-tighter uppercase">
+        Khánh Bán<span class="text-cyan-400">Sub</span>
+      </h2>
+    </header>
+
+    <div class="sidebar-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <aside class="sidebar" id="sidebar">
       <div class="p-8">
-        <div
-          class="flex items-center cursor-pointer"
-          onclick="navigateTo('trangchu.html')"
-        >
-          <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
-          <h2 class="font-special text-xl font-bold tracking-tighter">
-            Khánh Bán<span class="text-cyan-400">Sub</span>
-          </h2>
+        <div class="flex items-center justify-between">
+          <div
+            class="flex items-center cursor-pointer"
+            onclick="navigateTo('trangchu.html')"
+          >
+            <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
+            <h2 class="font-special text-lg font-bold tracking-tighter">
+              Khánh Bán<span class="text-cyan-400">Sub</span>
+            </h2>
+          </div>
+          <button onclick="toggleMenu()" class="lg:hidden text-gray-500">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
         <div class="flex items-center mt-3 space-x-2">
           <div class="status-pulse"></div>
@@ -217,19 +294,19 @@
         <div
           class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
         >
-          Danh mục lệnh
+          Danh Sách Dịch Vụ
         </div>
         <div class="nav-item" onclick="navigateTo('facebook.html')">
-          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook Giao thức
+          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook
         </div>
         <div class="nav-item" onclick="navigateTo('tiktok.html')">
-          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok Giao thức
+          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok
         </div>
         <div class="nav-item active">
-          <i class="fab fa-instagram mr-4 w-4"></i> Instagram Giao thức
+          <i class="fab fa-instagram mr-4 w-4"></i> Instagram
         </div>
         <div class="nav-item" onclick="navigateTo('youtube.html')">
-          <i class="fab fa-youtube mr-4 w-4"></i> YouTube Giao thức
+          <i class="fab fa-youtube mr-4 w-4"></i> YouTube
         </div>
         <div
           class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
@@ -252,19 +329,21 @@
       <div class="maintenance-container">
         <i class="fas fa-microchip gear-anim"></i>
 
-        <h1 class="font-special text-2xl mb-6 tracking-tighter uppercase">
+        <h1
+          class="font-special text-xl lg:text-2xl mb-6 tracking-tighter uppercase"
+        >
           Instagram <span class="text-cyan-400">Update</span>
         </h1>
 
         <div class="space-y-4">
-          <p class="text-gray-300 text-sm leading-relaxed">
+          <p class="text-gray-300 text-sm leading-relaxed px-4">
             Hệ thống giao tiếp API
             <span class="text-cyan-400 font-bold uppercase">Instagram</span>
             đang được nâng cấp định kỳ để đảm bảo tính ổn định.
           </p>
 
           <p
-            class="text-gray-400 text-[11px] italic uppercase tracking-[0.2em] leading-loose"
+            class="text-gray-400 text-[10px] lg:text-[11px] italic uppercase tracking-[0.2em] leading-loose"
           >
             Vui lòng quay lại sau ít phút.
             <br />KHÁNH BÁN SUB Trân trọng cảm ơn!
@@ -274,7 +353,7 @@
         <div class="mt-10 pt-6 border-t border-white/5">
           <button
             onclick="navigateTo('trangchu.html')"
-            class="px-8 py-3 bg-cyan-400 text-black text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_15px_rgba(0,242,255,0.3)]"
+            class="w-full sm:w-auto px-8 py-3 bg-cyan-400 text-black text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_15px_rgba(0,242,255,0.3)]"
           >
             <i class="fas fa-home mr-2"></i> Trở lại trung tâm lệnh
           </button>
@@ -283,6 +362,11 @@
     </main>
 
     <script>
+      function toggleMenu() {
+        document.getElementById("sidebar").classList.toggle("active");
+        document.getElementById("overlay").classList.toggle("active");
+      }
+
       function navigateTo(url) {
         document.body.style.opacity = "0.5";
         setTimeout(() => {
