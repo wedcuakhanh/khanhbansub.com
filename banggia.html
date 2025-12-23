@@ -3,288 +3,187 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QUỐC KHÁNH BÁN SUB</title>
+    <title>QUỐC KHÁNH SMM - BẢNG GIÁ 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
-      :root {
-        --accent: #00f2ff;
-        --bg: #030303;
-      }
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: var(--bg);
-        color: white;
-        overflow-x: hidden;
-      }
-      .font-special {
-        font-family: "Syncopate", sans-serif;
-      }
-
+      :root { --accent: #00f2ff; --bg: #030303; }
+      body { font-family: "Inter", sans-serif; background-color: var(--bg); color: white; overflow-x: hidden; }
+      .font-special { font-family: "Syncopate", sans-serif; }
+      
       .laser-grid {
-        position: fixed;
-        inset: 0;
-        background-image: linear-gradient(
-            to right,
-            rgba(0, 242, 255, 0.05) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            to bottom,
-            rgba(0, 242, 255, 0.05) 1px,
-            transparent 1px
-          );
-        background-size: 50px 50px;
-        perspective: 1000px;
-        transform: rotateX(60deg) translateY(-100px);
-        z-index: -1;
-        mask-image: linear-gradient(
-          to bottom,
-          transparent,
-          black 50%,
-          transparent
-        );
+        position: fixed; inset: 0;
+        background-image: linear-gradient(to right, rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px; perspective: 1000px;
+        transform: rotateX(60deg) translateY(-100px); z-index: -1;
+        mask-image: linear-gradient(to bottom, transparent, black 50%, transparent);
       }
 
       .btn-neon {
-        border: 1px solid var(--accent);
-        color: var(--accent);
-        box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        border: 1px solid var(--accent); color: var(--accent);
+        box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); transition: all 0.3s;
       }
-      .btn-neon:hover {
-        background: var(--accent);
-        color: black;
-        box-shadow: 0 0 40px rgba(0, 242, 255, 0.6);
-      }
+      .btn-neon:hover { background: var(--accent); color: black; box-shadow: 0 0 30px rgba(0, 242, 255, 0.6); }
 
       .bento-card {
-        background: rgba(10, 10, 10, 0.8);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(20px);
-        transition: all 0.3s;
+        background: rgba(15, 15, 15, 0.7); border: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
-      .bento-card:hover {
-        border-color: var(--accent);
-        transform: translateY(-5px);
-      }
-
-      .table-header {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding-bottom: 10px;
-        margin-bottom: 15px;
-      }
+      .bento-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px -15px rgba(0, 242, 255, 0.3); }
 
       .status-online {
-        width: 8px;
-        height: 8px;
-        background: #00ff88;
-        border-radius: 50%;
-        display: inline-block;
-        box-shadow: 0 0 10px #00ff88;
+        width: 8px; height: 8px; background: #00ff88; border-radius: 50%;
+        display: inline-block; box-shadow: 0 0 10px #00ff88; animation: pulse 2s infinite;
       }
+      @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
     </style>
   </head>
   <body>
     <div class="laser-grid"></div>
 
-    <nav
-      class="fixed w-full top-0 z-[100] p-10 flex justify-between items-center bg-transparent"
-    >
-      <div
-        class="flex items-center gap-4 cursor-pointer group"
-        onclick="location.href='index.html'"
-      >
-        <div
-          class="w-12 h-12 overflow-hidden bg-white/5 border border-white/10 rounded-lg"
-        >
-          <img src="../ack.jpg" alt="Logo" class="w-full h-full object-cover" />
+    <nav class="fixed w-full top-0 z-[100] p-4 md:p-10 flex justify-between items-center bg-black/50 md:bg-transparent backdrop-blur-md md:backdrop-blur-none">
+      <div class="flex items-center gap-3 cursor-pointer group" onclick="location.href='index.html'">
+        <div class="w-10 h-10 md:w-12 md:h-12 overflow-hidden bg-white/5 border border-white/10 rounded-lg">
+          <img src="./img/ack.jpg" alt="Logo" class="w-full h-full object-cover" />
         </div>
-        <div class="font-special text-xl font-bold tracking-tighter uppercase">
+        <div class="font-special text-sm md:text-xl font-bold tracking-tighter uppercase">
           QUỐC KHÁNH <span class="text-cyan-400">.</span>
         </div>
       </div>
-      <div class="flex gap-4">
-        <a
-          href="index.html"
-          class="px-6 py-2 text-sm font-bold opacity-60 hover:opacity-100 flex items-center"
-          >TRANG CHỦ</a
-        >
-        <a
-          href="dangnhap1.html"
-          class="btn-neon px-8 py-2 rounded-sm font-bold text-xs tracking-widest uppercase"
-          >Đăng nhập</a
-        >
+      <div class="flex gap-2 md:gap-4">
+        <a href="dangnhap1.html" class="btn-neon px-4 md:px-8 py-2 rounded-sm font-bold text-[10px] md:text-xs tracking-widest uppercase">Đăng nhập</a>
       </div>
     </nav>
 
-    <section class="pt-40 pb-20 px-6 max-w-7xl mx-auto">
-      <div class="mb-20 text-center">
-        <h2
-          class="font-special text-4xl md:text-6xl font-black tracking-tighter mb-4"
-        >
-          BẢNG GIÁ
-          <span
-            class="italic text-transparent"
-            style="-webkit-text-stroke: 1px white"
-            >DỊCH VỤ</span
-          >
+    <section class="pt-32 md:pt-48 pb-20 px-4 md:px-6 max-w-7xl mx-auto">
+      <div class="mb-12 md:mb-20 text-center">
+        <h2 class="font-special text-3xl md:text-6xl font-black tracking-tighter mb-4">
+          BẢNG GIÁ <span class="italic text-transparent" style="-webkit-text-stroke: 1px white">DỊCH VỤ</span>
         </h2>
-        <p class="text-gray-500 tracking-[0.4em] uppercase text-xs">
-          Cập nhật dữ liệu thời gian thực 2025
+        <p class="text-gray-500 tracking-[0.2em] md:tracking-[0.4em] uppercase text-[10px]">
+          Hệ thống cập nhật thời gian thực 2025
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div class="bento-card p-8 rounded-2xl">
-          <div class="table-header flex justify-between items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+        <div class="bento-card p-6 md:p-8 rounded-2xl">
+          <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
             <div class="flex items-center gap-3">
               <i class="fab fa-facebook text-cyan-400 text-2xl"></i>
               <span class="font-special text-lg font-bold">FACEBOOK</span>
             </div>
-            <span
-              class="text-[10px] bg-cyan-400/10 text-cyan-400 px-3 py-1 rounded-full font-bold"
-              >META PROTOCOL</span
-            >
+            <span class="text-[9px] bg-cyan-400/10 text-cyan-400 px-3 py-1 rounded-full font-bold">STABLE</span>
           </div>
 
-          <div class="space-y-4">
-            <div
-              class="flex justify-between items-center p-4 bg-white/5 rounded-lg border border-white/5"
-            >
+          <div class="space-y-3">
+            <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
               <div>
-                <div class="text-sm font-bold">Tăng Theo Dõi (Profile)</div>
-                <div
-                  class="text-[10px] text-gray-500 uppercase tracking-widest mt-1"
-                >
-                  Server 1 - Tốc độ cao
-                </div>
+                <div class="text-sm font-bold">Tăng Theo Dõi</div>
+                <div class="text-[10px] text-gray-500 uppercase mt-1">Profile Speed</div>
               </div>
               <div class="text-right">
-                <div class="text-cyan-400 font-special font-bold">15,000đ</div>
-                <div class="text-[9px] opacity-50">mỗi 1,000 lượt</div>
+                <div class="text-cyan-400 font-special font-bold text-lg">29đ</div>
+                <div class="text-[9px] opacity-50 uppercase">Mỗi đơn vị</div>
               </div>
             </div>
-            <div
-              class="flex justify-between items-center p-4 bg-white/5 rounded-lg border border-white/5"
-            >
+            <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
               <div>
                 <div class="text-sm font-bold">Like Bài Viết</div>
-                <div
-                  class="text-[10px] text-gray-500 uppercase tracking-widest mt-1"
-                >
-                  Server 4 - Không tụt
-                </div>
+                <div class="text-[10px] text-gray-500 uppercase mt-1">Sale off 2025</div>
               </div>
               <div class="text-right">
-                <div class="text-cyan-400 font-special font-bold">3,500đ</div>
-                <div class="text-[9px] opacity-50">mỗi 1,000 lượt</div>
+                <div class="text-cyan-400 font-special font-bold text-lg">20đ</div>
+                <div class="text-[9px] opacity-50 uppercase">Mỗi đơn vị</div>
               </div>
             </div>
-            <div
-              class="flex justify-between items-center p-4 bg-white/5 rounded-lg border border-white/5"
-            >
+            <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
               <div>
-                <div class="text-sm font-bold">Thành Viên Nhóm</div>
-                <div
-                  class="text-[10px] text-gray-500 uppercase tracking-widest mt-1"
-                >
-                  Server 2 - Nick thật
-                </div>
+                <div class="text-sm font-bold">Tăng Bình Luận</div>
+                <div class="text-[10px] text-gray-500 uppercase mt-1">Server VIP</div>
               </div>
               <div class="text-right">
-                <div class="text-cyan-400 font-special font-bold">28,000đ</div>
-                <div class="text-[9px] opacity-50">mỗi 1,000 lượt</div>
+                <div class="text-cyan-400 font-special font-bold text-lg">550đ</div>
+                <div class="text-[9px] opacity-50 uppercase">Mỗi đơn vị</div>
+              </div>
+            </div>
+             <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
+              <div>
+                <div class="text-sm font-bold">Tăng Share / View</div>
+                <div class="text-[10px] text-gray-500 uppercase mt-1">Quick Done</div>
+              </div>
+              <div class="text-right">
+                <div class="text-cyan-400 font-special font-bold text-lg">25đ</div>
+                <div class="text-[9px] opacity-50 uppercase">Mỗi đơn vị</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="bento-card p-8 rounded-2xl">
-          <div class="table-header flex justify-between items-center">
+        <div class="bento-card p-6 md:p-8 rounded-2xl">
+          <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
             <div class="flex items-center gap-3">
               <i class="fab fa-tiktok text-pink-500 text-2xl"></i>
               <span class="font-special text-lg font-bold">TIKTOK</span>
             </div>
-            <span
-              class="text-[10px] bg-pink-500/10 text-pink-500 px-3 py-1 rounded-full font-bold"
-              >BYTE PROTOCOL</span
-            >
+            <span class="text-[9px] bg-pink-500/10 text-pink-500 px-3 py-1 rounded-full font-bold">FAST</span>
           </div>
 
-          <div class="space-y-4">
-            <div
-              class="flex justify-between items-center p-4 bg-white/5 rounded-lg border border-white/5"
-            >
+          <div class="space-y-3">
+            <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
               <div>
-                <div class="text-sm font-bold">Tăng Follow</div>
-                <div
-                  class="text-[10px] text-gray-500 uppercase tracking-widest mt-1"
-                >
-                  Server 09 - Toàn cầu
-                </div>
+                <div class="text-sm font-bold">Follower TikTok</div>
+                <div class="text-[10px] text-gray-500 uppercase mt-1">Max Speed</div>
               </div>
               <div class="text-right">
-                <div class="text-pink-500 font-special font-bold">35,000đ</div>
-                <div class="text-[9px] opacity-50">mỗi 1,000 lượt</div>
+                <div class="text-pink-500 font-special font-bold text-lg">45đ</div>
+                <div class="text-[9px] opacity-50 uppercase">Mỗi đơn vị</div>
               </div>
             </div>
-            <div
-              class="flex justify-between items-center p-4 bg-white/5 rounded-lg border border-white/5"
-            >
+            <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
               <div>
-                <div class="text-sm font-bold">Lượt Xem (View)</div>
-                <div
-                  class="text-[10px] text-gray-500 uppercase tracking-widest mt-1"
-                >
-                  Server 01 - Siêu tốc
-                </div>
+                <div class="text-sm font-bold">Tim (Like) Video</div>
+                <div class="text-[10px] text-gray-500 uppercase mt-1">High Quality</div>
               </div>
               <div class="text-right">
-                <div class="text-pink-500 font-special font-bold">250đ</div>
-                <div class="text-[9px] opacity-50">mỗi 1,000 lượt</div>
+                <div class="text-pink-500 font-special font-bold text-lg">12đ</div>
+                <div class="text-[9px] opacity-50 uppercase">Mỗi đơn vị</div>
               </div>
             </div>
-            <div
-              class="flex justify-between items-center p-4 bg-white/5 rounded-lg border border-white/5"
-            >
+            <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
               <div>
-                <div class="text-sm font-bold">Lượt Thả Tim</div>
-                <div
-                  class="text-[10px] text-gray-500 uppercase tracking-widest mt-1"
-                >
-                  Server 05 - Việt Nam
-                </div>
+                <div class="text-sm font-bold">View Video</div>
+                <div class="text-[10px] text-gray-500 uppercase mt-1">Instant Delivery</div>
               </div>
               <div class="text-right">
-                <div class="text-pink-500 font-special font-bold">8,500đ</div>
-                <div class="text-[9px] opacity-50">mỗi 1,000 lượt</div>
+                <div class="text-pink-500 font-special font-bold text-lg">3đ</div>
+                <div class="text-[9px] opacity-50 uppercase">Mỗi đơn vị</div>
+              </div>
+            </div>
+            <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-all">
+              <div>
+                <div class="text-sm font-bold">Bình Luận</div>
+                <div class="text-[10px] text-gray-500 uppercase mt-1">Custom Content</div>
+              </div>
+              <div class="text-right">
+                <div class="text-pink-500 font-special font-bold text-lg">500đ</div>
+                <div class="text-[9px] opacity-50 uppercase">Mỗi đơn vị</div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div
-        class="mt-16 bento-card p-6 rounded-xl border-dashed border-white/20 text-center"
-      >
+      <div class="mt-12 bento-card p-5 rounded-xl border-dashed border-white/10 text-center">
         <span class="status-online mr-2"></span>
-        <span class="text-[10px] text-gray-400 uppercase tracking-[0.5em]"
-          >Tất cả hệ thống đang hoạt động bình thường</span
-        >
+        <span class="text-[10px] text-gray-400 uppercase tracking-[0.3em]">Hệ thống bảo mật & Hoạt động 24/7</span>
       </div>
     </section>
 
-    <footer class="p-20 text-center border-t border-white/5">
-      <div class="font-special text-xs opacity-20 tracking-[0.5em]">
-        QUỐC KHÁNH SMM &copy; 2025
+    <footer class="py-10 md:py-20 text-center border-t border-white/5">
+      <div class="font-special text-[10px] opacity-30 tracking-[0.5em]">
+        TRẦN QUỐC KHÁNH  
       </div>
     </footer>
   </body>

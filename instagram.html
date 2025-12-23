@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QUỐC KHÁNH BÁN SUB | Instagram - Đang Cập Nhật</title>
+    <title>QUỐC KHÁNH BÁN SUB - INSTAGRAM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap"
@@ -31,7 +31,7 @@
         font-family: "Syncopate", sans-serif;
       }
 
-      /* LƯỚI NỀN */
+      /* LƯỚI NỀN LASER */
       .laser-grid {
         position: fixed;
         inset: 0;
@@ -57,7 +57,7 @@
         );
       }
 
-      /* SIDEBAR RESPONSIVE */
+      /* SIDEBAR */
       .sidebar {
         width: 280px;
         height: 100vh;
@@ -113,9 +113,7 @@
       }
 
       @media (min-width: 1024px) {
-        .mobile-header {
-          display: none;
-        }
+        .mobile-header { display: none; }
       }
 
       .brand-logo {
@@ -149,13 +147,11 @@
         text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
       }
 
-      /* NỘI DUNG THÔNG BÁO */
+      /* NỘI DUNG CHÍNH */
       .main-content {
-        padding: 80px 20px 40px 20px;
+        padding: 100px 20px 40px 20px;
         display: flex;
-        align-items: center;
         justify-content: center;
-        min-height: 100vh;
         transition: 0.4s;
       }
 
@@ -166,36 +162,75 @@
         }
       }
 
-      .maintenance-container {
-        max-width: 600px;
+      .form-container {
         width: 100%;
+        max-width: 700px;
+      }
+
+      .nexus-card {
         background: var(--card-bg);
         border: 1px solid var(--border);
-        padding: 40px 20px;
-        text-align: center;
-        box-shadow: 0 0 30px var(--admin-glow);
-        position: relative;
-        backdrop-filter: blur(10px);
+        padding: 20px;
+        box-shadow: 0 0 15px var(--admin-glow);
       }
 
-      @media (min-width: 640px) {
-        .maintenance-container {
-          padding: 50px 30px;
-        }
+      .label-tech {
+        font-size: 9px;
+        color: var(--accent);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        display: block;
+        font-weight: bold;
       }
 
-      .maintenance-container::before {
-        content: "INSTAGRAM_RESTRICTION";
-        position: absolute;
-        top: -10px;
-        left: 50%;
-        transform: translateX(-50%);
+      .input-field {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(0, 242, 255, 0.1);
+        padding: 14px;
+        color: white;
+        font-size: 13px;
+        outline: none;
+        margin-bottom: 20px;
+        transition: 0.3s;
+        appearance: none;
+      }
+
+      .btn-execute {
+        width: 100%;
         background: var(--accent);
         color: black;
-        font-size: 8px;
-        font-weight: bold;
-        padding: 2px 12px;
-        white-space: nowrap;
+        padding: 16px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 12px;
+        transition: 0.4s;
+        cursor: pointer;
+        border: none;
+      }
+
+      /* MODAL */
+      #confirm-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 200;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+        padding: 20px;
+      }
+
+      .modal-box {
+        background: #050505;
+        border: 1px solid var(--accent);
+        padding: 25px;
+        width: 100%;
+        max-width: 480px;
+        position: relative;
       }
 
       .status-pulse {
@@ -204,50 +239,21 @@
         background: var(--accent);
         border-radius: 50%;
         animation: pulse 2s infinite;
-        display: inline-block;
       }
 
       @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-        }
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.2; }
       }
 
-      .gear-anim {
-        font-size: 40px;
-        color: var(--accent);
-        margin-bottom: 20px;
-        animation: spin 4s linear infinite;
-      }
-
-      @media (min-width: 640px) {
-        .gear-anim {
-          font-size: 50px;
-          margin-bottom: 25px;
-        }
-      }
-
-      @keyframes spin {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Overlay */
       .sidebar-overlay {
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0,0,0,0.5);
         z-index: 90;
       }
-      .sidebar-overlay.active {
-        display: block;
-      }
+      .sidebar-overlay.active { display: block; }
     </style>
   </head>
   <body>
@@ -257,9 +263,11 @@
       <button onclick="toggleMenu()" class="text-white text-2xl mr-4">
         <i class="fas fa-bars text-cyan-400"></i>
       </button>
-      <h2 class="font-special text-sm font-bold tracking-tighter uppercase">
-        Khánh Bán<span class="text-cyan-400">Sub</span>
-      </h2>
+      <div class="flex items-center">
+        <h2 class="font-special text-sm font-bold tracking-tighter uppercase">
+          Khánh Bán<span class="text-cyan-400">Sub</span>
+        </h2>
+      </div>
     </header>
 
     <div class="sidebar-overlay" id="overlay" onclick="toggleMenu()"></div>
@@ -267,104 +275,125 @@
     <aside class="sidebar" id="sidebar">
       <div class="p-8">
         <div class="flex items-center justify-between">
-          <div
-            class="flex items-center cursor-pointer"
-            onclick="navigateTo('trangchu.html')"
-          >
-            <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
-            <h2 class="font-special text-lg font-bold tracking-tighter">
-              Khánh Bán<span class="text-cyan-400">Sub</span>
-            </h2>
-          </div>
-          <button onclick="toggleMenu()" class="lg:hidden text-gray-500">
-            <i class="fas fa-times"></i>
-          </button>
+            <div class="flex items-center cursor-pointer" onclick="navigateTo('trangchu.html')">
+              <img src="./img/ack.jpg" alt="Logo" class="brand-logo" />
+              <h2 class="font-special text-lg font-bold tracking-tighter">
+                Khánh Bán<span class="text-cyan-400">Sub</span>
+              </h2>
+            </div>
+            <button onclick="toggleMenu()" class="lg:hidden text-gray-500">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
         <div class="flex items-center mt-3 space-x-2">
           <div class="status-pulse"></div>
-          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]"
-            >Hệ thống trực tuyến</span
-          >
+          <span class="text-[9px] text-gray-500 uppercase tracking-[0.3em]">Hệ thống trực tuyến</span>
         </div>
       </div>
       <nav class="mt-4">
         <div class="nav-item" onclick="navigateTo('trangchu.html')">
           <i class="fas fa-th-large mr-4 w-4"></i> Quản Lý Chung
         </div>
-        <div
-          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
-        >
-          Danh Sách Dịch Vụ
-        </div>
+        <div class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold">Danh Sách Dịch Vụ</div>
         <div class="nav-item" onclick="navigateTo('facebook.html')">
-          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook
+          <i class="fab fa-facebook-f mr-4 w-4"></i> Facebook 
         </div>
         <div class="nav-item" onclick="navigateTo('tiktok.html')">
-          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok
+          <i class="fab fa-tiktok mr-4 w-4"></i> TikTok 
         </div>
-        <div class="nav-item active">
-          <i class="fab fa-instagram mr-4 w-4"></i> Instagram
+        <div class="nav-item active" onclick="navigateTo('instagram.html')">
+          <i class="fab fa-instagram mr-4 w-4"></i> Instagram 
         </div>
         <div class="nav-item" onclick="navigateTo('youtube.html')">
-          <i class="fab fa-youtube mr-4 w-4"></i> YouTube
+          <i class="fab fa-youtube mr-4 w-4"></i> YouTube 
         </div>
-        <div
-          class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold"
-        >
-          Dữ liệu hệ thống
-        </div>
+        <div class="px-8 py-4 text-[9px] text-gray-600 uppercase tracking-widest font-bold">Dữ liệu hệ thống</div>
         <div class="nav-item" onclick="navigateTo('lichsu.html')">
-          <i class="fas fa-history mr-4 w-4"></i>Trò Chơi Mai Mắn
+          <i class="fas fa-history mr-4 w-4"></i>  Lịch sử giao dịch
         </div>
-        <div
-          class="nav-item text-red-500/70 hover:text-red-500 mt-6"
-          onclick="logout()"
-        >
+        <div class="nav-item text-red-500/70 hover:text-red-500 mt-6" onclick="logout()">
           <i class="fas fa-power-off mr-4 w-4"></i> Logout
         </div>
       </nav>
     </aside>
 
     <main class="main-content">
-      <div class="maintenance-container">
-        <i class="fas fa-microchip gear-anim"></i>
-
-        <h1
-          class="font-special text-xl lg:text-2xl mb-6 tracking-tighter uppercase"
-        >
-          Instagram <span class="text-cyan-400">Update</span>
-        </h1>
-
-        <div class="space-y-4">
-          <p class="text-gray-300 text-sm leading-relaxed px-4">
-            Hệ thống giao tiếp API
-            <span class="text-cyan-400 font-bold uppercase">Instagram</span>
-            đang được nâng cấp định kỳ để đảm bảo tính ổn định.
-          </p>
-
-          <p
-            class="text-gray-400 text-[10px] lg:text-[11px] italic uppercase tracking-[0.2em] leading-loose"
-          >
-            Vui lòng quay lại sau ít phút.
-            <br />KHÁNH BÁN SUB Trân trọng cảm ơn!
-          </p>
+      <div class="form-container">
+        <div class="mb-6 lg:mb-10 border-l-2 border-cyan-400 pl-6">
+          <h1 class="font-special text-2xl lg:text-3xl uppercase tracking-tighter">
+            Dịch Vụ <span class="text-cyan-400">Instagram</span>
+          </h1>
+          <p class="text-[9px] lg:text-[10px] text-gray-600 tracking-[0.4em] mt-2 uppercase italic">Giao diện Thanh Toán</p>
         </div>
 
-        <div class="mt-10 pt-6 border-t border-white/5">
-          <button
-            onclick="navigateTo('trangchu.html')"
-            class="w-full sm:w-auto px-8 py-3 bg-cyan-400 text-black text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_15px_rgba(0,242,255,0.3)]"
-          >
-            <i class="fas fa-home mr-2"></i> Trở lại trung tâm lệnh
+        <div class="nexus-card">
+          <label class="label-tech">// 01. Chọn Dịch Vụ Instagram</label>
+          <select class="input-field cursor-pointer" id="service-select" onchange="updateTotal()">
+            <option value="45">Tăng Theo Dõi (Followers) - 45đ</option>
+            <option value="15">Tăng Like Bài Viết - 15đ</option>
+            <option value="150">Tăng Bình Luận - 150đ</option>
+            <option value="10">Tăng View Video/Reels - 10đ</option>
+            <option value="60">Tăng Mắt Livestream - 60đ</option>
+          </select>
+
+          <label class="label-tech">// 02. Nhập Link Instagram (URL)</label>
+          <input type="text" id="target-link" class="input-field" placeholder="Nhập link Profile/Post cần tăng..." />
+
+          <label class="label-tech">// 03. Số Lượng cần Tăng </label>
+          <input type="number" id="quantity" class="input-field" placeholder="Tối thiểu 100" oninput="updateTotal()" />
+
+          <div class="mb-6 p-4 bg-white/5 border border-white/10 text-[10px] lg:text-[11px] text-gray-400 space-y-2">
+            <p class="text-white font-bold uppercase text-[9px] mb-2 text-cyan-400">Thông số máy chủ:</p>
+            <p>• Thời gian hoàn thành dự kiến: 2 giờ</p>
+            <p>• Tốc độ: 5k-10k/link/ngày</p>
+            <p>• Tối thiểu 100 / Tối đa: 500k</p>
+            <p>• Lưu ý: Tài khoản cần để chế độ Công Khai (Public)</p>
+          </div>
+
+          <div class="p-4 bg-cyan-400/5 border border-cyan-400/20 mb-8 flex justify-between items-center">
+            <span class="text-[9px] uppercase tracking-widest text-gray-500">Số Tiền Thanh Toán:</span>
+            <span class="font-special text-lg lg:text-xl text-cyan-400" id="total-price">0 VNĐ</span>
+          </div>
+
+          <button class="btn-execute" onclick="openModal()">
+            <i class="fab fa-instagram mr-2"></i> Xác Nhận Thanh Toán
           </button>
         </div>
       </div>
     </main>
 
+    <div id="confirm-modal">
+      <div class="modal-box">
+        <h2 class="font-special text-lg text-cyan-400 mb-6 uppercase tracking-tighter italic">Kiểm tra thông số</h2>
+        <div class="space-y-4 text-[11px] uppercase tracking-[0.1em] text-gray-400">
+          <div class="flex justify-between border-b border-white/5 pb-2">
+            <span>Dịch vụ:</span>
+            <span id="confirm-service" class="text-white font-bold">---</span>
+          </div>
+          <div class="border-b border-white/5 pb-2">
+            <span class="block mb-1">Link mục tiêu:</span>
+            <span id="confirm-link" class="text-cyan-400 break-all lowercase font-medium tracking-normal">---</span>
+          </div>
+          <div class="flex justify-between border-b border-white/5 pb-2">
+            <span>Số lượng:</span>
+            <span id="confirm-qty" class="text-white font-bold">0</span>
+          </div>
+          <div class="bg-cyan-400/10 p-4 flex justify-between items-center border border-cyan-400/20 mt-6">
+            <span class="text-cyan-400 font-bold">Tổng cộng:</span>
+            <span id="confirm-total" class="text-cyan-400 text-lg font-black">0 VNĐ</span>
+          </div>
+        </div>
+        <div class="flex space-x-3 mt-8">
+          <button onclick="closeModal()" class="flex-1 border border-red-500/50 text-red-500 py-3 text-[10px] font-black uppercase">Hủy</button>
+          <button onclick="submitOrder()" id="final-confirm-btn" class="flex-1 bg-cyan-400 text-black py-3 text-[10px] font-black uppercase">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+
     <script>
       function toggleMenu() {
-        document.getElementById("sidebar").classList.toggle("active");
-        document.getElementById("overlay").classList.toggle("active");
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
       }
 
       function navigateTo(url) {
@@ -375,8 +404,83 @@
       }
 
       function logout() {
-        if (confirm("Xác nhận ngắt kết nối khỏi hệ thống?"))
+        if (confirm("Xác nhận ngắt kết nối hệ thống?"))
           window.location.href = "index.html";
+      }
+
+      function updateTotal() {
+        const price = document.getElementById("service-select").value;
+        const qty = document.getElementById("quantity").value;
+        const total = price * qty || 0;
+        document.getElementById("total-price").innerText =
+          total.toLocaleString("vi-VN") + " VNĐ";
+      }
+
+      function openModal() {
+        const link = document.getElementById("target-link").value;
+        const qty = document.getElementById("quantity").value;
+
+        if (!link || !qty || qty <= 0) {
+          alert("Vui lòng nhập Link và Số lượng hợp lệ!");
+          return;
+        }
+
+        const serviceObj = document.getElementById("service-select");
+        document.getElementById("confirm-service").innerText =
+          serviceObj.options[serviceObj.selectedIndex].text;
+        document.getElementById("confirm-link").innerText = link;
+        document.getElementById("confirm-qty").innerText = qty;
+        document.getElementById("confirm-total").innerText =
+          document.getElementById("total-price").innerText;
+
+        document.getElementById("confirm-modal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("confirm-modal").style.display = "none";
+      }
+
+      async function submitOrder() {
+        const btn = document.getElementById("final-confirm-btn");
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> XỬ LÝ...';
+
+        const orderData = {
+          Nền_Tảng: "INSTAGRAM",
+          Dịch_Vụ: document.getElementById("confirm-service").innerText,
+          Link: document.getElementById("confirm-link").innerText,
+          Số_Lượng: document.getElementById("confirm-qty").innerText,
+          Tổng_Tiền: document.getElementById("confirm-total").innerText,
+          Time: new Date().toLocaleString(),
+        };
+
+        localStorage.setItem("nexusOrder", JSON.stringify(orderData));
+
+        try {
+          const response = await fetch("https://formspree.io/f/mdaneeyl", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(orderData),
+          });
+
+          if (response.ok) {
+            document.body.style.opacity = "0";
+            setTimeout(() => {
+              window.location.href = "thanhtoan.html";
+            }, 500);
+          } else {
+            alert("Máy chủ bận, vui lòng thử lại sau!");
+            btn.disabled = false;
+            btn.innerText = "Xác nhận";
+          }
+        } catch (error) {
+          alert("Lỗi kết nối mạng!");
+          btn.disabled = false;
+          btn.innerText = "Xác nhận";
+        }
       }
     </script>
   </body>
